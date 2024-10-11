@@ -329,25 +329,27 @@ button {
   display: inline-block;
   width: auto;
   position: relative;
+  vertical-align: middle;
 }
 .button-container::before {
   content: '';
   display: block;
-  height: 2.6rem;
+  height: 100%;
   width: 0;
   background-color: #E6E7E8;
   position: absolute;
+  top: 0;
   z-index: -1;
   transition: var(--transition);
 }
 .button-container::after {
   content: '';
   display: block;
-  height: 2.6rem;
+  height: 100%;
   width: 100%;
   background-color: #000;
   position: absolute;
-  margin-top: -2.6rem;
+  top: 0;
   z-index: -2;
   transition: var(--transition);
 }

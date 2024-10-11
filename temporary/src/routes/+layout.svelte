@@ -71,7 +71,7 @@
   gap: .5rem;
 }
 .logo>div>svg {
-  width: 100%;
+  width: auto;
   height: 100%;
   transition: var(--transition);
   vertical-align: middle;
