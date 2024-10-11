@@ -55,7 +55,11 @@ input, button, textarea, select {
 #root, #__next {
   isolation: isolate;
 }
-a:-webkit-any-link,
+a:-webkit-any-link {
+  color: inherit;
+  cursor: pointer;
+  text-decoration: none;
+}
 a:any-link {
   color: inherit;
   cursor: pointer;
