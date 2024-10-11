@@ -82,4 +82,7 @@ a:not(.no-hover):hover::before {
   :root{
     --gutter: 1.5rem;
   }
+  body {
+    font-size: 1.2rem;
+  }
 }

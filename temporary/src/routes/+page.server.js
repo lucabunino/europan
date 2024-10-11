@@ -9,6 +9,24 @@ export const actions = {
       const name = formData.get('name');
       const email = formData.get('email');
       const message = formData.get('message');
+      
+      var emptyFields = []
+      if (!name) {
+        emptyFields.push('name')
+      }
+      if (!email) {
+        emptyFields.push('email')
+      }
+      if (!message) {
+        emptyFields.push('message')
+      }
+      if (!name || !email || !message) {
+        return {
+          success: false,
+          empty: true,
+          emptyFields: emptyFields,
+        };
+      }
 
       const body = "Europan Suisse | Message from: " + name + ", email: " + email + ", message: " + message
       const html = `

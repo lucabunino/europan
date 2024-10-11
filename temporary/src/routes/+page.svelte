@@ -4,19 +4,36 @@ import { enhance, applyAction } from '$app/forms';
 let isSubmitted = $state(false);
 let isSubmitting = $state(false);
 let isErrorous = $state(false);
+let isEmpty = $state(false);
+let isEmptyName = $state(false);
+let isEmptyEmail = $state(false);
+let isEmptyMessage = $state(false);
 let innerWidth = $state()
 let innerHeight = $state()
 
 const handleEnhance = ({ formElement, formData, action, cancel }) => {
-  isSubmitting = false
-  return async ({ result }) => {    
+  return async ({ result }) => {
     console.log(result);
-    
     if (result.data.success) {
       isSubmitted = true;
+      formElement.reset()
     } else if (!result.data.success) {
-      isErrorous = true;
+      if (result.data.empty) {
+        isEmpty = true
+        if (result.data.emptyFields.includes('name')) {
+          isEmptyName = true
+        }
+        if (result.data.emptyFields.includes('email')) {
+          isEmptyEmail = true
+        }
+        if (result.data.emptyFields.includes('message')) {
+          isEmptyMessage = true
+        }
+      } else {
+        isErrorous = true;
+      }
     }
+    isSubmitting = false
     await applyAction(result);
   };
 };
@@ -26,11 +43,12 @@ const resetFormStates = () => {
     isSubmitted = false;
     isSubmitting = false;
     isErrorous = false;
+    isEmpty = false
   }, 5000);
 };
 
 $effect(() => {
-  if (isSubmitted || isErrorous) resetFormStates();
+  if (isSubmitted || isErrorous || isEmpty) resetFormStates();
 });
 </script>
 
@@ -185,17 +203,19 @@ $effect(() => {
   method="POST"
   use:enhance={handleEnhance}
   >
-    <textarea id="message" name="message" rows="5" placeholder="Message" required></textarea>
-    <input type="text" id="name" name="name" placeholder="Nom" required>
-    <input type="email" id="email" name="email" placeholder="E-mail" required>
+    <textarea id="message" name="message" rows="5" placeholder="Message" class:empty={isEmptyMessage} onclick={() => isEmptyMessage = false}></textarea>
+    <input type="text" id="name" name="name" placeholder="Nom" class:empty={isEmptyName} onclick={() => isEmptyName = false}>
+    <input type="email" id="email" name="email" placeholder="E-mail" class:empty={isEmptyEmail} onclick={() => isEmptyEmail = false}>
     <div class="button-container">
-      <button type="submit" onclick={() => isSubmitting = true} style="{isErrorous ? 'widht:100%' : 'width:9rem'}">
+      <button type="submit" onclick={() => isSubmitting = true} style="{isErrorous ? 'widht:100%' : 'width:9rem'}{isEmpty ? 'widht:100%' : ''}">
         {#if isSubmitted}
           Envoyé
         {:else if isSubmitting}
           En cours
         {:else if isErrorous}
           Erreur lors de l'envoi. Veuillez réessayer.
+        {:else if isEmpty}
+          Champs vides
         {:else}
           Envoyer
         {/if}
@@ -260,7 +280,7 @@ swiper-container {
 }
 swiper-container::part(pagination) {
   margin-left: calc(var(--gutter) - 4px);
-  margin-bottom: 2.3rem;
+  margin-bottom: 2.4rem;
   width: auto;
 }
 swiper-container::part(bullet-active) {
@@ -291,6 +311,10 @@ textarea {
 input:focus-visible,
 textarea:focus-visible {
   outline: solid 1px #000;
+}
+input.empty,
+textarea.empty {
+  outline: solid 1px #ff0000;
 }
 button {
   color: #fff;
@@ -341,6 +365,7 @@ button {
   section:not(#hero)>div,
   section:not(#hero)>form {
     grid-column: 2 / 4;
+    margin-top: .5rem;
   }
   #hero {
     height: 80vh;
@@ -352,9 +377,14 @@ button {
   .caption {
     grid-column: 2 / 4;
   }
-  #intro>div:not(:first-of-type),
-  form {
-    margin-top: var(--gutter);
+  #intro>div:not(:first-of-type){
+    margin-top: 3rem;
+  }
+  section:not(#hero)>form {
+    margin-top: 2rem;
+  }
+  swiper-container::part(pagination) {
+    margin-bottom: .8rem;
   }
 }
 
@@ -371,15 +401,15 @@ button {
     grid-column: unset;
   }
   #hero {
-    height: 60vh;
-    height: 60svh;
+    height: 70vh;
+    height: 70svh;
+  }
+  .slide-type {
+    margin-top: 7rem;
   }
   .caption {
     grid-column: 1 / 4;
     margin-bottom: 4rem;
-  }
-  swiper-container::part(pagination) {
-    margin-bottom: .5rem;
   }
 }
 </style>
