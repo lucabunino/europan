@@ -1,0 +1,85 @@
+/* Font import */
+@font-face {
+  font-family: Automatico;
+  src:  url('/fonts/Automatico_Text-Light.woff2') format('woff2');
+  src:  url('/fonts/Automatico_Text-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: Automatico;
+  src:  url('/fonts/Automatico_Text-Medium.woff2') format('woff2');
+  src:  url('/fonts/Automatico_Text-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+
+
+/* Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+}
+:root{
+  --gutter: 3rem;
+  --transition: cubic-bezier(.77,0,.175,1) 500ms;
+}
+html {
+  font-family: Automatico, Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  color: var(--color1);
+  background-color: var(--bg);
+  font-size: clamp(10px, .9375vw, 16px);
+  line-height: 1.2;
+  letter-spacing: .01em;
+}
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  white-space: pre-line;
+}
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+input, button, textarea, select {
+  font: inherit;
+}
+#root, #__next {
+  isolation: isolate;
+}
+a:-webkit-any-link {
+  color: inherit;
+  cursor: pointer;
+  text-decoration: none;
+}
+a {
+  display: inline-block;
+  width: auto;
+  position: relative;
+}
+a:not(.no-hover):before {
+  content: '';
+  display: block;
+  width: 0;
+  height: 1rem;
+  background-color: #E6E7E8;
+  position: absolute;
+  z-index: -1;
+  transition: var(--transition);
+}
+a:not(.no-hover):hover::before {
+  width: 100%;
+}
+@media screen and (max-width: 900px) {
+  :root{
+    --gutter: 1.5rem;
+  }
+}
