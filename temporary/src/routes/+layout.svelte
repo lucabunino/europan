@@ -70,11 +70,8 @@
   z-index: 2;
   gap: .5rem;
 }
-.logo>div>svg {
-  width: auto;
+.logo>div {
   height: 100%;
-  transition: var(--transition);
-  vertical-align: middle;
 }
 .logo>div:first-of-type {
   background-color: #E6E7E8;
@@ -94,6 +91,12 @@
 .logo.type>div:first-of-type::after,
 .logo:hover>div:first-of-type::after {
   width: 0%;
+}
+.logo>div svg {
+  width: auto;
+  height: 100%;
+  transition: var(--transition);
+  vertical-align: middle;
 }
 .logo>div:last-of-type svg {
   background-color: #000000;

@@ -100,22 +100,22 @@ $effect(() => {
   <div>
     <div class="person">
       <p>Président</p>
-      <p><a target="_blank" href="https://www.google.com/">Jürg Capol ↗</a></p>
+      <p><a target="_blank" href="#">Jürg Capol ↗</a></p>
       <p>Architecte EPFL, Urbaniste UNIGE</p>
       <p>CEO Utilita Management</p>
       <p>Rolle</p>
     </div>
     <div class="person">
       <p>Vice-Président</p>
-      <p><a target="_blank" href="https://www.google.com/">Barbara Stettler ↗</a></p>
-      <p><a href="mailto:barbara.stettler@europan.swiss">barbara.stettler@europan.swiss</a></p>
+      <p><a target="_blank" href="mailto:barbara.stettler@europan.swiss">Barbara Stettler ↗</a></p>
+      <p>barbara.stettler@europan.swiss</p>
       <p>Architecte EPF SIA</p>
       <p>Biel/Bienne</p>
     </div>
     <div class="person">
       <p>Secrétaire général</p>
-      <p><a target="_blank" href="https://www.google.com/">Konrad Scheffer ↗</a></p>
-      <p><a href="mailto:konrad.scheffer@europan.swiss">konrad.scheffer@europan.swiss</a></p>
+      <p><a target="_blank" href="mailto:konrad.scheffer@europan.swiss">Konrad Scheffer ↗</a></p>
+      <p>konrad.scheffer@europan.swiss</p>
       <p>Architekt Dipl.-Ing, M.Arch.</p>
       <p>Lauréat Europan 14</p>
       <p>Office Oblique</p>
@@ -123,8 +123,8 @@ $effect(() => {
     </div>
     <div class="person">
       <p>Trésorier</p>
-      <p><a target="_blank" href="https://www.google.com/">André Escobar ↗</a></p>
-      <p><a href="mailto:andre.escobar@europan.swiss">andre.escobar@europan.swiss</a></p>
+      <p><a target="_blank" href="mailto:andre.escobar@europan.swiss">André Escobar ↗</a></p>
+      <p>andre.escobar@europan.swiss</p>
       <p>Architecte HES FAS SIA</p>
       <p>Aviolat Chaperon Escobar</p>
       <p>Neuchâtel</p>
@@ -132,47 +132,48 @@ $effect(() => {
   </div>
   <div>
     <div class="person">
-      <p><a target="_blank" href="https://www.google.com/">Jürg Bart ↗</a></p>
+      <p><a target="_blank" href="#">Jürg Bart ↗</a></p>
       <p>Architekt EPFZ BSA SIA</p>
       <p>Bart Buchhofer Architekten</p>
       <p>Biel/Bienne</p>
     </div>
     <div class="person">
-      <p><a target="_blank" href="https://www.google.com/">Alberto Figuccio ↗</a></p>
+      <p><a target="_blank" href="mailto:alberto.figuccio@studio-af.ch">Alberto Figuccio ↗</a></p>
+      <p>alberto.figuccio@studio-af.ch</p>
       <p>Architecte AAM SIA</p>
       <p>Lauréat Europan 10 et 11</p>
       <p>Studio Alberto Figuccio</p>
       <p>Genève</p>
     </div>
     <div class="person">
-      <p><a target="_blank" href="https://www.google.com/">Isabel Girault ↗</a></p>
+      <p><a target="_blank" href="#">Isabel Girault ↗</a></p>
       <p>Architecte EPFL SIA, Urbaniste IFU FSU</p>
       <p>Urbanité(s)</p>
       <p>Genève</p>
     </div>
     <div class="person">
-      <p><a target="_blank" href="https://www.google.com/">Marine Girault ↗</a></p>
+      <p><a target="_blank" href="#">Marine Girault ↗</a></p>
       <p>Architecte HMNOP SIA, Paysagiste CESP</p>
       <p>Urbanité(s)</p>
       <p>Genève</p>
     </div>
     <div class="person">
-      <p><a target="_blank" href="https://www.google.com/">Ariane Widmer ↗</a></p>
+      <p><a target="_blank" href="#">Ariane Widmer ↗</a></p>
       <p>Urbaniste cantonale</p>
       <p>République et canton de Genève</p>
       <p>Département du territoire (DT) / Office de l'urbanisme / Direction générale (DG)</p>
       <p>Genève</p>
     </div>
     <div class="person">
-      <p><a target="_blank" href="https://www.google.com/">Mathias Heinz ↗</a></p>
-      <p><a href="mailto:m.heinz@poolarch.ch">m.heinz@poolarch.ch</a></p>
+      <p><a target="_blank" href="mailto:m.heinz@poolarch.ch">Mathias Heinz ↗</a></p>
+      <p>m.heinz@poolarch.ch</p>
       <p>Architecte ETHZ</p>
       <p>pool Architekten</p>
       <p>Zürich</p>
     </div>
     <div class="person">
-      <p><a target="_blank" href="https://www.google.com/">Glenn Fischer ↗</a></p>
-      <p><a href="mailto:glenn.fischer@bern.ch">glenn.fischer@bern.ch</a></p>
+      <p><a target="_blank" href="mailto:glenn.fischer@bern.ch">Glenn Fischer ↗</a></p>
+      <p>glenn.fischer@bern.ch</p>
       <p>Chef de projet développement et réalisation</p>
       <p>Direction du génie civil, des transports et des espaces verts de la ville</p>
       <p>Ville de Berne</p>
