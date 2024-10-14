@@ -140,8 +140,8 @@ $effect(() => {
       <p>Biel/Bienne</p>
     </div>
     <div class="person">
-      <p><a target="_blank" href="mailto:alberto.figuccio@studio-af.ch">Alberto Figuccio ↗</a></p>
-      <p>alberto.figuccio@studio-af.ch</p>
+      <p><a target="_blank" href="mailto:alberto.figuccio@europan.swiss">Alberto Figuccio ↗</a></p>
+      <p>alberto.figuccio@europan.swiss</p>
       <p>Architecte AAM SIA</p>
       <p>Lauréat Europan 10 et 11</p>
       <p>Studio Alberto Figuccio</p>
