@@ -100,7 +100,8 @@ $effect(() => {
   <div>
     <div class="person">
       <p>Président</p>
-      <p><a target="_blank" href="#">Jürg Capol ↗</a></p>
+      <p><a target="_blank" href="mailto:juerg.capol@europan.swiss">Jürg Capol ↗</a></p>
+      <p>juerg.capol@europan.swiss</p>
       <p>Architecte EPFL, Urbaniste UNIGE</p>
       <p>CEO Utilita Management</p>
       <p>Rolle</p>
@@ -132,7 +133,8 @@ $effect(() => {
   </div>
   <div>
     <div class="person">
-      <p><a target="_blank" href="#">Jürg Bart ↗</a></p>
+      <p><a target="_blank" href="mailto:juerg.bart@europan.swiss">Jürg Bart ↗</a></p>
+      <p>juerg.bart@europan.swiss</p>
       <p>Architekt EPFZ BSA SIA</p>
       <p>Bart Buchhofer Architekten</p>
       <p>Biel/Bienne</p>
@@ -146,19 +148,21 @@ $effect(() => {
       <p>Genève</p>
     </div>
     <div class="person">
-      <p><a target="_blank" href="#">Isabel Girault ↗</a></p>
+      <p><a target="_blank" href="mailto:isabel.girault@urbanites.ch">Isabel Girault ↗</a></p>
+      <p>isabel.girault@urbanites.ch</p>
       <p>Architecte EPFL SIA, Urbaniste IFU FSU</p>
       <p>Urbanité(s)</p>
       <p>Genève</p>
     </div>
     <div class="person">
-      <p><a target="_blank" href="#">Marine Girault ↗</a></p>
+      <p><a target="_blank" href="mailto:marine.girault@europan.swiss">Marine Girault ↗</a></p>
+      <p>marine.girault@europan.swiss</p>
       <p>Architecte HMNOP SIA, Paysagiste CESP</p>
       <p>Urbanité(s)</p>
       <p>Genève</p>
     </div>
     <div class="person">
-      <p><a target="_blank" href="#">Ariane Widmer ↗</a></p>
+      <p>Ariane Widmer</p>
       <p>Urbaniste cantonale</p>
       <p>République et canton de Genève</p>
       <p>Département du territoire (DT) / Office de l'urbanisme / Direction générale (DG)</p>
