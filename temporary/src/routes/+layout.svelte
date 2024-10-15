@@ -13,13 +13,12 @@
 
 <svelte:head>
   <title>Europan Suisse</title>
-  <meta name="description" content="Temp">
+  <meta name="description" content="Europan Suisse est un concours d'idées dans le domaine de l'architecture et l'urbanisme, adressé aux architectes et aménagistes du territoire de moins de quarante ans et organisé périodiquement tous les deux ans.">
   <link rel="canonical" href={$page.url}>
   <meta name="robots" content="index,follow">
   <meta name="googlebot" content="index,follow">
   <meta property="og:title" content="Europan Suisse">
-  <meta property="og:description" content="Temp">
-  <meta property="og:image" content="Temp">
+  <meta property="og:description" content="Europan Suisse est un concours d'idées dans le domaine de l'architecture et l'urbanisme, adressé aux architectes et aménagistes du territoire de moins de quarante ans et organisé périodiquement tous les deux ans.">
   <meta property="og:url" content={$page.url}>
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Europan Suisse">
