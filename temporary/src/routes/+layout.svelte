@@ -24,11 +24,11 @@
   <meta property="og:site_name" content="Europan Suisse">
 </svelte:head>
 
-{#if $page.url == 'https://www.europan.ch/'}
+<!-- {#if $page.url == 'https://www.europan.ch/'}
 <div style="display:flex;justify-content:center;align-items:center;width:100vw;width:100svw;height:100vh;height:100svh">
   <p style="font-size:1.5rem">Under construction</p>
 </div>
-{:else}
+{:else} -->
 <div class="logo" class:type={headerType}>
   <div>
     <svg class="logo-type"xmlns="http://www.w3.org/2000/svg" viewBox="0 0 273.16 66.19">
@@ -57,7 +57,7 @@
   </div>
   <p>European Schweiz Suisse Svizzera – <a href="mailto:info@europan.ch">info@europan.ch</a> – © Europan 2024</p>
 </footer>
-{/if}
+<!-- {/if} -->
 
 <style>
 /* Header */
