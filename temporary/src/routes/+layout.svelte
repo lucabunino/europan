@@ -1,7 +1,7 @@
 <script>
   import '../app.css'
   import { page } from '$app/stores';
-  import { inject } from '@vercel/analytics' inject()
+  import { inject } from '@vercel/analytics'; inject()
   const { children } = $props()
   let headerType = $state(true)
   $effect(() => {
