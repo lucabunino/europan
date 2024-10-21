@@ -195,7 +195,7 @@ $effect(() => {
     </div>
     <div class="contact">
       <p><a href="tel:+41 32 365 66 65">+41 32 365 66 65</a></p>
-      <p><a href="mailto:bureau@europan.suisse">bureau@europan.suisse</a></p>
+      <p><a href="mailto:bureau@europan.swiss">bureau@europan.swiss</a></p>
     </div>
     <div class="contact">
       <p><a target="_blank" href="https://www.europan.ch/">www.europan.ch</a></p>
