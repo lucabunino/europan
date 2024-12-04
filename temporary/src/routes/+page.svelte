@@ -92,7 +92,7 @@ $effect(() => {
   <div>
     <p>Europan Suisse est une association à but non lucratif qui organise le concours Europan en Suisse. L’association a été fondée en 1990 dans le but de promouvoir des modèles de logements exemplaires. Aujourd’hui, le champ d’action s’est élargi : Europan Suisse organise des échanges scientifiques et culturels dans le domaine de l’architecture et de l’urbanisme, et met en œuvre au niveau national le programme européen élaboré en commun par l’organisation faîtière Europan Europe.</p>
     <p>« Europan est un format de concours unique en Suisse. Situé à mi-chemin entre concours d’idées et concours de projets, Europan offre aux jeunes architectes la possibilité de se pencher de manière approfondie sur un thème actuel de notre époque et de notre environnement bâti. Pour la BSA, entretenir et développer un paysage compétitif vivant est un enjeu central. C’est pourquoi elle soutient volontiers Europan. » </p>
-    <p>— Association suisse des architectes (BSA).</p>
+    <p>— Fédération des Architectes Suisses (FAS).</p>
   </div>
 </section>
 <section id="comittee">
@@ -122,21 +122,13 @@ $effect(() => {
       <p>Office Oblique</p>
       <p>Zürich</p>
     </div>
-    <div class="person">
-      <p>Trésorier</p>
-      <p><a target="_blank" href="mailto:andre.escobar@europan.swiss">André Escobar ↗</a></p>
-      <p>andre.escobar@europan.swiss</p>
-      <p>Architecte HES FAS SIA</p>
-      <p>Aviolat Chaperon Escobar</p>
-      <p>Neuchâtel</p>
-    </div>
   </div>
   <div>
     <div class="person">
       <p><a target="_blank" href="mailto:juerg.bart@europan.swiss">Jürg Bart ↗</a></p>
       <p>juerg.bart@europan.swiss</p>
       <p>Architekt EPFZ BSA SIA</p>
-      <p>Bart Buchhofer Architekten</p>
+      <p>Studio WOW</p>
       <p>Biel/Bienne</p>
     </div>
     <div class="person">
@@ -148,16 +140,9 @@ $effect(() => {
       <p>Genève</p>
     </div>
     <div class="person">
-      <p><a target="_blank" href="mailto:isabel.girault@urbanites.ch">Isabel Girault ↗</a></p>
-      <p>isabel.girault@urbanites.ch</p>
-      <p>Architecte EPFL SIA, Urbaniste IFU FSU</p>
-      <p>Urbanité(s)</p>
-      <p>Genève</p>
-    </div>
-    <div class="person">
       <p><a target="_blank" href="mailto:marine.girault@europan.swiss">Marine Girault ↗</a></p>
       <p>marine.girault@europan.swiss</p>
-      <p>Architecte HMNOP SIA, Paysagiste CESP</p>
+      <p>Architecte HMONP SIA, Paysagiste CESP</p>
       <p>Urbanité(s)</p>
       <p>Genève</p>
     </div>
@@ -188,13 +173,12 @@ $effect(() => {
   <div>
     <div class="contact">
       <p>Europan Suisse</p>
-      <p>c/o Bart & Buchhofer Architekten AG</p>
     </div>
     <div class="contact">
       <p>Werkhofstrasse 11<br>2503 Bienne<br>Suisse</p>
     </div>
     <div class="contact">
-      <p><a href="tel:+41 32 365 66 65">+41 32 365 66 65</a></p>
+      <p><a href="tel:+41 32 365 66 65">+41 78 744 1179</a></p>
       <p><a href="mailto:bureau@europan.swiss">bureau@europan.swiss</a></p>
     </div>
     <div class="contact">

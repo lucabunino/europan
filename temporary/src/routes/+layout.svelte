@@ -55,7 +55,7 @@
     <a class="no-hover" target="_blank" href="https://www.sia.ch/"><img src="/logo/sia.svg" alt="sia logo"></a>
     <a class="no-hover" target="_blank" href="https://www.geneve.ch/"><img src="/logo/geneve.svg" alt="geneve logo"></a>
   </div>
-  <p>European Schweiz Suisse Svizzera – <a href="mailto:info@europan.ch">info@europan.ch</a> – © Europan 2024</p>
+  <p>Europan Schweiz Suisse Svizzera – <a href="mailto:info@europan.ch">info@europan.ch</a> – © Europan 2024</p>
 </footer>
 <!-- {/if} -->
 
