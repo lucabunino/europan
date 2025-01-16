@@ -1,5 +1,8 @@
 <script>
 import { enhance, applyAction } from '$app/forms';
+const { data } = $props()
+$inspect(data)
+
 let isSubmitted = $state(false);
 let isSubmitting = $state(false);
 let isErrorous = $state(false);
@@ -52,68 +55,56 @@ $effect(() => {
 <article>
   <h2 class="text-l page-title">Contact</h2>
   <div class="contact-grid text-xs">
-    <p>Association européenne<br>
-      pour la promotion de<br>
-      Architecture, logement<br>
-      et développement urbain</p>
-      <div>
-        <p>
-          Europan Suisse
-          Werkhofstrasse 11
-          2503 Bienne
-          Suisse
-          +41 78 744 1179
-          bureau@europan.swiss
-          www.europan.ch ↗
-        </p>
-        <p>
-          Europan Europe
-          16 bis rue François Arago
-          93100 Montreui
-          France
-          +33 9 62 52 95 98
-          contact@europan-europe.eu
-          www.europan-europe.eu ↗
-        </p>
-      </div>
-      <div>
-        <form
-        id="form"
-        action="?/create"
-        method="POST"
-        use:enhance={handleEnhance}
-        >
-          <textarea id="message" name="message" rows="5" placeholder="Message" class:empty={isEmptyMessage} onclick={() => isEmptyMessage = false}></textarea>
-          <input type="text" id="name" name="name" placeholder="Nom et prénom" class:empty={isEmptyName} onclick={() => isEmptyName = false}>
-          <input type="email" id="email" name="email" placeholder="E-mail" class:empty={isEmptyEmail} onclick={() => isEmptyEmail = false}>
-          <div class="button-container">
-            <button type="submit" onclick={() => isSubmitting = true} style="{isErrorous ? 'widht:100%' : 'width:9rem'}{isEmpty ? 'widht:100%' : ''}">
-              {#if isSubmitted}
-                Envoyé
-              {:else if isSubmitting}
-                En cours
-              {:else if isErrorous}
-                Erreur lors de l'envoi. Veuillez réessayer.
-              {:else if isEmpty}
-                Champs vides
-              {:else}
-                Envoyer
-              {/if}
-            </button>
-          </div>
-        </form>
+    <p>{data.contact[0].description}</p>
+    <div>
+      {#each data.contact[0].adresses as adress}
+        <p>{adress.adressName}</p>
+        <p class="mt-0">{adress.adressLine1}</p>
+        <p class="mt-0">{adress.adressLine2}</p>
+        <p class="mt-0">{adress.adressCountry}</p>
+        <p class="mt-0"><a href="tel:{adress.adressPhone}">{adress.adressPhone}</a></p>
+        <p class="mt-0"><a href="mailto:{adress.adressEmail}">{adress.adressEmail}</a></p>
+        <p class="mt-0"><a href="{adress.adressWebsiteUrl}" target="_blank" rel="noopener noreferrer">{adress.adressWebsite} ↗</a></p>
+      {/each}
+    </div>
+    <div>
+      <form
+      id="form"
+      action="?/create"
+      method="POST"
+      use:enhance={handleEnhance}
+      >
+        <textarea id="message" name="message" rows="5" placeholder="Message" class:empty={isEmptyMessage} onclick={() => isEmptyMessage = false}></textarea>
+        <input type="text" id="name" name="name" placeholder="Nom et prénom" class:empty={isEmptyName} onclick={() => isEmptyName = false}>
+        <input type="email" id="email" name="email" placeholder="E-mail" class:empty={isEmptyEmail} onclick={() => isEmptyEmail = false}>
+        <div class="button-container">
+          <button type="submit" onclick={() => isSubmitting = true} style="{isErrorous ? 'widht:100%' : 'width:9rem'}{isEmpty ? 'widht:100%' : ''}">
+            {#if isSubmitted}
+              Envoyé
+            {:else if isSubmitting}
+              En cours
+            {:else if isErrorous}
+              Erreur lors de l'envoi. Veuillez réessayer.
+            {:else if isEmpty}
+              Champs vides
+            {:else}
+              Envoyer
+            {/if}
+          </button>
+        </div>
+      </form>
 
-        <h3>Newsletter</h3>
-        <p>Pour recevoir nos nouvelles et mise à jour, inscrivez-vous à notre newsletter.</p>
-        <form action="">
-          <input type="email" id="email" name="email" placeholder="E-mail">
-          <div class="button-container">
-            <button type="submit" onclick={() => isSubmitting = true} style="{isErrorous ? 'widht:100%' : 'width:9rem'}{isEmpty ? 'widht:100%' : ''}">
-              Inscription
-            </button>
-          </div>
-        </form>
-      </div>
+      <h3>Newsletter</h3>
+      <p>{data.contact[0].newsletterMessage}</p>
+      <form action="">
+        <input type="email" id="email" name="email" placeholder="E-mail">
+        <div class="button-container">
+          <button type="submit" onclick={() => isSubmitting = true} style="{isErrorous ? 'widht:100%' : 'width:9rem'}{isEmpty ? 'widht:100%' : ''}">
+            Inscription
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
 </article>
 

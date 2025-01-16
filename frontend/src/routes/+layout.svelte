@@ -3,7 +3,9 @@
 import '../app.css'
 import { page } from '$app/stores';
 import { onMount } from "svelte";
-const { children } = $props()
+const { data, children } = $props()
+
+$inspect(data)
 
 // Variables
 let headerType = $state(true)
@@ -105,9 +107,10 @@ onmouseleave={() => {
         <div class="submenu-container">
           <ul class="submenu" class:on={activeMenuItem && activeMenuItem === '1' || activeMenuItemLast === '1'}>
             <li class="menu-item-container"><a class="menu-item" data-item="1" class:off={activeSubMenuItem && activeSubMenuItem !== '1'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {menuOpen = false;}} href="/concours/thematiques">Thématiques</a></li>
-            <li class="menu-item-container"><a class="menu-item" data-item="2" class:off={activeSubMenuItem && activeSubMenuItem !== '2'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {menuOpen = false;}} href="/concours/lieux">Lieux</a></li>
-            <li class="menu-item-container"><a class="menu-item" data-item="3" class:off={activeSubMenuItem && activeSubMenuItem !== '3'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {menuOpen = false;}} href="/concours/jury">Jury</a></li>
-            <li class="menu-item-container"><a class="menu-item" data-item="4" class:off={activeSubMenuItem && activeSubMenuItem !== '4'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {menuOpen = false;}} href="/concours/resultats">Resultats</a></li>
+            <li class="menu-item-container"><a class="menu-item" data-item="2" class:off={activeSubMenuItem && activeSubMenuItem !== '2'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {menuOpen = false;}} href="/concours/deroulement">Déroulement</a></li>
+            <li class="menu-item-container"><a class="menu-item" data-item="3" class:off={activeSubMenuItem && activeSubMenuItem !== '3'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {menuOpen = false;}} href="/concours/lieux">Lieux</a></li>
+            <!-- {#if data.competition.jury.length > 0}<li class="menu-item-container"><a class="menu-item" data-item="4" class:off={activeSubMenuItem && activeSubMenuItem !== '4'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {menuOpen = false;}} href="/concours/jury">Jury</a></li>{/if} -->
+            <li class="menu-item-container"><a class="menu-item" data-item="5" class:off={activeSubMenuItem && activeSubMenuItem !== '5'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {menuOpen = false;}} href="/concours/resultats">Resultats</a></li>
           </ul>
         </div>
       </li>
@@ -338,6 +341,7 @@ main {
   grid-template-columns: repeat(6, 1fr);
   column-gap: var(--gutter);
   padding: var(--gutter) var(--gutter);
+  overflow-x: hidden;
 }
 
 

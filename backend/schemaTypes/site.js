@@ -1,10 +1,22 @@
 import {MarkerIcon} from '@sanity/icons'
+import {isUniqueOtherThanLanguage} from "./isUniqueOtherThanLanguage.js";
 
 export default {
   name: 'site',
   icon: MarkerIcon,
   type: 'document',
   fields: [
+    {
+      name: 'language',
+      type: 'string',
+      readOnly: true,
+      options: {
+        list: [
+          { title: 'German', value: 'de' },
+          { title: 'French', value: 'fr' },
+        ],
+      },
+    },
     {
       name: 'title',
       type: 'string',
@@ -17,6 +29,7 @@ export default {
       options: {
         source: 'title',
         maxLength: 96,
+        isUnique: isUniqueOtherThanLanguage,
       },
     },
     {
@@ -55,5 +68,17 @@ export default {
         }
       ],
     },
-  ]
+  ],
+  preview: {
+    select: {
+      title: 'title',
+      language: 'language',
+    },
+    prepare({ title, language, site }) {
+      return {
+        title: title,
+        subtitle: `[${language ? language.toUpperCase() : 'Undefined'}]`,
+      };
+    },
+  },
 }

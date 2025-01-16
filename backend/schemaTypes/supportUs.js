@@ -1,29 +1,27 @@
-import {DocumentTextIcon} from '@sanity/icons';
+import {HeartIcon} from '@sanity/icons'
 
 export default {
-  name: 'policy',
+  name: 'supportUs',
   type: 'document',
-  icon: DocumentTextIcon,
+  icon: HeartIcon,
   fieldsets: [
 
   ],
   fields: [
     {
-      name: 'title',
+      name: 'language',
       type: 'string',
-    },
-    {
-      name: 'kind',
-      type: 'string',
+      readOnly: true,
       options: {
         list: [
-          {title: 'Cookie policy', value: 'cookies'},
-          {title: 'Privacy policy', value: 'privacy'},
+          { title: 'German', value: 'de' },
+          { title: 'French', value: 'fr' },
         ],
-        layout: 'radio'
       },
-      initialValue: 'cookies',
-      validation: (Rule) => Rule.required(),
+    },
+    {
+      name: 'title',
+      type: 'string',
     },
     {
       name: 'body',
@@ -45,9 +43,6 @@ export default {
                   {
                     name: 'href',
                     type: 'url',
-                    validation: Rule => Rule.uri({
-                      scheme: ['http', 'https', 'mailto', 'tel']
-                    })
                   },
                   {
                     title: 'Open in new tab',
@@ -60,7 +55,19 @@ export default {
             ]
           },
         }
-      ]
+      ],
     },
   ],
+  preview: {
+    select: {
+      title: 'title',
+      language: 'language',
+    },
+    prepare({ title, language, from, to }) {
+      return {
+        title: title,
+        subtitle: `[${language ? language.toUpperCase() : 'Undefined'}]`,
+      };
+    },
+  },
 }

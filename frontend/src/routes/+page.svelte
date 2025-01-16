@@ -1,6 +1,6 @@
 <script>
-import { register } from 'swiper/element/bundle';register();
 
+import { register } from 'swiper/element/bundle';register();
 $effect(() => {
   const swiperEl = document.querySelector('swiper-container');
   const swiperParams = {

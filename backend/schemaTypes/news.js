@@ -1,4 +1,5 @@
 import {BellIcon} from '@sanity/icons'
+import {isUniqueOtherThanLanguage} from "./isUniqueOtherThanLanguage.js";
 
 export default {
   name: 'news',
@@ -6,20 +7,11 @@ export default {
   type: 'document',
   fieldsets: [
     {
-      name: 'test',
-      title: 'Test',
+      name: 'dates',
       options: { columns: 2 },
     },
   ],
   fields: [
-    {
-      name: 'title',
-      type: 'string',
-    },
-    {
-      name: 'subtitle',
-      type: 'string',
-    },
     {
       name: 'language',
       type: 'string',
@@ -32,6 +24,18 @@ export default {
       },
     },
     {
+      name: 'title',
+      type: 'string',
+    },
+    {
+      name: 'subtitle',
+      type: 'string',
+    },
+    {
+      name: 'place',
+      type: 'string',
+    },
+    {
       name: 'slug',
       type: 'slug',
       validation: (Rule) => Rule.required(),
@@ -42,7 +46,8 @@ export default {
       },
     },
     {
-      name: 'date',
+      name: 'from',
+      fieldset: 'dates',
       type: 'date',
       options: {
         dateFormat: 'DD.MM.YY',
@@ -51,14 +56,14 @@ export default {
       validation: (Rule) => Rule.required(),
     },
     {
-      name: 'homepageHighlight',
-      type: 'boolean',
+      name: 'to',
+      fieldset: 'dates',
+      type: 'date',
+      options: {
+        dateFormat: 'DD.MM.YY',
+      },
+      initialValue: () => new Date().toISOString().split('T')[0],
     },
-    // {
-    //   name: 'site',
-    //   type: 'reference',
-    //   to: [{type: 'site'}],
-    // },
     {
       name: 'images',
       type: 'array',
@@ -78,9 +83,9 @@ export default {
         {
           type: 'block',
           styles: [
-            {value: 'normal'},
-            {value: 'h3'},
-            {value: 'h4'},
+            {value: 'normal', title: 'Normal'},
+            {value: 'h3', title: 'H3'},
+            {value: 'h4', title: 'H4'},
           ],
           marks: {
             annotations: [
@@ -144,55 +149,55 @@ export default {
       title: 'Date (Newest first)',
       name: 'dateDesc',
       by: [
-        { field: 'date', direction: 'desc' },
+        { field: 'from', direction: 'desc' },
       ],
     },
     {
       title: 'Date (Oldest first)',
       name: 'dateAsc',
       by: [
-        { field: 'date', direction: 'asc' },
+        { field: 'from', direction: 'asc' },
       ],
     },
   ],
   preview: {
     select: {
       title: 'title',
-      date: 'date',
+      from: 'from',
+      to: 'to',
       language: 'language',
     },
-    prepare({ title, language, date }) {
-      const formattedDate = date
-        ? new Intl.DateTimeFormat('en-GB', { day: '2-digit', month: '2-digit', year: '2-digit' })
-            .format(new Date(date))
-            .replace(/\//g, '.')
-        : 'No date';
+    prepare({ title, language, from, to }) {
       return {
         title: title,
-        subtitle: `[${language? language.toUpperCase() : 'Undefined'}] ${formattedDate}`,
+        subtitle: `[${language ? language.toUpperCase() : 'Undefined'}] ${formatDate(from, to)}`,
       };
     },
   },
 }
 
-export async function isUniqueOtherThanLanguage(slug, context) {
-  const {document, getClient} = context
-  if (!document?.language) {
-    return true
+function formatDate(date1, date2) {
+  if (!date1) return '';
+
+  const parseDate = (date) => new Date(date);
+  const formatDatePart = (date) => {
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear().toString().slice(-2);
+    return { day, month, year };
+  };
+
+  const d1 = parseDate(date1);
+  const d2 = date2 ? parseDate(date2) : null;
+
+  const { day: day1, month: month1, year: year1 } = formatDatePart(d1);
+  if (!d2) {
+    return `${day1}.${month1}.${year1}`;
   }
-  const client = getClient({apiVersion: '2023-04-24'})
-  const id = document._id.replace(/^drafts\./, '')
-  const params = {
-    draft: `drafts.${id}`,
-    published: id,
-    language: document.language,
-    slug,
+
+  const { day: day2, month: month2, year: year2 } = formatDatePart(d2);
+  if (year1 === year2 && month1 === month2) {
+    return `${day1}-${day2}.${month1}.${year1}`;
   }
-  const query = `!defined(*[
-    !(_id in [$draft, $published]) &&
-    slug.current == $slug &&
-    language == $language
-  ][0]._id)`
-  const result = await client.fetch(query, params)
-  return result
+  return `${day1}.${month1}.${year1}-${day2}.${month2}.${year2}`;
 }

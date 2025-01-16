@@ -96,6 +96,10 @@ a:any-link {
   font-weight: 400;
   letter-spacing: -.03em;
 }
+h2.text-l {
+  line-height: 1;
+  margin-top: .15em;
+}
 .text-m {
   font-size: 2.222rem;
   font-weight: 400;

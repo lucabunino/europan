@@ -1,21 +1,32 @@
-import {MarkerIcon} from '@sanity/icons'
+import {MarkerIcon, EnvelopeIcon} from '@sanity/icons'
 
 export default {
   name: 'contact',
   type: 'document',
+  icon: EnvelopeIcon,
   fieldsets: [
 
   ],
   fields: [
     {
+      name: 'language',
+      type: 'string',
+      readOnly: true,
+      options: {
+        list: [
+          { title: 'German', value: 'de' },
+          { title: 'French', value: 'fr' },
+        ],
+      },
+    },
+    {
       name: 'title',
       type: 'string',
-      hidden: true,
     },
     {
       name: 'description',
       type: 'text',
-      rows: 2,
+      rows: 4,
     },
     {
       name: 'adresses',
@@ -67,15 +78,17 @@ export default {
       type: 'text',
       rows: 2,
     },
-    // {
-    //   name: 'socials',
-    //   type: 'array',
-    //   of: [
-    //     {
-    //       name: 'socialUrl',
-    //       type: 'url'
-    //     },
-    //   ]
-    // },
-  ]
+  ],
+  preview: {
+    select: {
+      title: 'title',
+      language: 'language',
+    },
+    prepare({ title, language, from, to }) {
+      return {
+        title: title,
+        subtitle: `[${language ? language.toUpperCase() : 'Undefined'}]`,
+      };
+    },
+  },
 }

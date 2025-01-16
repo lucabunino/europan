@@ -6,14 +6,6 @@ export default {
   icon: UserIcon,
   fields: [
     {
-      name: 'name',
-      type: 'string',
-    },
-    {
-      name: 'surname',
-      type: 'string',
-    },
-    {
       name: 'language',
       type: 'string',
       readOnly: true,
@@ -25,13 +17,12 @@ export default {
       },
     },
     {
-      name: 'slug',
-      type: 'slug',
-      validation: (Rule) => Rule.required(),
-      options: {
-        source: (doc) => `${doc.name}-${doc.surname}`,
-        maxLength: 96,
-      },
+      name: 'name',
+      type: 'string',
+    },
+    {
+      name: 'surname',
+      type: 'string',
     },
     {
       name: 'role',
@@ -90,7 +81,7 @@ export default {
       const {name, surname, role, language, media} = selection;
       return {
         title: `${name} ${surname}`,
-        subtitle: `[${language? language.toUpperCase() : 'Undefined'}] ${role}`,
+        subtitle: `[${language? language.toUpperCase() : 'Undefined'}]${role? ` ${role}` : ''}`,
         media: media
       };
     }

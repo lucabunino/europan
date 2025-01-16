@@ -1,22 +1,33 @@
-import { UsersIcon, EarthGlobeIcon, EnvelopeIcon} from '@sanity/icons'
+import { UsersIcon, EarthGlobeIcon, InfoOutlineIcon} from '@sanity/icons'
 
 export const myStructure = (S, context) => {
   const entities = [
     S.divider(),
     S.documentTypeListItem('news')
       .title('News'),
+    S.documentTypeListItem('featuredNews')
+      .title('Featured News'),
   ];
   const pages = [
     S.divider(),
-    S.documentTypeListItem('about')
-      .title('About'),
-    S.documentTypeListItem('person')
-      .icon(UsersIcon)
-      .title('Committee'),
     S.listItem()
-      .title('Contacts')
-      .icon(EnvelopeIcon)
-      .child(S.document().schemaType('contact').documentId('contact')),
+      .title('About')
+      .icon(InfoOutlineIcon)
+      .child(
+        S.list()
+          .title('About')
+          .items([
+            S.documentTypeListItem('whatIsEuropan'),
+            S.listItem()
+              .title('Team')
+              .icon(UsersIcon)
+              .child(S.document().schemaType('team').documentId('team')),
+            S.documentTypeListItem('partner')
+              .title('Partners'),
+            S.documentTypeListItem('supportUs')
+          ])
+      ),
+    S.documentTypeListItem('contact')
   ];
   const competition = [
     S.divider(),
@@ -26,6 +37,9 @@ export const myStructure = (S, context) => {
       .title('Sites'),
     S.documentTypeListItem('project')
       .title('Projects'),
+    S.documentTypeListItem('person')
+      .title('People')
+      .icon(UsersIcon),
   ];
   const siteSettings = [
     S.divider(),
@@ -35,6 +49,8 @@ export const myStructure = (S, context) => {
       .child(S.document().schemaType('seo').documentId('seo')),
     S.documentTypeListItem('policy')
       .title('Policy'),
+    S.documentTypeListItem('translation.metadata')
+      .title('Translations'),
   ];
 
   return S.list()

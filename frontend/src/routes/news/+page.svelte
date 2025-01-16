@@ -1,14 +1,15 @@
 <script>
-let dates = ['16.07.25',  '23.04.25',  '07.12.24',  '12.12.24',  '19.11.24',  '08.01.24',  '24.08.23',]
+  const { data } = $props()
+  import { formatDate } from "$lib/utils/date";
 </script>
 
-{#each dates as news, i}
-<a class="news no-hover" href="/">
-  <h2 class="text-xl">{news}</h2>
+{#each data.newses as news, i}
+<a class="news no-hover" href="/news/{news.slug.current}">
+  <h2 class="text-xl">{formatDate(news.from)}</h2>
   <div class="info text-xs">
-    <p>La ville adaptable I:</p>
-    <p class="mt-0">Insérer les rythmes urbains</p>
-    <p class="mt-0">Couvet, Kreuzlingen-Konstanz, Marly</p>
+    <p>{news.title}</p>
+    <p class="mt-0">{news.subtitle}</p>
+    <p class="mt-0">{news.place}</p>
   </div>
 </a>
 {/each}

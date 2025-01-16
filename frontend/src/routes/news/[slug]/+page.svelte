@@ -1,0 +1,105 @@
+<script>
+const { data } = $props()
+import { urlFor } from '$lib/utils/image';
+import { PortableText } from '@portabletext/svelte'
+import PortableTextStyle from '$lib/components/portableTextStyle.svelte';
+
+import { register } from 'swiper/element/bundle';register();
+$effect(() => {
+  if (data.news[0].images) {
+    const swiperEl = document.querySelector('swiper-container');
+    const swiperParams = {
+      slidesPerView: 1,
+      injectStyles: [
+        `
+        .swiper-button-prev,
+        .swiper-button-next {
+          background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" fill="none"><circle cx="18.803" cy="18.803" r="18.803" fill="%23fff"/><path d="m4.932 19.111 21.27-12.28v24.56l-21.27-12.28Z" fill="%23000"/></svg>');
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: contain;
+          width: 38px; /* Match the SVG dimensions */
+          height: 38px;
+          border: none; /* Remove any default button styles */
+          cursor: pointer;
+        }
+        .swiper-button-next {
+          transform: rotate(180deg);
+        }
+        .swiper-button-next svg,
+        .swiper-button-prev svg {
+          display: none;
+        }
+        `,
+      ],
+    };
+    Object.assign(swiperEl, swiperParams);
+    swiperEl.initialize();
+  }
+})
+let innerWidth = $state()
+</script>
+
+<svelte:window bind:innerWidth></svelte:window>
+
+<article>
+  <h2 class="text-l page-title">{data.news[0].title}</h2>
+  {#if data.news[0].images}
+  <swiper-container
+  init={false}
+  slides-per-view={1}
+  navigation={true}
+  loop={true}
+  speed={400}
+  >
+  {#each data.news[0].images as image}
+    <swiper-slide>
+      <img src={urlFor(image).width(1080)} alt="">
+    </swiper-slide>
+  {/each}
+  </swiper-container>
+  {/if}
+
+  <div class="body">
+    <PortableText
+    value={data.news[0].body}
+    components={{
+      block: {
+        normal: PortableTextStyle,
+        h3: PortableTextStyle,
+        h4: PortableTextStyle,
+      },
+      listItem: PortableTextStyle,
+      marks: {
+        link: PortableTextStyle,
+      },
+    }}
+    />
+  </div>
+  
+  {#if data.news[0].attachments}
+    {#each data.news[0].attachments as attachment, i}
+      <p class={i > 0 ? 'mt-0' : ''}><a href={attachment.url} target="_blank" rel="noopener noreferrer">{attachment.title} ↧</a></p>
+    {/each}
+  {/if}
+  <p><a href=/news>See more news →</a></p>
+</article>
+
+<style>
+article {
+  grid-column: 3 / span 4;
+}
+swiper-container {
+  margin-bottom: var(--gutter);
+}
+swiper-slide {
+  width: 100%;
+  aspect-ratio: var(--aspectRatio);
+  background-color: var(--gray);
+}
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+</style>

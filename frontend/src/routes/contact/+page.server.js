@@ -1,5 +1,18 @@
 import { EMAIL } from "$env/static/private";
-import transporter from "$lib/emailSetup.server.js";
+import transporter from "$lib/utils/emailSetup.server.js";
+import { getContact } from '$lib/utils/sanity';
+import { error } from '@sveltejs/kit';
+
+export async function load({ url }) {
+	const contact = await getContact();
+	
+	if (contact) {
+		return {
+			contact,
+		};
+	}
+  throw error(404, 'Not found');
+}
 
 export const actions = {
   create: async ({ request }) => {
@@ -36,7 +49,8 @@ export const actions = {
       
       const mail = {
         from: EMAIL,
-        to: "bureau@europan.swiss",
+        // to: "bureau@europan.swiss",
+        to: "hello@lucabunino.com",
         subject: `Europan Suisse | Message from ${email}`,
         text: body,
         html: html,
