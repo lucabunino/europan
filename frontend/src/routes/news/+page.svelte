@@ -5,7 +5,7 @@
 
 {#each data.newses as news, i}
 <a class="news no-hover" href="/news/{news.slug.current}">
-  <h2 class="text-xl">{formatDate(news.from)}</h2>
+  <h2 class="text-xl">{formatDate(news.date)}</h2>
   <div class="info text-xs">
     <p>{news.title}</p>
     <p class="mt-0">{news.subtitle}</p>

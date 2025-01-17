@@ -33,40 +33,11 @@ export default {
       },
     },
     {
-      name: 'body',
-      type: 'array',
-      of: [
-        {
-          type: 'block',
-          styles: [
-            {title: 'Testo corrente', value: 'normal'},
-            {title: 'Titolo', value: 'h3'},
-            {title: 'Titoletto', value: 'h4'},
-          ],
-          marks: {
-            annotations: [
-              {
-                name: 'link',
-                type: 'object',
-                title: 'Link',
-                fields: [
-                  {
-                    name: 'href',
-                    type: 'url',
-                    title: 'URL'
-                  },
-                  {
-                    title: 'Open in new tab',
-                    name: 'blank',
-                    description: 'Meant to be used when the link is from another domain',
-                    type: 'boolean'
-                  }
-                ]
-              },
-            ]
-          },
-        }
-      ],
+      name: 'thumbnail',
+      type: 'image',
+      options: {
+        accept: 'image/jpg,image/jpeg,image/png,image/webp',
+      },
     },
   ],
   preview: {

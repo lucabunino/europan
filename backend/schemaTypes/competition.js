@@ -1,4 +1,5 @@
 import {EmptyIcon} from '@sanity/icons'
+import {MarkerIcon} from '@sanity/icons'
 import {isUniqueOtherThanLanguage} from "./isUniqueOtherThanLanguage.js";
 
 export default {
@@ -138,18 +139,126 @@ export default {
       type: 'array',
       of: [
         {
-          type: 'reference',
-          to: [{type: 'site'}],
-          options: {
-            filter: ({ document }) => ({
-              filter: 'language == $language',
-              params: { language: document?.language },
-            }),
+          name: 'site',
+          type: 'object',
+          icon: MarkerIcon,
+          fields: [
+            {
+              name: 'siteReference',
+              type: 'reference',
+              to: [{ type: 'site' }],
+              options: {
+                filter: ({ document }) => ({
+                  filter: 'language == $language',
+                  params: { language: document?.language },
+                }),
+              },
+            },
+            {
+              name: 'winners',
+              type: 'array',
+              of: [
+                {
+                  name: 'winner',
+                  type: 'reference',
+                  to: [{ type: 'project' }],
+                  options: {
+                    filter: ({ document }) => {
+                      // Loop through the 'featuredSites' array to find the 'siteReference' for filtering
+                      const siteReference = document.featuredSites?.find(site => site?.siteReference)?.siteReference;
+                      
+                      if (!siteReference) {
+                        return {
+                          filter: 'site._ref == $siteId',  // No site reference available, fallback
+                          params: { siteId: '' },  // Default or empty filter
+                        };
+                      }
+                      
+                      // If siteReference exists, use it for filtering
+                      return {
+                        filter: 'site._ref == $siteId',
+                        params: { siteId: siteReference?._ref },  // Get the site _ref from the parent document
+                      };
+                    },
+                  },
+                },
+              ],
+            },                                        
+            {
+              name: 'runnerUps',
+              type: 'array',
+              of: [
+                {
+                  name: 'runnerUp',
+                  type: 'reference',
+                  to: [{ type: 'project' }],
+                  options: {
+                    filter: ({ document }) => {
+                      const siteReference = document.featuredSites?.find(site => site?.siteReference)?.siteReference;
+                      
+                      if (!siteReference) {
+                        return {
+                          filter: 'site._ref == $siteId',
+                          params: { siteId: '' },  // Default or empty filter
+                        };
+                      }
+                      
+                      return {
+                        filter: 'site._ref == $siteId',
+                        params: { siteId: siteReference?._ref },
+                      };
+                    },
+                  },
+                },
+              ],
+            },
+            {
+              name: 'specialMentions',
+              type: 'array',
+              of: [
+                {
+                  name: 'specialMention',
+                  type: 'reference',
+                  to: [{ type: 'project' }],
+                  options: {
+                    filter: ({ document }) => {
+                      const siteReference = document.featuredSites?.find(site => site?.siteReference)?.siteReference;
+                      
+                      if (!siteReference) {
+                        return {
+                          filter: 'site._ref == $siteId',
+                          params: { siteId: '' },  // Default or empty filter
+                        };
+                      }
+                      
+                      return {
+                        filter: 'site._ref == $siteId',
+                        params: { siteId: siteReference?._ref },
+                      };
+                    },
+                  },
+                },
+              ],
+            },            
+          ],
+          preview: {
+            select: {
+              site: 'siteReference.title',
+              winners: 'winners',
+              runnerUps: 'runnerUps',
+              specialMentions: 'specialMentions',
+            },
+            prepare({ site, winners, runnerUps, specialMentions }) {
+              return {
+                title: site || 'Untitled Site',
+                subtitle: `Winners: ${winners ? winners.length : 0}, Runner-Ups: ${runnerUps? runnerUps.length : 0}, Mentions: ${specialMentions ? specialMentions.length : 0}`,
+              };
+            },
           },
-        }
+        },
       ],
       group: 'sites',
-    },
+    },    
     {
       name: 'jury',
       type: 'array',

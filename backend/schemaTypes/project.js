@@ -38,24 +38,57 @@ export default {
       },
     },
     {
+      name: 'europanEuropeUrl',
+      type: 'url'
+    }, 
+    {
       name: 'team',
       type: 'array',
       of: [
         {
-          type: 'object',
-          fields: [
-            {
-              name: 'person',
-              type: 'reference',
-              to: [{type: 'site'}],
-              options: {
-                filter: ({ document }) => ({
-                  filter: 'language == $language',
-                  params: { language: document?.language },
-                }),
+          name: 'person',
+          type: 'reference',
+          to: [{type: 'person'}],
+          options: {
+            filter: ({ document }) => ({
+              filter: 'language == $language',
+              params: { language: document?.language },
+            }),
+          },
+        }
+      ],
+    },
+    {
+      name: 'body',
+      type: 'array',
+      of: [
+        {
+          type: 'block',
+          styles: [
+            {value: 'normal', title: 'Normal'},
+            {value: 'h3', title: 'H3'},
+            {value: 'h4', title: 'H4'},
+          ],
+          marks: {
+            annotations: [
+              {
+                name: 'link',
+                type: 'object',
+                fields: [
+                  {
+                    name: 'href',
+                    type: 'url',
+                  },
+                  {
+                    title: 'Open in new tab',
+                    name: 'blank',
+                    description: 'Meant to be used when the link is from another domain',
+                    type: 'boolean'
+                  }
+                ]
               },
-            }
-          ]
+            ]
+          },
         }
       ],
     },

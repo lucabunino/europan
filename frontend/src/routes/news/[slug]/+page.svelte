@@ -3,6 +3,7 @@ const { data } = $props()
 import { urlFor } from '$lib/utils/image';
 import { PortableText } from '@portabletext/svelte'
 import PortableTextStyle from '$lib/components/portableTextStyle.svelte';
+import { formatDate } from "$lib/utils/date";
 
 import { register } from 'swiper/element/bundle';register();
 $effect(() => {
@@ -43,7 +44,10 @@ let innerWidth = $state()
 <svelte:window bind:innerWidth></svelte:window>
 
 <article>
-  <h2 class="text-l page-title">{data.news[0].title}</h2>
+  <div class="page-title">
+    <h2 class="text-l">{data.news[0].title}</h2>
+    {#if data.news[0].from}<h3 class="text-s page-subtitle">{formatDate(data.news[0].from, data.news[0].to)}</h3>{/if}
+  </div>
   {#if data.news[0].images}
   <swiper-container
   init={false}
@@ -54,7 +58,7 @@ let innerWidth = $state()
   >
   {#each data.news[0].images as image}
     <swiper-slide>
-      <img src={urlFor(image).width(1080)} alt="">
+      <img src={urlFor(image).width(1080)} alt="Image for {data.news[0].title}">
     </swiper-slide>
   {/each}
   </swiper-container>
@@ -100,6 +104,6 @@ swiper-slide {
 img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 </style>

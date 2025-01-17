@@ -9,6 +9,17 @@ export default {
   ],
   fields: [
     {
+      name: 'language',
+      type: 'string',
+      readOnly: true,
+      options: {
+        list: [
+          { title: 'German', value: 'de' },
+          { title: 'French', value: 'fr' },
+        ],
+      },
+    },
+    {
       name: 'title',
       type: 'string',
     },
@@ -22,7 +33,7 @@ export default {
           options: {
             filter: ({ document }) => ({
               filter: 'language == $language',
-              params: { language: 'fr' },
+              params: { language: document?.language },
             }),
           },
         }

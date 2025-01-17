@@ -117,6 +117,9 @@ p + p:not(.mt-0) {
 .page-title {
   margin-bottom: calc(2rem + 1em);
 }
+.page-subtitle {
+  margin-top: calc(1em);
+}
 p + .subtitle {
   margin-top: 1em;
 }

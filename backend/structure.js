@@ -18,10 +18,7 @@ export const myStructure = (S, context) => {
           .title('About')
           .items([
             S.documentTypeListItem('whatIsEuropan'),
-            S.listItem()
-              .title('Team')
-              .icon(UsersIcon)
-              .child(S.document().schemaType('team').documentId('team')),
+            S.documentTypeListItem('team'),
             S.documentTypeListItem('partner')
               .title('Partners'),
             S.documentTypeListItem('supportUs')

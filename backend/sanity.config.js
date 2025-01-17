@@ -21,7 +21,7 @@ export default defineConfig({
         {id: 'fr', title: 'French'},
         {id: 'de', title: 'German'},
       ],
-      schemaTypes: ['news', 'person', 'whatIsEuropan', 'partner', 'contact', 'featuredNews', 'competition', 'site', 'project'],
+      schemaTypes: ['news', 'person', 'whatIsEuropan', 'partner', 'contact', 'featuredNews', 'competition', 'site', 'project', 'team'],
     }),
     structureTool({
       structure: myStructure,

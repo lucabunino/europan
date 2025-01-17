@@ -17,7 +17,7 @@ export const client = createClient({
 // Newses
 export async function getNewses() {
 	return await client.fetch(`
-		*[_type == "news" && language == "fr" && !(_id in path('drafts.**'))] | order(from desc) {
+		*[_type == "news" && language == "fr" && !(_id in path('drafts.**'))] | order(date desc) {
 			...,
 		}
 	`);
