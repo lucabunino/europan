@@ -1,14 +1,16 @@
 <script>
 const { data } = $props()
 import { formatDate } from "$lib/utils/date";
-import { onMount } from "svelte";
 
 let innerWidth = $state()
 let innerHeight = $state()
 let activeNews = $state(true)
 
-onMount(() => {
-  window.scrollTo(0, innerWidth*.4);
+import { tick } from 'svelte';
+$effect.pre(() => {
+  tick().then(() => {
+    window.scrollTo(0, innerWidth*.4);
+  });
 });
 
 function updateActiveNews() {
@@ -16,10 +18,10 @@ function updateActiveNews() {
   const newsElements = document.querySelectorAll(".news"); // Get all news elements
 
   for (let i = 0; i < newsElements.length; i++) {
-    const rect = newsElements[i].getBoundingClientRect(); // Get element position
+    const rect = newsElements[i].getBoundingClientRect();
     if (rect.top >= threshold) {
-      activeNews = i; // Set active news index
-      break; // Stop after finding the first element matching the condition
+      activeNews = i;
+      break;
     }
   }
 }
@@ -63,9 +65,6 @@ h2 {
   z-index: -1;
   /* transition: var(--transition); */
 }
-.news.active-news h2::before {
-  width: 100%;
-}
 .news .info {
   color: var(--white);
   padding: 1em;
@@ -79,6 +78,9 @@ h2 {
 .news .info p {
   /* transition: var(--transition); */
   transform: translateX(-101%);
+}
+.news.active-news h2::before {
+  width: 100%;
 }
 .news.active-news .info p {
   transform: translateX(0);
