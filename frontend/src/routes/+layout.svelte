@@ -4,7 +4,6 @@ import '../app.css'
 import { page } from '$app/stores';
 import { onMount } from "svelte";
 const { data, children } = $props()
-
 $inspect(data)
 
 // Variables
@@ -106,11 +105,11 @@ onmouseleave={() => {
         >Concours</a>
         <div class="submenu-container">
           <ul class="submenu" class:on={activeMenuItem && activeMenuItem === '1' || activeMenuItemLast === '1'}>
-            <li class="menu-item-container"><a class="menu-item" data-item="1" class:off={activeSubMenuItem && activeSubMenuItem !== '1'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {menuOpen = false;}} href="/concours/thematiques">Thématiques</a></li>
-            <li class="menu-item-container"><a class="menu-item" data-item="2" class:off={activeSubMenuItem && activeSubMenuItem !== '2'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {menuOpen = false;}} href="/concours/deroulement">Déroulement</a></li>
-            <li class="menu-item-container"><a class="menu-item" data-item="3" class:off={activeSubMenuItem && activeSubMenuItem !== '3'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {menuOpen = false;}} href="/concours/lieux">Lieux</a></li>
-            <!-- {#if data.competition.jury.length > 0}<li class="menu-item-container"><a class="menu-item" data-item="4" class:off={activeSubMenuItem && activeSubMenuItem !== '4'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {menuOpen = false;}} href="/concours/jury">Jury</a></li>{/if} -->
-            <li class="menu-item-container"><a class="menu-item" data-item="5" class:off={activeSubMenuItem && activeSubMenuItem !== '5'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {menuOpen = false;}} href="/concours/resultats">Resultats</a></li>
+            {#if data.competition.topicBody}<li class="menu-item-container"><a class="menu-item" data-item="1" class:off={activeSubMenuItem && activeSubMenuItem !== '1'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {menuOpen = false;}} href="/concours/sujet">Sujet</a></li>{/if}
+            {#if data.competition.processBody}<li class="menu-item-container"><a class="menu-item" data-item="2" class:off={activeSubMenuItem && activeSubMenuItem !== '2'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {menuOpen = false;}} href="/concours/deroulement">Déroulement</a></li>{/if}
+            {#if data.competition.featuredSites?.length > 0}<li class="menu-item-container"><a class="menu-item" data-item="3" class:off={activeSubMenuItem && activeSubMenuItem !== '3'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {menuOpen = false;}} href="/concours/lieux">Lieux</a></li>{/if}
+            {#if data.competition.juryPresident || data.competition.jury?.length > 0}<li class="menu-item-container"><a class="menu-item" data-item="4" class:off={activeSubMenuItem && activeSubMenuItem !== '4'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {menuOpen = false;}} href="/concours/jury">Jury</a></li>{/if}
+            {#if data.competition.showResults}<li class="menu-item-container"><a class="menu-item" data-item="5" class:off={activeSubMenuItem && activeSubMenuItem !== '5'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {menuOpen = false;}} href="/concours/resultats">Resultats</a></li>{/if}
           </ul>
         </div>
       </li>
@@ -167,13 +166,20 @@ onmouseleave={() => {
 </header>
 
 <main>
-  {@render children()}
+  <div>
+    {@render children()}
+  </div>
 </main>
 
 <footer class="text-xs">
-  <p>Europan<br>Schweiz<br>Suisse<br>Svizzera</p>
   <div>
     <div>
+      <ul>
+        <li>Europan</li>
+        <li>Schweiz</li>
+        <li>Suisse</li>
+        <li>Svizzera</li>
+      </ul>
       <ul>
         <li><a class="active" href="/fr">→ Français</a></li>
         <li><a href="/de">→ Deutsch</a></li>
@@ -183,8 +189,8 @@ onmouseleave={() => {
       <ul>
         <li><a href="/concours">Concours</a></li>
         <li><a href="/archive">Archive</a></li>
-        <li><a href="/concours">A propos</a></li>
-        <li><a href="/concours">News</a></li>
+        <li><a href="/a-propos">A propos</a></li>
+        <li><a href="/news">News</a></li>
       </ul>
       <ul>
         <li><a href="/contact">Contact</a></li>
@@ -193,13 +199,13 @@ onmouseleave={() => {
         <li><a href="/credits">Credits</a></li>
       </ul>
     </div>
-    <div>
+    <!-- <div>
       <a class="no-hover" target="_blank" href="https://www.sia.ch/"><img src="/logo/sia.svg" alt="sia logo"></a>
       <a class="no-hover" target="_blank" href="https://www.bsla.ch/"><img src="/logo/fsap.svg" alt="bsla logo"></a>
       <a class="no-hover" target="_blank" href="https://gvb.ch/"><img src="/logo/gvb.svg" alt="gvb logo"></a>
       <a class="no-hover" target="_blank" href="https://www.bsa-fas.ch/"><img src="/logo/bsafas.svg" alt="bsafas logo"></a>
       <a class="no-hover" target="_blank" href="https://www.geneve.ch/"><img src="/logo/geneve.svg" alt="geneve logo"></a>
-    </div>
+    </div> -->
   </div>
 </footer>
 
@@ -214,7 +220,6 @@ header {
   margin: var(--gutter);
   gap: .7rem;
   z-index: 3;
-  border: solid red;
   width: -webkit-fill-available;
   pointer-events: none;
 }
@@ -337,11 +342,21 @@ nav {
 
 /* Main */
 main {
+  min-height: calc(100vh - (.777rem*4*1.2 + var(--gutter)*6));
+}
+main>div {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   column-gap: var(--gutter);
   padding: var(--gutter) var(--gutter);
-  overflow-x: hidden;
+}
+@media screen and (max-width: 1200px) {
+  main {
+    min-height: calc(100vh - (.777rem*4*1.2 + 6rem + var(--gutter)*6));
+  }
+  main>div {
+    margin-top: 6rem;
+  }
 }
 
 
@@ -352,19 +367,20 @@ footer {
   padding: calc(var(--gutter)*5) var(--gutter) var(--gutter);
   column-gap: var(--gutter);
 }
-footer>*:nth-child(1) {
+/* footer>*:nth-child(1) {
   grid-column: 1 / span 2;
-}
-footer>*:nth-child(2) {
+} */
+footer>*:nth-child(1) {
   grid-column: 3 / span 4;
   display: flex;
   column-gap: var(--gutter);
   justify-content: space-between;
   align-items: flex-end;
 }
-footer>*:nth-child(2) div {
+footer>*:nth-child(1) div {
   display: flex;
   column-gap: var(--gutter);
+  width: 100%;
 }
 footer ul {
   list-style: none;
@@ -375,6 +391,13 @@ footer img {
   height: 2.2rem;
   width: auto;
 }
+
+@media screen and (max-width: 1200px) {
+  footer>*:nth-child(1) {
+    grid-column: 1 / span 6;
+  }
+}
+
 
 @media screen and (max-width: 900px) {
   footer div,
@@ -389,6 +412,9 @@ footer img {
   }
   section:not(#hero)>div {
     grid-column: unset;
+  }
+  footer ul {
+    width: 25%
   }
 }
 </style>

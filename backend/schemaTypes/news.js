@@ -62,8 +62,6 @@ export default {
       options: {
         dateFormat: 'DD.MM.YY',
       },
-      initialValue: () => new Date().toISOString().split('T')[0],
-      validation: (Rule) => Rule.required(),
     },
     {
       name: 'to',
@@ -72,7 +70,6 @@ export default {
       options: {
         dateFormat: 'DD.MM.YY',
       },
-      initialValue: () => new Date().toISOString().split('T')[0],
     },
     {
       name: 'images',

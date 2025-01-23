@@ -1,12 +1,12 @@
-import { getJury } from '$lib/utils/sanity';
+import { getPartners } from '$lib/utils/sanity';
 import { error } from '@sveltejs/kit';
 
 export async function load({ url }) {
-	const jury = await getJury();
+	const partners = await getPartners();
 	
-	if (jury) {
+	if (partners) {
 		return {
-			jury,
+			partners,
 		};
 	}
   throw error(404, 'Not found');

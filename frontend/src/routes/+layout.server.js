@@ -1,8 +1,8 @@
-import { getJury } from '$lib/utils/sanity';
+import { getLastCompetition } from '$lib/utils/sanity';
 import { error } from '@sveltejs/kit';
 
 export async function load({ url }) {
-	const competition = await getJury();
+	const competition = await getLastCompetition();
 	
 	if (competition) {
 		return {

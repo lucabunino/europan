@@ -23,6 +23,17 @@ export default {
       name: 'title',
       type: 'string',
     },
+    {
+      name: 'logo',
+      type: 'file',
+      options: {
+        accept: '.svg, .png',
+      },
+    },
+    {
+      name: 'url',
+      type: 'url'
+    },
   ],
   preview: {
     select: {

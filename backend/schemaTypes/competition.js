@@ -10,9 +10,8 @@ export default {
     { name: 'basics'},
     { name: 'topic'},
     { name: 'process'},
-    { name: 'sites'},
     { name: 'jury'},
-    { name: 'results'},
+    { name: 'sites'},
   ],
   fields: [
     {
@@ -39,6 +38,11 @@ export default {
       group: 'basics',
     },
     {
+      name: 'subtitle',
+      type: 'string',
+      group: 'basics',
+    },
+    {
       name: 'slug',
       title: 'Slug',
       type: 'slug',
@@ -50,16 +54,16 @@ export default {
       },
       group: 'basics',
     },
-    {
-      name: 'date',
-      type: 'date',
-      options: {
-        dateFormat: 'DD.MM.YY',
-      },
-      initialValue: () => new Date().toISOString().split('T')[0],
-      validation: (Rule) => Rule.required(),
-      group: 'basics',
-    },
+    // {
+    //   name: 'date',
+    //   type: 'date',
+    //   options: {
+    //     dateFormat: 'DD.MM.YY',
+    //   },
+    //   initialValue: () => new Date().toISOString().split('T')[0],
+    //   validation: (Rule) => Rule.required(),
+    //   group: 'basics',
+    // },
     {
       name: 'topicBody',
       type: 'array',
@@ -162,25 +166,25 @@ export default {
                   name: 'winner',
                   type: 'reference',
                   to: [{ type: 'project' }],
-                  options: {
-                    filter: ({ document }) => {
-                      // Loop through the 'featuredSites' array to find the 'siteReference' for filtering
-                      const siteReference = document.featuredSites?.find(site => site?.siteReference)?.siteReference;
+                  // options: {
+                  //   filter: ({ document }) => {
+                  //     // Loop through the 'featuredSites' array to find the 'siteReference' for filtering
+                  //     const siteReference = document.featuredSites?.find(site => site?.siteReference)?.siteReference;
                       
-                      if (!siteReference) {
-                        return {
-                          filter: 'site._ref == $siteId',  // No site reference available, fallback
-                          params: { siteId: '' },  // Default or empty filter
-                        };
-                      }
+                  //     if (!siteReference) {
+                  //       return {
+                  //         filter: 'site._ref == $siteId',  // No site reference available, fallback
+                  //         params: { siteId: '' },  // Default or empty filter
+                  //       };
+                  //     }
                       
-                      // If siteReference exists, use it for filtering
-                      return {
-                        filter: 'site._ref == $siteId',
-                        params: { siteId: siteReference?._ref },  // Get the site _ref from the parent document
-                      };
-                    },
-                  },
+
+                  //     return {
+                  //       filter: 'site._ref == $siteId',
+                  //       params: { siteId: siteReference?._ref },  // Get the site _ref from the parent document
+                  //     };
+                  //   },
+                  // },
                 },
               ],
             },                                        
@@ -193,21 +197,10 @@ export default {
                   type: 'reference',
                   to: [{ type: 'project' }],
                   options: {
-                    filter: ({ document }) => {
-                      const siteReference = document.featuredSites?.find(site => site?.siteReference)?.siteReference;
-                      
-                      if (!siteReference) {
-                        return {
-                          filter: 'site._ref == $siteId',
-                          params: { siteId: '' },  // Default or empty filter
-                        };
-                      }
-                      
-                      return {
-                        filter: 'site._ref == $siteId',
-                        params: { siteId: siteReference?._ref },
-                      };
-                    },
+                    filter: ({ document }) => ({
+                      filter: 'language == $language',
+                      params: { language: document?.language },
+                    }),
                   },
                 },
               ],
@@ -221,21 +214,10 @@ export default {
                   type: 'reference',
                   to: [{ type: 'project' }],
                   options: {
-                    filter: ({ document }) => {
-                      const siteReference = document.featuredSites?.find(site => site?.siteReference)?.siteReference;
-                      
-                      if (!siteReference) {
-                        return {
-                          filter: 'site._ref == $siteId',
-                          params: { siteId: '' },  // Default or empty filter
-                        };
-                      }
-                      
-                      return {
-                        filter: 'site._ref == $siteId',
-                        params: { siteId: siteReference?._ref },
-                      };
-                    },
+                    filter: ({ document }) => ({
+                      filter: 'language == $language',
+                      params: { language: document?.language },
+                    }),
                   },
                 },
               ],
@@ -258,7 +240,24 @@ export default {
         },
       ],
       group: 'sites',
-    },    
+    },
+    {
+      name: 'showResults',
+      type: 'boolean',
+      group: 'sites',
+    },
+    {
+      name: 'juryPresident',
+      type: 'reference',
+      to: [{type: 'person'}],
+      options: {
+        filter: ({ document }) => ({
+          filter: 'language == $language',
+          params: { language: document?.language },
+        }),
+      },
+      group: 'jury',
+    },
     {
       name: 'jury',
       type: 'array',
@@ -293,31 +292,31 @@ export default {
       ],
     },
     {
-      title: 'Date (Newest first)',
-      name: 'dateDesc',
+      title: 'Edition (Newest first)',
+      name: 'editionDesc',
       by: [
-        { field: 'date', direction: 'desc' },
+        { field: 'edition', direction: 'desc' },
       ],
     },
     {
-      title: 'Date (Oldest first)',
-      name: 'dateAsc',
+      title: 'Edition (Oldest first)',
+      name: 'editionAsc',
       by: [
-        { field: 'date', direction: 'asc' },
+        { field: 'edition', direction: 'asc' },
       ],
     },
   ],
   preview: {
     select: {
       title: 'title',
+      subtitle: 'subtitle',
       edition: 'edition',
-      date: 'date',
       language: 'language',
     },
-    prepare({ title, edition, language, date }) {
+    prepare({ title, subtitle, edition, language }) {
       return {
         title: `E${edition} ${title}`,
-        subtitle: `[${language ? language.toUpperCase() : 'Undefined'}] ${formatDate(date)}`,
+        subtitle: `[${language ? language.toUpperCase() : 'Undefined'}] ${subtitle? subtitle : ''}`,
       };
     },
   },

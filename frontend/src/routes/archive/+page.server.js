@@ -1,12 +1,12 @@
-import { getTopic } from '$lib/utils/sanity';
+import { getArchive } from '$lib/utils/sanity';
 import { error } from '@sveltejs/kit';
 
 export async function load({ url }) {
-	const topic = await getTopic();
+	const archive = await getArchive();
 	
-	if (topic) {
+	if (archive) {
 		return {
-			topic,
+			archive,
 		};
 	}
   throw error(404, 'Not found');

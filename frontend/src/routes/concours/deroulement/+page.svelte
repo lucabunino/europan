@@ -7,11 +7,11 @@ import PortableTextStyle from '$lib/components/portableTextStyle.svelte';
 
 <article class="content">
   <section class="page-title">
-    <h2 class="text-l">Sujet</h2>
+    <h2 class="text-l page-title">Déroulement</h2>
   </section>
-  <section class="body">
+  <div class="body">
     <PortableText
-    value={data.competition.topicBody}
+    value={data.competition.processBody}
     components={{
       block: {
         normal: PortableTextStyle,
@@ -24,5 +24,5 @@ import PortableTextStyle from '$lib/components/portableTextStyle.svelte';
       },
     }}
     />
-  </section>
+  </div>
 </article>

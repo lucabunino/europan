@@ -24,7 +24,13 @@ export default {
     {
       name: 'site',
       type: 'reference',
-      to: [{type: 'site'}]
+      to: [{type: 'site'}],
+      options: {
+        filter: ({ document }) => ({
+          filter: 'language == $language',
+          params: { language: document?.language },
+        }),
+      },
     },
     {
       name: 'slug',
@@ -35,6 +41,13 @@ export default {
         source: 'title',
         maxLength: 96,
         isUnique: isUniqueOtherThanLanguage,
+      },
+    },
+    {
+      name: 'thumbnail',
+      type: 'image',
+      options: {
+        accept: 'image/jpg,image/jpeg,image/png,image/webp',
       },
     },
     {

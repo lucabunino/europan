@@ -4,9 +4,11 @@ import { PortableText } from '@portabletext/svelte'
 import PortableTextStyle from '$lib/components/portableTextStyle.svelte';
 </script>
 
-<article>
-  <h2 class="text-l page-title">{data.whatIsEuropan[0].title}</h2>
-  <div class="content cols-1 body">
+<article class="content">
+  <section class="page-title">
+    <h2 class="text-l page-title">{data.whatIsEuropan[0].title}</h2>
+  </section>
+  <div class="body">
     <PortableText
     value={data.whatIsEuropan[0].body}
     components={{
@@ -23,9 +25,3 @@ import PortableTextStyle from '$lib/components/portableTextStyle.svelte';
     />
   </div>
 </article>
-
-<style>
-article {
-  grid-column: 3 / span 4;
-}
-</style>

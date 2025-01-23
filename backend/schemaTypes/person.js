@@ -1,4 +1,5 @@
 import {UserIcon} from '@sanity/icons'
+import countries from './isoCountries.json'; 
 
 export default {
   name: 'person',
@@ -44,6 +45,19 @@ export default {
     {
       name: 'city',
       type: 'string',
+    },
+    {
+      name: 'country',
+      type: 'string',
+      title: 'Country',
+      options: {
+        list: countries.map(({ name, code }) => ({
+          title: name,
+          value: code,
+        })),
+      },
+      initialValue: 'CH',
+      validation: (Rule) => Rule.required(),
     },
     {
       name: 'thumbnail',

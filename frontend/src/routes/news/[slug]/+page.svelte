@@ -43,11 +43,11 @@ let innerWidth = $state()
 
 <svelte:window bind:innerWidth></svelte:window>
 
-<article>
-  <div class="page-title">
+<article class="content">
+  <section class="page-title">
     <h2 class="text-l">{data.news[0].title}</h2>
     {#if data.news[0].from}<h3 class="text-s page-subtitle">{formatDate(data.news[0].from, data.news[0].to)}</h3>{/if}
-  </div>
+  </section>
   {#if data.news[0].images}
   <swiper-container
   init={false}
@@ -58,13 +58,13 @@ let innerWidth = $state()
   >
   {#each data.news[0].images as image}
     <swiper-slide>
-      <img src={urlFor(image).width(1080)} alt="Image for {data.news[0].title}">
+      <img class="news-img" src={urlFor(image).width(1080)} alt="Image for {data.news[0].title}">
     </swiper-slide>
   {/each}
   </swiper-container>
   {/if}
 
-  <div class="body">
+  <section class="body">
     <PortableText
     value={data.news[0].body}
     components={{
@@ -79,31 +79,13 @@ let innerWidth = $state()
       },
     }}
     />
-  </div>
-  
-  {#if data.news[0].attachments}
-    {#each data.news[0].attachments as attachment, i}
-      <p class={i > 0 ? 'mt-0' : ''}><a href={attachment.url} target="_blank" rel="noopener noreferrer">{attachment.title} ↧</a></p>
-    {/each}
-  {/if}
-  <p><a href=/news>See more news →</a></p>
+  </section>
+  <section>
+    {#if data.news[0].attachments}
+      {#each data.news[0].attachments as attachment, i}
+        <p class={i > 0 ? 'mt-0' : ''}><a href={attachment.url} target="_blank" rel="noopener noreferrer">{attachment.title} ↧</a></p>
+      {/each}
+    {/if}
+    <p><a href=/news>See more news →</a></p>
+  </section>
 </article>
-
-<style>
-article {
-  grid-column: 3 / span 4;
-}
-swiper-container {
-  margin-bottom: var(--gutter);
-}
-swiper-slide {
-  width: 100%;
-  aspect-ratio: var(--aspectRatio);
-  background-color: var(--gray);
-}
-img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-</style>

@@ -1,23 +1,28 @@
 <script>
-let competitions = ['E16', 'E15', 'E14', 'E13', 'E12', 'E11', 'E10', 'E9', 'E8', 'E7', 'E6', 'E5', 'E4', 'E3', 'E2', 'E1',]
+const { data } = $props()
 </script>
 
-<div class="competitions-grid">
-  {#each competitions as competition, i}
-  <a class="competition no-hover" href="/">
-    <h2 class="text-xl">{competition}</h2>
+<section class="content competitions-grid">
+  {#each data.archive as competition, i}
+  <a class="competition no-hover" href="archive/{competition.slug.current}">
+    <h2 class="text-xl">E{competition.edition}</h2>
     <div class="info text-xs">
-      <p>La ville adaptable I:</p>
-      <p class="mt-0">Insérer les rythmes urbains</p>
-      <p class="mt-0">Couvet, Kreuzlingen-Konstanz, Marly</p>
+      <p>{competition.title}</p>
+      {#if competition.subtitle}<p class="mt-0">{competition.subtitle}</p>{/if}
+      {#if competition.featuredSites}
+        <p class="mt-0">
+          {#each competition.featuredSites as site, j}
+            {site.siteReference.title}{#if j+1 < competition.featuredSites.length}{@html ', '}{/if}
+          {/each}
+        </p>
+      {/if}
     </div>
   </a>
   {/each}
-</div>
+</section>
 
 <style>
 .competitions-grid {
-  grid-column: 3 / span 4;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: var(--gutter);
@@ -38,11 +43,8 @@ h2 {
   background-color: var(--blackOpacity);
   position: absolute;
   z-index: -1;
-  transition: var(--transition);
+  /* transition: var(--transition); */
   margin-left: 0.08em;
-}
-.competition:hover h2::before {
-  width: 100%;
 }
 .competition .info {
   color: var(--white);
@@ -50,15 +52,26 @@ h2 {
   display: block;
   position: absolute;
   top: 0;
-  transition: var(--transition);
+  /* transition: var(--transition); */
   overflow: hidden;
   width: 100%;
 }
 .competition .info p {
-  transition: var(--transition);
+  /* transition: var(--transition); */
   transform: translateX(-101%);
 }
-.competition:hover .info p {
-  transform: translateX(0);
+
+@media screen and (min-width: 601px) {
+  .competition:hover h2::before {
+    width: 100%;
+  }
+  .competition:hover .info p {
+    transform: translateX(0);
+  }
+}
+@media screen and (max-width: 600px) {
+  .competitions-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
 </style>

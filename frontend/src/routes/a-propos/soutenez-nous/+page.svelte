@@ -1,32 +1,131 @@
 <script>
+const { data } = $props()
+import { enhance, applyAction } from '$app/forms';
+import { PortableText } from '@portabletext/svelte'
+import PortableTextStyle from '$lib/components/portableTextStyle.svelte';
 
+let isSubmitted = $state(false);
+let isSubmitting = $state(false);
+let isErrorous = $state(false);
+let isEmpty = $state(false);
+let isEmptyName = $state(false);
+let isEmptyEmail = $state(false);
+let isEmptyCompany = $state(false);
+let isEmptyAdress = $state(false);
+let isEmptyPhone = $state(false);
+let isEmptyMembership = $state(false);
+let isEmptyMessage = $state(false);
+
+const handleEnhance = ({ formElement, formData, action, cancel }) => {
+  return async ({ result }) => {
+    console.log(result);
+    if (result.data.success) {
+      isSubmitted = true;
+      formElement.reset()
+    } else if (!result.data.success) {
+      if (result.data.empty) {
+        isEmpty = true
+        if (result.data.emptyFields.includes('name')) {
+          isEmptyName = true
+        }
+        if (result.data.emptyFields.includes('company')) {
+          isEmptyCompany = true
+        }
+        if (result.data.emptyFields.includes('adress')) {
+          isEmptyAdress = true
+        }
+        if (result.data.emptyFields.includes('email')) {
+          isEmptyEmail = true
+        }
+        if (result.data.emptyFields.includes('phone')) {
+          isEmptyPhone = true
+        }
+        if (result.data.emptyFields.includes('membership')) {
+          isEmptyMembership = true
+        }
+        if (result.data.emptyFields.includes('message')) {
+          isEmptyMessage = true
+        }
+      } else {
+        isErrorous = true;
+      }
+    }
+    isSubmitting = false
+    await applyAction(result);
+  };
+};
+
+const resetFormStates = () => {
+  setTimeout(() => {
+    isSubmitted = false;
+    isSubmitting = false;
+    isErrorous = false;
+    isEmpty = false
+  }, 5000);
+};
+
+$effect(() => {
+  if (isSubmitted || isErrorous || isEmpty) resetFormStates();
+});
 </script>
-
-<article>
-  <h2 class="text-l page-title">Soutenez-nous</h2>
-  <div class="content cols-2 text-xs">
+  
+<article class="content">
+  <section class="page-title">
+    <h2 class="text-l">{data.supportUs[0].title}</h2>
+  </section>
+  <section class="supportUs-grid text-xs">
     <div>
-      <p>Dans un appel public, plus de 350 expert·es en mobilité rejettent les six extensions  autoroutières soumises à votation le 24 novembre, et devisées à 4.9  mia CHF. Celles-ci contredisent non seulement les projets de  développements des agglomérations, mais également celui de la  Confédération: le plan sectoriel des transports mise en priorité sur  l’optimisation des infrastructures existantes et sur une diminution du  trafic automobile dès 2030. Surtout, ces projets ne relèvent pas de la science et du professionnalisme, car ils ne sont pas issus d’une  démarche concertée et méthodique.</p>
-      <p>Dans le cas de  l’A1, a-t-on établi un véritable diagnostic, mesuré les files  d’attentes, sondé les usagers pour savoir si elles sont vraiment  inacceptables – plus que les embouteillages actuels dans les  agglomérations? Et si c’était le cas, a-t-on analysé précisément  les causes du problème: les tronçons, le manque d’alternative... ou  peut-être les habitudes? C’est bien là qu’il faut agir et les  spécialistes le savent: un faible report des usagers suffit en  général à réduire de 30-40% la congestion d’un tronçon.</p>
-      <p>Accroître la capacité de l’A1 entre Nyon et le Vengeron est inutile, voire  dangereux, explique le professeur Yves Delacrétaz (HEIG-VD), qui  préconise plutôt de réaménager l’échangeur. Et surtout de regarder  tout ce qu’il y a autour: le contournement de Genève va évoluer  prochainement, la congestion se déplacer. Le vrai problème, c’est que  l’Office fédéral des routes (OFROU) n’intègre pas les enjeux urbains  dans sa vision. Il travaille dans son coin et se concentre sur «son»  autoroute, comme si c’était un objet en soi.</p>
-      <p>Par définition, l’autoroute relie des territoires. C’est donc  à partir de leurs perspectives qu’il faut travailler. Le Conseil  fédéral martèle que l’objectif vise à désengorger les villes; mais  en imposant sa solution, il bafoue le principe de subsidiarité qui est  au fondement même du fédéralisme: ce sont les communes et les cantons qui ont la compétence communes et les cantons qui ont la compétence d’initier des mesures qui les concernent. Or  depuis 20 ans les villes mettent tout en œuvre pour diminuer les  nuisances liées au trafic: les bouchons, la cacophonie, l’espace  confisqué (30% des zones bâties), les atteintes à la santé, etc.  Alors si le but est vraiment de s’attaquer à ce problème colossal, la  bonne nouvelle est que la Confédération dispose de 4.9 milliards! De  quoi réaliser un véritable projet de territoire, concerté, rigoureux  et créatif.</p>
-      <p>L’autoroute n’appartient pas à l’OFROU, mais à nous! Comme nos lacs et nos  montagnes, c’est un commun, un gigantesque patrimoine en partage, que  nous devons soigner et, surtout, faire évoluer à la hauteur des  exigences actuelles et futures. Si nous investissons aujourd’hui.</p>
+      <PortableText
+      value={data.supportUs[0].body}
+      components={{
+        block: {
+          normal: PortableTextStyle,
+          h3: PortableTextStyle,
+          h4: PortableTextStyle,
+        },
+        listItem: PortableTextStyle,
+        marks: {
+          link: PortableTextStyle,
+        },
+      }}
+      />
     </div>
     <div>
-      <p>Dans le cas de  l’A1, a-t-on établi un véritable diagnostic, mesuré les files  d’attentes, sondé les usagers pour savoir si elles sont vraiment  inacceptables – plus que les embouteillages actuels dans les  agglomérations? Et si c’était le cas, a-t-on analysé précisément  les causes du problème: les tronçons, le manque d’alternative... ou  peut-être les habitudes? C’est bien là qu’il faut agir et les  spécialistes le savent: un faible report des usagers suffit en  général à réduire de 30-40% la congestion d’un tronçon. Accroître la capacité de l’A1 entre Nyon et le Vengeron est inutile, voire  dangereux, explique le professeur Yves Delacrétaz (HEIG-VD), qui  préconise plutôt de réaménager l’échangeur. Et surtout de regarder  tout ce qu’il y a autour: le contournement de Genève va évoluer  prochainement, la congestion se déplacer. Le vrai problème, c’est que  l’Office fédéral des routes (OFROU) n’intègre pas les enjeux urbains  dans sa vision.
-      <h3 class="text-m subtitle">Urbanisme et de paysage</h3>
-      <p>Il travaille dans son coin et se concentre sur «son»  autoroute, comme si c’était un objet en soi.<br>
-        Par définition, l’autoroute relie des territoires. C’est donc  à partir de leurs perspectives qu’il faut travailler. Le Conseil  fédéral martèle que l’objectif vise à désengorger les villes; mais  en imposant sa solution, il bafoue le principe de subsidiarité qui est  au fondement même du fédéralisme: ce sont les communes et les cantons qui ont la compétence communes et les cantons qui ont la compétence d’initier des mesures qui les concernent.<br>
-        Nous pourrions développer des solutions innovantes, comme des pistes pour gérer le stockage pendant les pics  de congestion ou l’introduction d’outils d’analyse pour mieux  connaître, enfin, les comportements des usagers (besoins professionnels ou confort?) Cela serait vraiment utile, dans un pays où l’on estime  à 45% les trajets effectués pour des besoins professionnels.  Aujourd’hui, bien qu’elle soit entièrement sponsorisée par l’État, on ne comprend pas quels intérêts l’autoroute sert exactement.</p>
-      <p><a href="">www.urbanisme-paysage.org/habitation ↗</a></p>
-      <p class="mt-0"><a href="">www.urbanisme-paysage.org/home ↗</a></p>
-      <p class="mt-0"><a href="">www.sia.ch/fr ↗</a></p>
+      <form
+      id="form"
+      action="?/create"
+      method="POST"
+      use:enhance={handleEnhance}
+      >
+        <input type="text" id="name" name="name" placeholder="Nom et prénom" class:empty={isEmptyName} onclick={() => isEmptyName = false}>
+        <input type="text" id="company" name="company" placeholder="Société" class:empty={isEmptyCompany} onclick={() => isEmptyCompany = false}>
+        <input type="text" id="adress" name="adress" placeholder="Adresse" class:empty={isEmptyAdress} onclick={() => isEmptyAdress = false}>
+        <input type="email" id="email" name="email" placeholder="E-mail" class:empty={isEmptyEmail} onclick={() => isEmptyEmail = false}>
+        <input type="tel" id="phone" name="phone" placeholder="Phone" class:empty={isEmptyPhone} onclick={() => isEmptyPhone = false}>
+        <select id="membership" name="membership" class:empty={isEmptyMembership} onclick={() => isEmptyMembership = false}>
+          <option value="" disabled selected>Type de membre</option>
+          <option value="partner_or_sponsor">Membre partenaire ou sponsor : >CHF 500.-</option>
+          <option value="collective_member">Membre collectif / personne morale-entreprise : CHF 500.-</option>
+          <option value="individual_member">Membre individuel / personne physique : CHF 100.-</option>
+          <option value="student_member">Membre étudiant (joindre une attestation) : CHF 50.-</option>
+        </select>
+        <textarea id="message" name="message" rows="5" placeholder="Message" class:empty={isEmptyMessage} onclick={() => isEmptyMessage = false}></textarea>
+        <div class="button-container">
+          <button type="submit" onclick={() => isSubmitting = true} style="{isErrorous ? 'widht:100%' : 'width:9rem'}{isEmpty ? 'widht:100%' : ''}">
+            {#if isSubmitted}
+              Envoyé
+            {:else if isSubmitting}
+              En cours
+            {:else if isErrorous}
+              Erreur lors de l'envoi. Veuillez réessayer.
+            {:else if isEmpty}
+              Champs vides
+            {:else}
+              Envoyer
+            {/if}
+          </button>
+        </div>
+      </form>
     </div>
-  </div>
+  </section>
 </article>
-
-<style>
-article {
-  grid-column: 3 / span 4;
-}
-</style>

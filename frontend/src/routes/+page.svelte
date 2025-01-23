@@ -1,8 +1,15 @@
 <script>
+const { data } = $props()
+$inspect(data)
+
+import { urlFor } from '$lib/utils/image';
+import { PortableText } from '@portabletext/svelte'
+import PortableTextStyle from '$lib/components/portableTextStyle.svelte';
+import { formatDate } from "$lib/utils/date";
 
 import { register } from 'swiper/element/bundle';register();
 $effect(() => {
-  const swiperEl = document.querySelector('swiper-container');
+  const swiperEls = document.querySelectorAll('swiper-container');
   const swiperParams = {
     slidesPerView: 1,
     injectStyles: [
@@ -28,13 +35,20 @@ $effect(() => {
       `,
     ],
   };
-  Object.assign(swiperEl, swiperParams);
-  swiperEl.initialize();
+  swiperEls.forEach((swiperEl, index) => {
+    Object.assign(swiperEl, swiperParams);
+    swiperEl.initialize();
+  });
 })
 </script>
 
-<article>
-  <h2 class="text-l page-title">Re-sourcing 2025</h2>
+{#each data.featuredNewses[0].featuredNews as news}
+<article class="content">
+  <div class="page-title">
+    <h2 class="text-l">{news.title}</h2>
+    {#if news.from}<h3 class="text-s page-subtitle">{formatDate(news.from, news.to)}</h3>{/if}
+  </div>
+  {#if news.images}
   <swiper-container
   init={false}
   slides-per-view={1}
@@ -42,19 +56,43 @@ $effect(() => {
   loop={true}
   speed={400}
   >
-    <swiper-slide style="background-color: red;">Slide 1</swiper-slide>
-    <swiper-slide style="background-color: blue;">Slide 2</swiper-slide>
-    <swiper-slide style="background-color: green;">Slide 3</swiper-slide>
+  {#each news.images as image}
+    <swiper-slide>
+      <img class="news-img" src={urlFor(image).width(1080)} alt="Image for {news.title}">
+    </swiper-slide>
+  {/each}
   </swiper-container>
-  <p>The Europan 18 competition, themed "Re:sourcing - A new perspective on the existing", explores ways in which we can conserve natural resources by applying the 3 Rs (Re:duce, Re:use, Re:cycle) while tackling climate change and social inequalities in urban areas through innovative projects and planning processes. The aim is to transform neglected buildings and areas into vibrant and inclusive spaces that protect the environment and promote a balance between nature and society. Regeneration, integration of nature and culture, and the application of environmentally friendly strategies play a crucial role in shaping a more sustainable future and rethinking the use of our planet's resources. The Europan 18 competition, themed "Re:sourcing - A new perspective on the existing", explores ways in which we can conserve natural resources by applying the 3 Rs (Re:duce, Re:use, Re:cycle) while tackling climate change and social inequalities in urban areas through innovative projects and planning processes. The aim is to transform neglected buildings and areas into vibrant and inclusive spaces that protect the environment and promote a balance between nature and society. Regeneration, integration of nature and culture, and the application of environmentally friendly strategies play a crucial role in shaping a more sustainable future and rethinking the use of our planet's resources. 
-  <p><a href="">Télécharger le concours ↧</a></p>
-  <p class="mt-0"><a href="">Télécharger le photo ↧</a></p>
-  <p><a href="">See more news →</a></p>
+  {/if}
+
+  <div class="body">
+    <PortableText
+    value={news.body}
+    components={{
+      block: {
+        normal: PortableTextStyle,
+        h3: PortableTextStyle,
+        h4: PortableTextStyle,
+      },
+      listItem: PortableTextStyle,
+      marks: {
+        link: PortableTextStyle,
+      },
+    }}
+    />
+  </div>
+  
+  {#if news.attachments}
+    {#each news.attachments as attachment, i}
+      <p class={i > 0 ? 'mt-0' : ''}><a href={attachment.url} target="_blank" rel="noopener noreferrer">{attachment.title} ↧</a></p>
+    {/each}
+  {/if}
+  <p><a href=/news>See more news →</a></p>
 </article>
+{/each}
 
 <style>
-article {
-  grid-column: 3 / span 4;
+article + article {
+  margin-top: 10rem;
 }
 swiper-container {
   margin-bottom: var(--gutter);

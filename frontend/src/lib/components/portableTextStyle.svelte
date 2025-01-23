@@ -13,7 +13,7 @@
 {:else if style=== 'h3'}
   <h3 class="text-m"><slot /></h3>
 {:else if style=== 'h4'}
-  <h4 class="text-m"><slot /></h4>
+  <h4><slot /></h4>
 {:else if value.href}
   <a class="link" href={value.href} target={value.blank ? '_blank' : undefined}>
     <slot />
@@ -42,9 +42,7 @@ h3 {
   margin-bottom: .3em;
 }
 h4 {
-  margin-top: .7em;
+  margin-top: 1.5em;
   margin-bottom: .3em;
-  font-size: 1.777rem;
-  letter-spacing: -.03em;
 }
 </style>

@@ -1,26 +1,18 @@
 <script>
-let sites = ['Carouge',  'Biel/Bienne',  'Lausanne',  'Zürich',  'Lugano',  'Basel',]
+const { data } = $props()
+$inspect(data)
+import { urlFor } from '$lib/utils/image';
 </script>
 
-<div class="sites-grid">
-  {#each sites as site, i}
+<div class="content sites-grid">
+  {#each data.competition.featuredSites as site, i}
   <a class="site no-hover" href="/">
-    <h2 class="text-m">{site}</h2>
+    {#if site.siteReference.thumbnail}<img class="site-img" src={urlFor(site.siteReference.thumbnail)} alt="Cover for {site.siteReference.title}">{/if}
+    <h2 class="text-m">{site.siteReference.title}</h2>
   </a>
   {/each}
 </div>
 
 <style>
-.sites-grid {
-  grid-column: 3 / span 4;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--gutter);
-}
-.site {
-  color: var(--white);
-  background-color: var(--gray);
-  aspect-ratio: var(--aspectRatio);
-  padding: .4em .8em;
-}
+
 </style>

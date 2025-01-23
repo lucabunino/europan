@@ -23,6 +23,22 @@ export async function getNewses() {
 	`);
 }
 
+// Featured Newses
+export async function getFeaturedNewses() {
+	return await client.fetch(`
+		*[_type == "featuredNews" && language == "fr" && !(_id in path('drafts.**'))] | order(date desc) {
+			...,
+			featuredNews[]->{
+				...,
+				attachments[] {
+					"title": attachmentTitle,
+					"url": attachmentFile.asset->url
+				},
+			}
+		}
+	`);
+}
+
 // News
 export async function getNews(slug) {
 	return await client.fetch(`
@@ -39,7 +55,29 @@ export async function getNews(slug) {
 // Team
 export async function getTeam() {
 	return await client.fetch(`
-		*[_type == "person" && language == "fr" && !(_id in path('drafts.**'))] | order(hierarchy asc, surname asc) {
+		*[_type == "team" && language == "fr" && !(_id in path('drafts.**'))] {
+			title,
+			team[]->{
+				...,
+			}
+		}
+	`);
+}
+
+// Partners
+export async function getPartners() {
+	return await client.fetch(`
+		*[_type == "partner" && language == "fr" && !(_id in path('drafts.**'))] {
+			...,
+			"logoUrl": logo.asset->url
+		}
+	`);
+}
+
+// Support Us
+export async function getSupportUs() {
+	return await client.fetch(`
+		*[_type == "supportUs" && language == "fr" && !(_id in path('drafts.**'))] {
 			...,
 		}
 	`);
@@ -63,16 +101,119 @@ export async function getWhatIsEuropan() {
 	`);
 }
 
+// Topic
+export async function getTopic() {
+	return await client.fetch(`
+    	*[_type == "competition" && language == "fr"] | order(edition desc)[0] {
+				...,
+			}
+    }
+	`);
+}
+
 // Jury
 export async function getJury() {
 	return await client.fetch(`
-    *[_type == "competition"] | order(edition desc)[0] {
+    *[_type == "competition" && language == "fr"] | order(edition desc)[0] {
+			juryPresident {
+				...,
+			},
 			jury[]->{
 				...,
       }
     }
 	`);
 }
+
+// Last competition
+export async function getLastCompetition() {
+	return await client.fetch(`
+		*[_type == "competition" && language == "fr" && !(_id in path('drafts.**'))] | order(edition desc)[0] {
+			...,
+			juryPresident->{
+				...,
+			},
+			jury[]->,
+			featuredSites[]{
+				...,
+				siteReference->{
+					...
+				},
+				winners[]->{
+					...,
+					site->{...},
+					team[]->{...}
+				},
+				runnerUps[]->{
+					...,
+					site->{...},
+					team[]->{...}
+				},
+				specialMentions[]->{
+					...,
+					site->{...},
+					team[]->{...}
+				}
+			}
+		}
+	`);
+}
+
+// Archive
+export async function getArchive() {
+	return await client.fetch(`
+    *[_type == "competition" && language == "fr"] | order(edition desc)[1..-1] {
+			title,
+			subtitle,
+			slug,
+			featuredSites[]{
+				siteReference->{
+					title
+				},
+			},
+			edition
+    }
+	`);
+}
+
+// Competition
+export async function getCompetition(slug) {
+	return await client.fetch(`
+    *[_type == "competition" && language == "fr" && slug.current == $slug] {
+			...,
+			jury[]->,
+			featuredSites[]{
+				...,
+				siteReference->{
+					...
+				},
+				winners[]->{
+					...,
+					site->{...},
+					team[]->{...}
+				},
+				runnerUps[]->{
+					...,
+					site->{...},
+					team[]->{...}
+				},
+				specialMentions[]->{
+					...,
+					site->{...},
+					team[]->{...}
+				}
+			}
+    }
+	`, { slug });
+}
+
+
+
+
+
+
+
+
 
 
 
@@ -189,16 +330,16 @@ export async function getWhatWeDosCategories() {
 }
 
 // Archive
-export async function getArchive(category) {
-	return await client.fetch(`
-		*[_type == "whatWeDo" && collector == "archive"
-		${category && category !== '*' ? `&& $category in category[]->slug.current` : ''}
-		&& !(_id in path('drafts.**'))] {
-			...,
-			category[]-> { title, slug } | order(title asc),
-		} | order(date desc)
-	`, { category });
-}
+// export async function getArchive(category) {
+// 	return await client.fetch(`
+// 		*[_type == "whatWeDo" && collector == "archive"
+// 		${category && category !== '*' ? `&& $category in category[]->slug.current` : ''}
+// 		&& !(_id in path('drafts.**'))] {
+// 			...,
+// 			category[]-> { title, slug } | order(title asc),
+// 		} | order(date desc)
+// 	`, { category });
+// }
 
 // Archive Categories
 export async function getArchiveCategories() {
