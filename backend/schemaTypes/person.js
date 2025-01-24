@@ -1,5 +1,5 @@
 import {UserIcon} from '@sanity/icons'
-import countries from './isoCountries.json'; 
+import countries from './_isoCountries.json'; 
 
 export default {
   name: 'person',

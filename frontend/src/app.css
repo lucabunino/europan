@@ -37,9 +37,9 @@
   margin: 0;
 }
 :root{
-  --gutter: 1.5rem;
+  --gutter: 1.4rem;
   --aspectRatio: 3 / 2;
-  --transition: cubic-bezier(.77,0,.175,1) 500ms;
+  --transition: cubic-bezier(.77,0,.175,1) 300ms;
   --black: rgba(0, 0, 0, 1);
   --blackOpacity: rgba(0, 0, 0, .9);
   --white: rgba(255, 255, 255, 1);
@@ -135,6 +135,11 @@ p + .subtitle {
 .content {
   grid-column: 3 / span 4;
 }
+@media screen and (max-width: 1300px) {
+  .text-xl {
+    font-size: 12rem;
+  }
+}
 @media screen and (max-width: 1200px) {
   .content,
   .page-title {
@@ -165,6 +170,9 @@ p + .subtitle {
 @media screen and (max-width: 600px) {
   .text-xl {
     font-size: 50vw;
+  }
+  h2.text-l {
+    margin-top: 0;
   }
 }
 .grid {
@@ -290,20 +298,6 @@ button {
     width: 100%;
   }
 }
-.contact-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  column-gap: var(--gutter);
-}
-.contact-grid > *:nth-child(1) {
-  grid-column: 1 / span 1;
-}
-.contact-grid > *:nth-child(2) {
-  grid-column: 2 / span 1;
-}
-.contact-grid > *:nth-child(3) {
-  grid-column: 3 / span 2;
-}
 .supportUs-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -382,7 +376,8 @@ select {
     filter: brightness(0);
   }
   .site:hover,
-  .page:hover {
+  .page:hover,
+  .project>a:hover {
     background-color: var(--black);
     color: var(--white);
   }

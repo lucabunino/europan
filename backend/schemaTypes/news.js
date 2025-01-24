@@ -1,6 +1,6 @@
 import {BellIcon} from '@sanity/icons'
-import {isUniqueOtherThanLanguage} from "./isUniqueOtherThanLanguage.js";
-import {formatDate} from "./formatDate.js";
+import {isUniqueOtherThanLanguage} from "./_isUniqueOtherThanLanguage.js";
+import {formatDate} from "./_formatDate.js";
 
 export default {
   name: 'news',
@@ -94,7 +94,14 @@ export default {
             {value: 'h3', title: 'H3'},
             {value: 'h4', title: 'H4'},
           ],
+          lists: [
+            {title: 'Bullet', value: 'bullet'},
+          ],
           marks: {
+            decorators: [
+              {title: 'Strong', value: 'strong'},
+              {title: 'Emphasis', value: 'em'},
+            ],
             annotations: [
               {
                 name: 'link',

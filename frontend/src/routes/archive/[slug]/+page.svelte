@@ -11,6 +11,15 @@ import Project from '$lib/components/project.svelte';
     <h2 class="text-l">{data.singleCompetition[0].title}</h2>
     {#if data.singleCompetition[0].subtitle}<h3 class="text-s page-subtitle">{data.singleCompetition[0].subtitle}</h3>{/if}
   </section>
+  {#if data.singleCompetition[0].jury}
+    <section class="jury">
+        <p class="mt-0">Jury: 
+          {#each data.singleCompetition[0].jury as person, i}
+            {person.name} {person.surname} ({person.country}){#if i+1 < data.singleCompetition[0].jury.length}{@html ', '}{/if}
+          {/each}
+        </p>
+    </section>
+  {/if}
   <section class="projects-grid">
     {#each data.singleCompetition[0].featuredSites as site, i}
       {#each site.winners as winner}
@@ -24,23 +33,16 @@ import Project from '$lib/components/project.svelte';
       {/each}
     {/each}
   </section>
-  {#if data.singleCompetition[0].jury}
-    <section class="jury">
-      <h4 class="text-ms">Jury</h4>
-      <div>
-        {#each data.singleCompetition[0].jury as person, i}
-          <p class="mt-0">{person.name} {person.surname} ({person.country})</p>
-        {/each}
-      </div>
-    </section>
-  {/if}
 </article>
 
 <style>
 .jury {
-  margin-top: calc(var(--gutter)*1.5)
+  margin-bottom: calc(var(--gutter)*3)
 }
 .jury h4 {
   margin-bottom: .5em;
+}
+.jury p {
+  max-width: 700px;
 }
 </style>

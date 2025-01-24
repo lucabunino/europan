@@ -20,6 +20,8 @@
   </a>
 {:else if listItem == 'bullet'}
   <li><slot /></li>
+{:else if listItem == 'bumber'}
+  <li><slot /></li>
 {/if}
 
 <style>

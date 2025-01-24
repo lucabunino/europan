@@ -36,7 +36,14 @@ export default {
             {value: 'h3', title: 'H3'},
             {value: 'h4', title: 'H4'},
           ],
+          lists: [
+            {title: 'Bullet', value: 'bullet'},
+          ],
           marks: {
+            decorators: [
+              {title: 'Strong', value: 'strong'},
+              {title: 'Emphasis', value: 'em'},
+            ],
             annotations: [
               {
                 name: 'link',

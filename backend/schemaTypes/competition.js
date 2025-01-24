@@ -1,6 +1,6 @@
 import {EmptyIcon} from '@sanity/icons'
 import {MarkerIcon} from '@sanity/icons'
-import {isUniqueOtherThanLanguage} from "./isUniqueOtherThanLanguage.js";
+import {isUniqueOtherThanLanguage} from "./_isUniqueOtherThanLanguage.js";
 
 export default {
   name: 'competition',
@@ -75,7 +75,14 @@ export default {
             {value: 'h3', title: 'H3'},
             {value: 'h4', title: 'H4'},
           ],
+          lists: [
+            {title: 'Bullet', value: 'bullet'},
+          ],
           marks: {
+            decorators: [
+              {title: 'Strong', value: 'strong'},
+              {title: 'Emphasis', value: 'em'},
+            ],
             annotations: [
               {
                 name: 'link',

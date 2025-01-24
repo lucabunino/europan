@@ -1,9 +1,11 @@
 <script>
-import { urlFor } from '$lib/utils/image';
 const {
   project = null,
   prize = null,
 } = $props();
+import { urlFor } from '$lib/utils/image';
+import { PortableText } from '@portabletext/svelte'
+import PortableTextStyle from '$lib/components/portableTextStyle.svelte';
 </script>
 
 <div class="project">
@@ -23,5 +25,30 @@ const {
         <p class="mt-0">{person.name} {person.surname} ({person.country})</p>
       {/each}
     </div>
+    <div class="body">
+      {#if project.body}
+        <PortableText
+        value={project.body}
+        components={{
+          block: {
+            normal: PortableTextStyle,
+            h3: PortableTextStyle,
+            h4: PortableTextStyle,
+          },
+          listItem: PortableTextStyle,
+          marks: {
+            link: PortableTextStyle,
+          },
+        }}
+        />
+      {/if}
+    </div>
   </div>
 </div>
+
+<style>
+.body {
+  margin-top: 1.2em;
+  grid-column: 1 / span 2;
+}
+</style>

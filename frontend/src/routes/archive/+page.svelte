@@ -7,9 +7,11 @@ let activeNews = $state(true)
 
 import { tick } from 'svelte';
 $effect.pre(() => {
-  tick().then(() => {
-    window.scrollTo(0, innerWidth*.4);
-  });
+  if (innerWidth < 601) {
+    tick().then(() => {
+      window.scrollTo(0, innerWidth*.4);
+    });
+  }
 });
 
 function updateActiveNews() {

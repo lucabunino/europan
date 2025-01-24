@@ -1,5 +1,5 @@
 import {ProjectsIcon} from '@sanity/icons'
-import {isUniqueOtherThanLanguage} from "./isUniqueOtherThanLanguage.js";
+import {isUniqueOtherThanLanguage} from "./_isUniqueOtherThanLanguage.js";
 
 export default {
   name: 'project',
@@ -77,12 +77,17 @@ export default {
       of: [
         {
           type: 'block',
+          lists: [
+            {title: 'Bullet', value: 'bullet'},
+          ],
           styles: [
             {value: 'normal', title: 'Normal'},
-            {value: 'h3', title: 'H3'},
-            {value: 'h4', title: 'H4'},
           ],
           marks: {
+            decorators: [
+              {title: 'Strong', value: 'strong'},
+              {title: 'Emphasis', value: 'em'},
+            ],
             annotations: [
               {
                 name: 'link',
