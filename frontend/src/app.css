@@ -32,6 +32,7 @@
 /* Reset */
 *, *::before, *::after {
   box-sizing: border-box;
+  -webkit-tap-highlight-color:transparent;
 }
 * {
   margin: 0;
@@ -221,6 +222,11 @@ a:not(.no-hover):hover::before {
 a.active::before {
   width: 100%;
 } */
+@media screen and (max-width: 600px) {
+  .grid.cols-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 
 /* All */
 swiper-container {

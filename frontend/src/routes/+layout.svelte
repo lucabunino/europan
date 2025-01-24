@@ -137,7 +137,7 @@ $effect(() => {
 </div>
 {/if}
 
-<p class="text-m" style="position:fixed; top:50%; left:50%; z-index:10;background-color:var(--white)">{activeMenuItem} {activeSubmenuItem}</p>
+<!-- <p class="text-m" style="position:fixed; top:50%; left:50%; z-index:10;background-color:var(--white)">{activeMenuItem} {activeSubmenuItem}</p> -->
 
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <header
@@ -463,6 +463,7 @@ header.on {
 nav {
   display: flex;
   width: -webkit-fill-available;
+  padding-top: .7rem;
 }
 .submenu-container {
   left: 100%;
@@ -555,7 +556,6 @@ main>div {
   nav {
     height: calc(100vh - var(--gutter)*2);
     overflow: scroll;
-    padding-top: .7rem;
     scrollbar-width: none;
     -ms-overflow-style: none;
     overflow-y: scroll;

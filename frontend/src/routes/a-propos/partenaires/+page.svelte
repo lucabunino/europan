@@ -23,7 +23,7 @@
 </article>
   
   <style>
-  .content {
+  .grid {
     row-gap: calc(var(--gutter)*3);
   }
   .logo {
