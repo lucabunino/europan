@@ -38,6 +38,8 @@ function startCloseMenu() {
 }
 
 function closeMenu() {
+  console.log("CLOSED!!");
+  
   activeMenu = false;
   activeMenuItem = false;
   activeMenuItemLast = false;
@@ -63,6 +65,8 @@ function handleMenuEnter(e) {
 function handleMenuTap(e) {
   if (activeMenuItemLast == e.target.getAttribute('data-item')) {
     activeSubmenu = false
+    activeMenuItem = false
+    activeMenuItemLast = false
     return
   }
   activeMenuItemLast = e.target.getAttribute('data-item')
@@ -87,7 +91,9 @@ function handleMenuTap(e) {
 }
 function handleMenuLeave(e) {
   activeMenuItemLast = e.target.getAttribute('data-item')
-  activeMenuItem = true
+  if (innerWidth > 900) {
+    activeMenuItem = true 
+  }
 }
 function handleSubMenuEnter(e) {
   activeSubmenuItem = e.target.getAttribute('data-item')
@@ -131,7 +137,7 @@ $effect(() => {
 </div>
 {/if}
 
-<!-- <p class="text-m" style="position:fixed; top:50%; left:50%; z-index:10;background-color:var(--white)">{activeMenuItem} {activeSubmenuItem}</p> -->
+<p class="text-m" style="position:fixed; top:50%; left:50%; z-index:10;background-color:var(--white)">{activeMenuItem} {activeSubmenuItem}</p>
 
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <header
