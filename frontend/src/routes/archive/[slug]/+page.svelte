@@ -1,8 +1,6 @@
 <script>
 const { data } = $props()
 $inspect(data)
-import { PortableText } from '@portabletext/svelte'
-import PortableTextStyle from '$lib/components/portableTextStyle.svelte';
 import Project from '$lib/components/project.svelte';
 </script>
 
@@ -21,16 +19,8 @@ import Project from '$lib/components/project.svelte';
     </section>
   {/if}
   <section class="projects-grid">
-    {#each data.singleCompetition[0].featuredSites as site, i}
-      {#each site.winners as winner}
-        <Project project={winner} prize=1/>
-      {/each}
-      {#each site.roundUps as roundUp}
-        <Project project={roundUp} prize=2/>
-      {/each}
-      {#each site.specialMentions as specialMention}
-        <Project project={specialMention} prize=3/>
-      {/each}
+    {#each data.singleCompetition[0].featuredProjects as project}
+      <Project project={project} result={project.result}/>
     {/each}
   </section>
 </article>

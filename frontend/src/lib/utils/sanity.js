@@ -57,9 +57,7 @@ export async function getTeam() {
 	return await client.fetch(`
 		*[_type == "team" && language == "fr" && !(_id in path('drafts.**'))] {
 			title,
-			team[]->{
-				...,
-			}
+			team[]->{...}
 		}
 	`);
 }
@@ -115,12 +113,8 @@ export async function getTopic() {
 export async function getJury() {
 	return await client.fetch(`
     *[_type == "competition" && language == "fr"] | order(edition desc)[0] {
-			juryPresident {
-				...,
-			},
-			jury[]->{
-				...,
-      }
+			juryPresident {...},
+			jury[]->{...}
     }
 	`);
 }
@@ -130,31 +124,15 @@ export async function getLastCompetition() {
 	return await client.fetch(`
 		*[_type == "competition" && language == "fr" && !(_id in path('drafts.**'))] | order(edition desc)[0] {
 			...,
-			juryPresident->{
-				...,
-			},
+			juryPresident->{...,},
 			jury[]->,
-			featuredSites[]{
+			featuredSites[]->{...} | order(title asc),
+			"featuredProjects": *[_type == "project" && references(^._id)] {
 				...,
-				siteReference->{
-					...
-				},
-				winners[]->{
-					...,
-					site->{...},
-					team[]->{...}
-				},
-				runnerUps[]->{
-					...,
-					site->{...},
-					team[]->{...}
-				},
-				specialMentions[]->{
-					...,
-					site->{...},
-					team[]->{...}
-				}
-			}
+				competition->{...},
+				team[]->{...},
+				site->{...}
+			} | order(site.title asc, result)
 		}
 	`);
 }
@@ -166,11 +144,12 @@ export async function getArchive() {
 			title,
 			subtitle,
 			slug,
-			featuredSites[]{
-				siteReference->{
-					title
-				},
-			},
+			"sites": *[_type == "project" && references(^._id)] {
+				site->{
+					_id,
+					title,
+				}
+			} | order(title asc),
 			edition
     }
 	`);
@@ -182,42 +161,31 @@ export async function getCompetition(slug) {
     *[_type == "competition" && language == "fr" && slug.current == $slug] {
 			...,
 			jury[]->,
-			featuredSites[]{
+			featuredSites[]->{...} | order(title asc),
+			"featuredProjects": *[_type == "project" && references(^._id)] {
 				...,
-				siteReference->{
-					...
-				},
-				winners[]->{
-					...,
-					site->{...},
-					team[]->{...}
-				},
-				runnerUps[]->{
-					...,
-					site->{...},
-					team[]->{...}
-				},
-				specialMentions[]->{
-					...,
-					site->{...},
-					team[]->{...}
-				}
-			}
+				competition->{...},
+				team[]->{...},
+				site->{...}
+			} | order(site.title asc, result)
     }
 	`, { slug });
 }
 
-
-
-
-
-
-
-
-
-
-
-
+// Competition
+export async function getSite(slug) {
+  return await client.fetch(`
+    *[_type == "site" && language == "fr" && slug.current == $slug && !(_id in path('drafts.**'))][0] {
+			title,
+      "referencingProjects": *[_type == "project" && references(^._id) && !(_id in path('drafts.**'))] {
+        ...,
+        competition->{title, edition, slug},
+        team[]->{...},
+        site->{title, slug}
+      } | order(competition.edition desc)
+    }
+  `, { slug });
+}
 
 // SEO
 export async function getSEO() {
@@ -228,209 +196,6 @@ export async function getSEO() {
 			SEOImage
 		}
 	`);
-}
-
-// Contacts
-export async function getContacts() {
-	return await client.fetch(`
-		*[_type == "contact" && !(_id in path('drafts.**'))] {
-			...,
-		}
-	`);
-}
-
-// Homepage
-export async function getHomepage() {
-	return await client.fetch(`
-		*[_type == "homepage" && !(_id in path('drafts.**'))] {
-			...,
-			aboutContent[] {
-				...,
-				person-> { "title": name + " " + surname, slug, role, email, singlePage  },
-				entities[]-> { title, link, slug },
-				people[]-> { "title": name + " " + surname, singlePage, slug },
-				"link": download.asset->url
-			}
-		}
-	`);
-}
-
-// Homepage WhatWeDos
-export async function getWhatWeDosHomepage() {
-	return await client.fetch(`
-		*[_type == "whatWeDo" && collector == "whatWeDo" && !(_id in path('drafts.**'))] {
-			...,
-			category[]-> { title, slug } | order(title asc),
-		} | order(date desc)[0...6]
-	`);
-}
-
-// Homepage Archive
-export async function getArchiveHomepage() {
-	return await client.fetch(`
-		*[_type == "whatWeDo" && collector == "archive" && !(_id in path('drafts.**'))] {
-			...,
-			category[]-> { title, slug } | order(title asc),
-		} | order(date desc)[0...6]
-	`);
-}
-
-// Homepage Publications
-export async function getPublicationsHomepage() {
-	return await client.fetch(`
-		*[_type == "publication" && !(_id in path('drafts.**'))] {
-			...,
-			editor-> {title, link, slug },
-			curator -> { "title": name + " " + surname, },
-			author -> { "title": name + " " + surname, },
-		} | order(date desc)[0...6]
-	`);
-}
-
-// Homepage WhoWeAre
-export async function getPeopleHomepage() {
-	return await client.fetch(`
-		*[_type == "person" && withWhom && !(_id in path('drafts.**'))] {
-			...,
-			"title": name + " " + surname,
-		} | order(surname asc)[0...11]
-	`);
-}
-
-// WhoWeAre
-export async function getPeople() {
-	return await client.fetch(`
-		*[_type == "person" && withWhom && !(_id in path('drafts.**'))] {
-			...,
-			"title": name + " " + surname,
-		} | order(surname asc)
-	`);
-}
-
-// WhatWeDo
-export async function getWhatWeDos(category) {
-	return await client.fetch(`
-		*[_type == "whatWeDo" && collector == "whatWeDo"
-		${category && category !== '*' ? `&& $category in category[]->slug.current` : ''}
-		&& !(_id in path('drafts.**'))] {
-			...,
-			category[]-> { title, slug } | order(title asc),
-		} | order(date desc)
-	`, { category });
-}
-
-// WhatWeDo Categories
-export async function getWhatWeDosCategories() {
-	return await client.fetch(`
-		*[_type == "category" && _id in *[_type == "whatWeDo" && collector == "whatWeDo"].category[]._ref] {
-			"title": title,
-			"slug": slug
-		} | order(title asc)
-	`);
-}
-
-// Archive
-// export async function getArchive(category) {
-// 	return await client.fetch(`
-// 		*[_type == "whatWeDo" && collector == "archive"
-// 		${category && category !== '*' ? `&& $category in category[]->slug.current` : ''}
-// 		&& !(_id in path('drafts.**'))] {
-// 			...,
-// 			category[]-> { title, slug } | order(title asc),
-// 		} | order(date desc)
-// 	`, { category });
-// }
-
-// Archive Categories
-export async function getArchiveCategories() {
-	return await client.fetch(`
-		*[_type == "category" && _id in *[_type == "whatWeDo" && collector == "archive"].category[]._ref] {
-			"title": title,
-			"slug": slug
-		} | order(title asc)
-	`);
-}
-
-// Publications
-export async function getPublications(editor) {
-	return await client.fetch(`
-		*[_type == "publication"
-		${editor ? `&& $editor == editor->slug.current` : ''}
-		&& !(_id in path('drafts.**'))] {
-			...,
-			editor-> {title, link, slug },
-			curator -> { "title": name + " " + surname, },
-			author -> { "title": name + " " + surname, },
-		} | order(date desc)
-	`, { editor });
-}
-
-// Publications Editors
-export async function getPublicationsEditors() {
-	return await client.fetch(`
-	*[_type == "editor" && _id in *[_type == "publication"].editor._ref] {
-			"title": title,
-			"slug": slug
-		} | order(title asc)
-	`);
-}
-
-
-// Single WhatWeDo
-export async function getWhatWeDo(slug) {
-	return await client.fetch(`
-		*[_type == "whatWeDo" && slug.current == $slug] {
-			...,
-			image {
-				...,
-				"aspectRatio": asset->metadata.dimensions.width / asset->metadata.dimensions.height
-			},
-			category[]-> { title, slug },
-			credits[]{
-				...,
-				_type == 'partners' => { partnersArray[]->{"title": coalesce(name + " " + surname, title), link} },
-				_type == 'sponsors' => { sponsorsArray[]->{"title": coalesce(name + " " + surname, title), link} },
-				_type == 'patronages' => { patronagesArray[]->{"title": coalesce(name + " " + surname, title), link} },
-				_type == 'customCredit' => { customText, customsArray[]->{"title": coalesce(name + " " + surname, title), link} }
-			},
-			"prev": *[_type == "whatWeDo" && collector == ^.collector && date < ^.date] | order(date desc)[0] {
-				slug, date
-			},
-			"next": *[_type == "whatWeDo" && collector == ^.collector && date > ^.date] | order(date asc)[0] {
-				slug, date
-			},
-		}
-	`, { slug });
-}
-
-
-// Single Pubblication
-export async function getPublication(slug) {
-  return await client.fetch(`
-    *[_type == "publication" && slug.current == $slug] {
-      ...,
-      curator -> { "title": name + " " + surname },
-      author -> { "title": name + " " + surname },
-      editor -> { title, slug, link },
-      "prev": *[_type == "publication" && date < ^.date] | order(date desc)[0] {
-				slug, date
-      },
-      "next": *[_type == "publication" && date > ^.date] | order(date asc)[0] {
-        slug, date
-      },
-    }
-  `, { slug });
-}
-
-
-// Single Person
-export async function getPerson(slug) {
-	return await client.fetch(`
-		*[_type == "person" && slug.current == $slug] {
-			...,
-			"title": name + " " + surname,
-		}
-	`, { slug });
 }
 
 // Cookies
@@ -447,6 +212,6 @@ export async function getPrivacy() {
 	return await client.fetch(`
 		*[_type == "policy" && kind =='privacy'] {
 			...,
-		}[0...1]	
+		}[0...1]
 	`
 )};

@@ -1,7 +1,7 @@
 <script>
 const {
   project = null,
-  prize = null,
+  result = null,
 } = $props();
 import { urlFor } from '$lib/utils/image';
 import { PortableText } from '@portabletext/svelte'
@@ -16,9 +16,9 @@ import PortableTextStyle from '$lib/components/portableTextStyle.svelte';
   <div class="project-info text-xs">
     <div>
       <p class="mt-0">{project.site.title}</p>
-      {#if prize == 1}<p class="mt-0">Lauréat</p>{/if}
-      {#if prize == 2}<p class="mt-0">Finaliste</p>{/if}
-      {#if prize == 3}<p class="mt-0">Mentionné</p>{/if}
+      {#if result == 1}<p class="mt-0">Lauréat</p>{/if}
+      {#if result == 2}<p class="mt-0">Finaliste</p>{/if}
+      {#if result == 3}<p class="mt-0">Mentionné</p>{/if}
     </div>
     <div>
       {#each project.team as person, i}

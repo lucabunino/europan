@@ -151,98 +151,13 @@ export default {
       of: [
         {
           name: 'site',
-          type: 'object',
-          icon: MarkerIcon,
-          fields: [
-            {
-              name: 'siteReference',
-              type: 'reference',
-              to: [{ type: 'site' }],
-              options: {
-                filter: ({ document }) => ({
-                  filter: 'language == $language',
-                  params: { language: document?.language },
-                }),
-              },
-            },
-            {
-              name: 'winners',
-              type: 'array',
-              of: [
-                {
-                  name: 'winner',
-                  type: 'reference',
-                  to: [{ type: 'project' }],
-                  // options: {
-                  //   filter: ({ document }) => {
-                  //     // Loop through the 'featuredSites' array to find the 'siteReference' for filtering
-                  //     const siteReference = document.featuredSites?.find(site => site?.siteReference)?.siteReference;
-                      
-                  //     if (!siteReference) {
-                  //       return {
-                  //         filter: 'site._ref == $siteId',  // No site reference available, fallback
-                  //         params: { siteId: '' },  // Default or empty filter
-                  //       };
-                  //     }
-                      
-
-                  //     return {
-                  //       filter: 'site._ref == $siteId',
-                  //       params: { siteId: siteReference?._ref },  // Get the site _ref from the parent document
-                  //     };
-                  //   },
-                  // },
-                },
-              ],
-            },                                        
-            {
-              name: 'runnerUps',
-              type: 'array',
-              of: [
-                {
-                  name: 'runnerUp',
-                  type: 'reference',
-                  to: [{ type: 'project' }],
-                  options: {
-                    filter: ({ document }) => ({
-                      filter: 'language == $language',
-                      params: { language: document?.language },
-                    }),
-                  },
-                },
-              ],
-            },
-            {
-              name: 'specialMentions',
-              type: 'array',
-              of: [
-                {
-                  name: 'specialMention',
-                  type: 'reference',
-                  to: [{ type: 'project' }],
-                  options: {
-                    filter: ({ document }) => ({
-                      filter: 'language == $language',
-                      params: { language: document?.language },
-                    }),
-                  },
-                },
-              ],
-            },            
-          ],
-          preview: {
-            select: {
-              site: 'siteReference.title',
-              winners: 'winners',
-              runnerUps: 'runnerUps',
-              specialMentions: 'specialMentions',
-            },
-            prepare({ site, winners, runnerUps, specialMentions }) {
-              return {
-                title: site || 'Untitled Site',
-                subtitle: `Winners: ${winners ? winners.length : 0}, Runner-Ups: ${runnerUps? runnerUps.length : 0}, Mentions: ${specialMentions ? specialMentions.length : 0}`,
-              };
-            },
+          type: 'reference',
+          to: [{ type: 'site' }],
+          options: {
+            filter: ({ document }) => ({
+              filter: 'language == $language',
+              params: { language: document?.language },
+            }),
           },
         },
       ],

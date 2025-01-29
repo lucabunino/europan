@@ -1,5 +1,6 @@
 <script>
 const { data } = $props()
+$inspect(data)
 
 let innerWidth = $state()
 let innerHeight = $state()
@@ -37,10 +38,10 @@ function updateActiveNews() {
     <div class="info text-xs">
       <p>{competition.title}</p>
       {#if competition.subtitle}<p class="mt-0">{competition.subtitle}</p>{/if}
-      {#if competition.featuredSites}
+      {#if competition.sites}
         <p class="mt-0">
-          {#each competition.featuredSites as site, j}
-            {site.siteReference.title}{#if j+1 < competition.featuredSites.length}{@html ', '}{/if}
+          {#each competition.sites as site, j}
+            {site.site.title}{#if j+1 < competition.sites.length}{@html ', '}{/if}
           {/each}
         </p>
       {/if}

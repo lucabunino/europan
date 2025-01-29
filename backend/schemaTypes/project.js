@@ -22,17 +22,6 @@ export default {
       type: 'string',
     },
     {
-      name: 'site',
-      type: 'reference',
-      to: [{type: 'site'}],
-      options: {
-        filter: ({ document }) => ({
-          filter: 'language == $language',
-          params: { language: document?.language },
-        }),
-      },
-    },
-    {
       name: 'slug',
       title: 'Slug',
       type: 'slug',
@@ -44,16 +33,43 @@ export default {
       },
     },
     {
-      name: 'thumbnail',
-      type: 'image',
+      name: 'site',
+      type: 'reference',
+      to: [{type: 'site'}],
       options: {
-        accept: 'image/jpg,image/jpeg,image/png,image/webp',
+        filter: ({ document }) => ({
+          filter: 'language == $language',
+          params: { language: document?.language },
+        }),
       },
+    },
+    {
+      name: 'competition',
+      type: 'reference',
+      to: [{type: 'competition'}],
+      options: {
+        filter: ({ document }) => ({
+          filter: 'language == $language',
+          params: { language: document?.language },
+        }),
+      },
+    },
+    {
+      name: 'result',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Winner', value: '1' },
+          { title: 'Runner Up', value: '2' },
+          { title: 'Special Mention', value: '3' },
+        ],
+      },
+      initialValue: 'winner',
     },
     {
       name: 'europanEuropeUrl',
       type: 'url'
-    }, 
+    },
     {
       name: 'team',
       type: 'array',
@@ -70,6 +86,13 @@ export default {
           },
         }
       ],
+    },
+    {
+      name: 'thumbnail',
+      type: 'image',
+      options: {
+        accept: 'image/jpg,image/jpeg,image/png,image/webp',
+      },
     },
     {
       name: 'body',

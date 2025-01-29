@@ -3,19 +3,12 @@
 import '../app.css'
 import { page } from '$app/stores';
 import { onMount } from "svelte";
+import { fade, slide } from 'svelte/transition'
 const { data, children } = $props()
 $inspect(data)
 
 // Variables
 let headerType = $state(true)
-
-// Lifecycle
-onMount(() => {
-  setTimeout(() => {
-    headerType = false
-    activeMenu = false
-  }, 700);  
-})
 let activeMenuItem = $state(false)
 let activeMenuItemLast = $state(false)
 let activeSubmenu = $state(false)
@@ -26,6 +19,19 @@ let allOff = $state(false)
 let timer;
 let timer2;
 let mobileMargin = $state()
+let creditsOpen = $state(false);
+let creditsHeight = $state();
+
+// Lifecycle
+onMount(() => {
+  setTimeout(() => {
+    headerType = false
+    activeMenu = false
+  }, 700);  
+})
+$effect(() => {
+  console.log(activeMenuItem);
+})
 
 function isDesktop() {
   return window.matchMedia("(hover: hover)").matches;
@@ -62,11 +68,16 @@ function handleMenuEnter(e) {
   activeSubmenu = true
   activeSubmenuItem = false
 }
-function handleMenuTap(e) {
+function handleMenuEnterTouch(e) {
+  activeMenuItem = true
+  activeMenuItemLast = false
+  activeSubmenuItem = false
+}
+function handleMenuTouch(e) {
   if (activeMenuItemLast == e.target.getAttribute('data-item')) {
-    activeSubmenu = false
-    activeMenuItem = false
+    activeMenuItem = true
     activeMenuItemLast = false
+    activeSubmenu = false
     return
   }
   activeMenuItemLast = e.target.getAttribute('data-item')
@@ -108,9 +119,18 @@ const gridColumnsDesktop = 6
 const gridColumnsMobile = 4
 function handleKey({key}) {if (key === 'G') {viewGrid = !viewGrid}}
 
-$effect(() => {
-  console.log(activeMenuItem);
-})
+function toggleCredits() {
+  creditsOpen = !creditsOpen;
+  setTimeout(() => {
+    const pageHeight = document.body.scrollHeight
+    console.log(creditsHeight);
+    
+    window.scrollTo({
+      top: pageHeight + creditsHeight,
+      behavior: "smooth" // Smooth scrolling effect
+    });
+  }, 200);
+}
 </script>
 
 <svelte:head>
@@ -227,6 +247,7 @@ onmouseleave={() => {
         </li>
         <li class="menu-item-container"
         style="margin-bottom: {activeSubmenu && activeMenuItem === '1' || activeSubmenu && activeMenuItemLast === '1' ? mobileMargin : ''}px"
+        class:undelayed={activeSubmenu && activeMenuItem === '1' || activeSubmenu && activeMenuItemLast === '1' ? mobileMargin : ''}
         >
           <a class="menu-item desktop-only"
           href="/concours"
@@ -243,8 +264,9 @@ onmouseleave={() => {
           href="/concours"
           data-item="1"
           class:off={activeMenuItem && activeMenuItem !== '1'}
+          onmouseenter={(e) => handleMenuEnterTouch(e)}
           onclick={(e) => {
-            handleMenuTap(e)
+            handleMenuTouch(e)
           }}
           >Concours</p>
           <div class="submenu-container">
@@ -285,6 +307,7 @@ onmouseleave={() => {
         </li>
         <li class="menu-item-container"
         style="margin-bottom: {activeSubmenu && activeMenuItem === '3' || activeSubmenu && activeMenuItemLast === '3' ? mobileMargin : ''}px"
+        class:undelayed={activeSubmenu && activeMenuItem === '1' || activeSubmenu && activeMenuItemLast === '1' ? mobileMargin : ''}
         >
           <a class="menu-item desktop-only"
           href="/a-propos"
@@ -299,8 +322,9 @@ onmouseleave={() => {
           href="/concours"
           data-item="3"
           class:off={activeMenuItem && activeMenuItem !== '3'}
+          onmouseenter={(e) => handleMenuEnterTouch(e)}
           onclick={(e) => {
-            handleMenuTap(e)
+            handleMenuTouch(e)
           }}
           >A propos</p>
           <div class="submenu-container">
@@ -370,16 +394,16 @@ onmouseleave={() => {
         <li>Europan {new Date().getFullYear()}</li>
       </ul>
       <ul>
-        <li><a href="/concours">Concours</a></li>
-        <li><a href="/archive">Archive</a></li>
-        <li><a href="/a-propos">A propos</a></li>
-        <li><a href="/news">News</a></li>
+        <li><a class:active={$page.url.pathname == '/concours' || $page.url.pathname.includes('/concours/')} href="/concours">Concours</a></li>
+        <li><a class:active={$page.url.pathname == '/archive' || $page.url.pathname.includes('/archive/')} href="/archive">Archive</a></li>
+        <li><a class:active={$page.url.pathname == '/a-propos' || $page.url.pathname.includes('/a-propos/')} href="/a-propos">A propos</a></li>
+        <li><a class:active={$page.url.pathname == '/news' || $page.url.pathname.includes('/news/')} href="/news">News</a></li>
       </ul>
       <ul>
-        <li><a href="/contact">Contact</a></li>
-        <li><a href="/newsletter">Newsletter</a></li>
-        <li><a href="#">Instagram</a></li>
-        <li><a href="/credits">Credits</a></li>
+        <li><a class:active={$page.url.hash == 'contact'} href="/contact">Contact</a></li>
+        <li><a class:active={$page.url.hash == 'newsletter'} href="/newsletter">Newsletter</a></li>
+        <li> <a href="https://www.instagram.com/europan_europe/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+        <li><button onclick={(e) => toggleCredits()}>{#if !creditsOpen}Credits{:else}Fermer{/if}</button></li>
       </ul>
     </div>
     <!-- <div>
@@ -391,6 +415,12 @@ onmouseleave={() => {
     </div> -->
   </div>
 </footer>
+{#if creditsOpen}
+  <div id="credits" class="text-xs" bind:clientHeight={creditsHeight} in:slide={{ delay: 0, duration: 200 }} out:slide={{ delay: 0, duration: 200 }}>
+    <p>Visual Identity and UI: <a class="credits-link" href="https://www.automaticostudio.com/" target="_blank" rel="noopener noreferrer">Automatico Studio</a></p>
+    <p class="mt-0">Development: <a class="credits-link" href="https://lucabunino.com/" target="_blank" rel="noopener noreferrer">Luca Bunino</a></p>
+  </div>
+{/if}
 
 
 
@@ -499,6 +529,10 @@ nav {
 .menu-item-container {
   overflow: hidden;
   transition: var(--transition);
+  transition-delay: .3s;
+}
+.menu-item-container.undelayed {
+  transition-delay: 0s;
 }
 .menu-item {
   display: inline-block;
@@ -563,6 +597,12 @@ main>div {
   nav::-webkit-scrollbar {
     display: none; /* For Chrome, Safari, and Edge */
   }
+  .menu-item {
+    cursor: pointer;
+  }
+  p.menu-item:hover::before {
+    width: 0;
+  }
   .menu-item-container {
     width: calc(100vw - var(--gutter)*2);
   }
@@ -612,6 +652,20 @@ footer ul {
 footer img {
   height: 2.2rem;
   width: auto;
+}
+footer button {
+  padding: 0;
+  color: var(--black);
+  transition: none;
+}
+footer button:hover {
+  color: var(--gray);
+  transition: none;
+}
+#credits {
+  padding: var(--gutter);
+  background-color: var(--black);
+  color: var(--white);
 }
 
 @media screen and (max-width: 1200px) {
