@@ -73,7 +73,6 @@ export default {
           styles: [
             {value: 'normal', title: 'Normal'},
             {value: 'h3', title: 'H3'},
-            {value: 'h4', title: 'H4'},
           ],
           lists: [
             {title: 'Bullet', value: 'bullet'},
@@ -117,7 +116,6 @@ export default {
           styles: [
             {value: 'normal', title: 'Normal'},
             {value: 'h3', title: 'H3'},
-            {value: 'h4', title: 'H4'},
           ],
           marks: {
             annotations: [

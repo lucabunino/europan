@@ -9,10 +9,10 @@ import PortableTextStyle from '$lib/components/portableTextStyle.svelte';
 </script>
 
 <div class="project">
-  <a class="no-hover" target="_blank" rel="noopener noreferrer" href={project.europanEuropeUrl}>
+  <div class="project-img-container">
     <h2 class="text-m">{project.title}</h2>
-    {#if project.thumbnail}<img class="project-img" src={urlFor(project.thumbnail)} alt="Cover for {project.title}">{/if}
-  </a>
+    {#if project.thumbnail}<img class="project-img" src={urlFor(project.thumbnail).width(1080)} alt="Cover for {project.title}">{/if}
+  </div>
   <div class="project-info text-xs">
     <div>
       <p class="mt-0">{project.site.title}</p>
@@ -43,12 +43,6 @@ import PortableTextStyle from '$lib/components/portableTextStyle.svelte';
         />
       {/if}
     </div>
+    <a target="_blank" rel="noopener noreferrer" href={project.europanEuropeUrl}>Voir le projet sur Europan Europe</a>
   </div>
 </div>
-
-<style>
-.body {
-  margin-top: 1.2em;
-  grid-column: 1 / span 2;
-}
-</style>

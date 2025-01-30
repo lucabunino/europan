@@ -70,7 +70,7 @@ function handleMenuEnter(e) {
 }
 function handleMenuEnterTouch(e) {
   activeMenuItem = true
-  activeMenuItemLast = false
+  // activeMenuItemLast = false
   activeSubmenuItem = false
 }
 function handleMenuTouch(e) {
@@ -307,7 +307,7 @@ onmouseleave={() => {
         </li>
         <li class="menu-item-container"
         style="margin-bottom: {activeSubmenu && activeMenuItem === '3' || activeSubmenu && activeMenuItemLast === '3' ? mobileMargin : ''}px"
-        class:undelayed={activeSubmenu && activeMenuItem === '1' || activeSubmenu && activeMenuItemLast === '1' ? mobileMargin : ''}
+        class:undelayed={activeSubmenu && activeMenuItem === '3' || activeSubmenu && activeMenuItemLast === '3' ? mobileMargin : ''}
         >
           <a class="menu-item desktop-only"
           href="/a-propos"
@@ -400,10 +400,10 @@ onmouseleave={() => {
         <li><a class:active={$page.url.pathname == '/news' || $page.url.pathname.includes('/news/')} href="/news">News</a></li>
       </ul>
       <ul>
-        <li><a class:active={$page.url.hash == 'contact'} href="/contact">Contact</a></li>
-        <li><a class:active={$page.url.hash == 'newsletter'} href="/newsletter">Newsletter</a></li>
+        <li><a class:active={$page.url.pathname == '/contact'} href="/contact">Contact</a></li>
+        <li><a class:active={$page.url.pathname == '/newsletter'} href="/newsletter">Newsletter</a></li>
         <li> <a href="https://www.instagram.com/europan_europe/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-        <li><button onclick={(e) => toggleCredits()}>{#if !creditsOpen}Credits{:else}Fermer{/if}</button></li>
+        <li><button class:active={creditsOpen} onclick={(e) => toggleCredits()}>{#if !creditsOpen}Credits{:else}Fermer{/if}</button></li>
       </ul>
     </div>
     <!-- <div>
@@ -541,9 +541,8 @@ nav {
   background-color: var(--grayOpacity);
   width: fit-content;
   transition: var(--transition);
-  padding: 0 .2em;
   line-height: 1;
-  padding: .1em 0;
+  padding: .1em .1em;
 }
 .menu-item-container:nth-child(1) .menu-item {transition-delay: 0.00s;}
 .menu-item-container:nth-child(2) .menu-item {transition-delay: 0.03s;}
@@ -603,6 +602,12 @@ main>div {
   p.menu-item:hover::before {
     width: 0;
   }
+  /* .menu-container {
+    pointer-events: none;
+  }
+  .menu-container * {
+    pointer-events: all;
+  } */
   .menu-item-container {
     width: calc(100vw - var(--gutter)*2);
   }

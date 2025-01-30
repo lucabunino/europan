@@ -9,7 +9,7 @@
 </script>
 
 {#if style === 'normal' && !listItem}
-  <p><slot /></p>
+  <p class="portableText"><slot /></p>
 {:else if style=== 'h3'}
   <h3 class="text-m"><slot /></h3>
 {:else if style=== 'h4'}
@@ -32,12 +32,18 @@
 a:hover {
   text-decoration: none;
 }
-p, li:last-of-type {
-  margin-bottom: 1em;
+p {
+  margin: 0;
 }
 :global(ul) {
-  list-style-type: disc;
-  padding-left: 1em;
+  list-style-type: none;
+  padding-left: 2em;
+}
+li::before {
+  display: inline-block;
+  content: "— ";
+  width: 2em;
+  margin-left: -2em;
 }
 h3 {
   margin-top: .7em;

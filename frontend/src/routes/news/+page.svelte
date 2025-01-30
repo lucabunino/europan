@@ -36,7 +36,7 @@ function updateActiveNews() {
   <a class={innerWidth < 601 && activeNews == i ? 'news no-hover active-news' : 'news no-hover'} href="/news/{news.slug.current}">
     <h2 class="text-xl date">{innerWidth > 600 ? formatDate(news.date) : news.date.split("-")[2]} <div class="date-small"><span>{news.date.split("-")[1]}</span><span>{news.date.split("-")[0].slice(-2)}</span></div></h2>
     <div class="info text-xs">
-      <p>{news.title}</p>
+      <p>{news.title.replace(/(\r\n|\n|\r)/gm, " ")}</p>
       <p class="mt-0">{news.subtitle}</p>
       <p class="mt-0">{news.place}</p>
     </div>

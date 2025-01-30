@@ -46,7 +46,7 @@ let innerWidth = $state()
 <article class="content">
   <section class="page-title">
     <h2 class="text-l">{data.news[0].title}</h2>
-    {#if data.news[0].from}<h3 class="text-s page-subtitle">{formatDate(data.news[0].from, data.news[0].to)}</h3>{/if}
+    {#if data.news[0].subtitle}<h3 class="text-s page-subtitle">{data.news[0].subtitle}</h3>{/if}
   </section>
   {#if data.news[0].images}
   <swiper-container
@@ -65,6 +65,7 @@ let innerWidth = $state()
   {/if}
 
   <section class="body">
+    {#if data.news[0].from}<h3 class="text-s">{formatDate(data.news[0].from, data.news[0].to)}</h3>{/if}
     <PortableText
     value={data.news[0].body}
     components={{
