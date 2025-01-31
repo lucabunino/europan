@@ -15,6 +15,7 @@ import PortableTextStyle from '$lib/components/portableTextStyle.svelte';
   </div>
   <div class="project-info text-xs">
     <div>
+      <p class="mt-0">{project.title}</p>
       <p class="mt-0">{project.site.title}</p>
       {#if result == 1}<p class="mt-0">Lauréat</p>{/if}
       {#if result == 2}<p class="mt-0">Finaliste</p>{/if}
@@ -43,6 +44,6 @@ import PortableTextStyle from '$lib/components/portableTextStyle.svelte';
         />
       {/if}
     </div>
-    <a target="_blank" rel="noopener noreferrer" href={project.europanEuropeUrl}>Voir le projet sur Europan Europe</a>
+    <a class="externalLink" target="_blank" rel="noopener noreferrer" href={project.europanEuropeUrl}>Voir le projet sur Europan Europe ↗</a>
   </div>
 </div>

@@ -40,6 +40,7 @@
 :root{
   --gutter: 1.4rem;
   --aspectRatio: 3 / 2;
+  --aspectRatioWide: 16 / 9;
   --transition: cubic-bezier(.77,0,.175,1) 300ms;
   --black: rgba(0, 0, 0, 1);
   --blackOpacity: rgba(0, 0, 0, .9);
@@ -239,13 +240,29 @@ a.active::before {
 }
 
 /* All */
-swiper-container {
+.swiper-container-container {
+  width: 100%;
+  display:flex;
+  aspect-ratio: var(--aspectRatioWide);
+  background-color: var(--gray);
   margin-bottom: var(--gutter);
+}
+swiper-container {
+  width: 100%;
+  aspect-ratio: var(--aspectRatioWide);
+  opacity: 0;
+}
+swiper-container.loaded {
+  opacity: 1;
 }
 swiper-slide {
   width: 100%;
-  aspect-ratio: var(--aspectRatio);
-  background-color: var(--gray);
+  aspect-ratio: var(--aspectRatioWide);
+}
+swiper-slide img {
+  height: 100%;
+  width: 100%;
+  aspect-ratio: var(--aspectRatioWide);
 }
 .thumbnail {
   background-color: var(--gray);
@@ -401,7 +418,7 @@ select {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   column-gap: var(--gutter);
-  row-gap: calc(var(--gutter)*1.5);
+  row-gap: calc(var(--gutter)*3);
 }
 .project {
   display: flex;
@@ -419,6 +436,9 @@ select {
   grid-template-columns: repeat(2, 1fr);
   column-gap: var(--gutter);
 }
+.project .externalLink {
+  grid-column: 1 / span 2;
+}
 
 .site-img,
 .project-img {
@@ -435,6 +455,13 @@ select {
   z-index: 1;
   position: relative;
   color: var(--white);
+}
+@media screen and (min-width: 1920px) {
+  .projects-grid,
+  .sites-grid,
+  .pages-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 @media screen and (max-width: 600px) {
   .projects-grid,

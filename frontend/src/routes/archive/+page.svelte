@@ -108,7 +108,7 @@ h2 {
     margin-top: 40vw;
   }
   .competition:last-of-type {
-    margin-bottom: 40vw;
+    margin-bottom: 40vh;
   }
   .competitions-grid {
     grid-template-columns: repeat(1, 1fr);

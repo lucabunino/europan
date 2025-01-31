@@ -4,8 +4,9 @@ import { urlFor } from '$lib/utils/image';
 import { PortableText } from '@portabletext/svelte'
 import PortableTextStyle from '$lib/components/portableTextStyle.svelte';
 import { formatDate } from "$lib/utils/date";
-
 import { register } from 'swiper/element/bundle';register();
+
+let swiperLoaded = $state(false)
 $effect(() => {
   if (data.news[0].images) {
     const swiperEl = document.querySelector('swiper-container');
@@ -36,6 +37,7 @@ $effect(() => {
     };
     Object.assign(swiperEl, swiperParams);
     swiperEl.initialize();
+    swiperLoaded = true
   }
 })
 let innerWidth = $state()
@@ -49,19 +51,22 @@ let innerWidth = $state()
     {#if data.news[0].subtitle}<h3 class="text-s page-subtitle">{data.news[0].subtitle}</h3>{/if}
   </section>
   {#if data.news[0].images}
-  <swiper-container
-  init={false}
-  slides-per-view={1}
-  navigation={true}
-  loop={true}
-  speed={400}
-  >
-  {#each data.news[0].images as image}
-    <swiper-slide>
-      <img class="news-img" src={urlFor(image).width(1080)} alt="Image for {data.news[0].title}">
-    </swiper-slide>
-  {/each}
-  </swiper-container>
+  <div class="swiper-container-container">
+    <swiper-container
+    class:loaded={swiperLoaded}
+    init={false}
+    slides-per-view={1}
+    navigation={true}
+    loop={true}
+    speed={400}
+    >
+    {#each data.news[0].images as image}
+      <swiper-slide>
+        <img class="news-img" src={urlFor(image).width(1080)} alt="Image for {data.news[0].title}">
+      </swiper-slide>
+    {/each}
+    </swiper-container>
+  </div>
   {/if}
 
   <section class="body">

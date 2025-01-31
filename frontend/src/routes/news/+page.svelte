@@ -103,7 +103,7 @@ h2 {
     margin-top: 40vw;
   }
   .news:last-of-type {
-    margin-bottom: 40vw;
+    margin-bottom: 40vh;
   }
   .news + .news {
     margin-top: 3vw;

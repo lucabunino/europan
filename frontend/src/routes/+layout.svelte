@@ -21,13 +21,17 @@ let timer2;
 let mobileMargin = $state()
 let creditsOpen = $state(false);
 let creditsHeight = $state();
+let isLoaded = $state(false);
 
 // Lifecycle
 onMount(() => {
   setTimeout(() => {
+    isLoaded = true
+  }, 700);
+  setTimeout(() => {
     headerType = false
     activeMenu = false
-  }, 700);  
+  }, 700);
 })
 $effect(() => {
   console.log(activeMenuItem);
@@ -372,7 +376,7 @@ onmouseleave={() => {
   </nav>
 </header>
 
-<main>
+<main class:loaded={isLoaded}>
   <div>
     {@render children()}
   </div>
@@ -402,7 +406,7 @@ onmouseleave={() => {
       <ul>
         <li><a class:active={$page.url.pathname == '/contact'} href="/contact">Contact</a></li>
         <li><a class:active={$page.url.pathname == '/newsletter'} href="/newsletter">Newsletter</a></li>
-        <li> <a href="https://www.instagram.com/europan_europe/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+        <li> <a href="https://www.instagram.com/europan_europe/" target="_blank" rel="noopener noreferrer">Instagram ↗</a></li>
         <li><button class:active={creditsOpen} onclick={(e) => toggleCredits()}>{#if !creditsOpen}Credits{:else}Fermer{/if}</button></li>
       </ul>
     </div>
@@ -417,18 +421,18 @@ onmouseleave={() => {
 </footer>
 {#if creditsOpen}
   <div id="credits" class="text-xs" bind:clientHeight={creditsHeight} in:slide={{ delay: 0, duration: 200 }} out:slide={{ delay: 0, duration: 200 }}>
-    <p>Visual Identity and UI: <a class="credits-link" href="https://www.automaticostudio.com/" target="_blank" rel="noopener noreferrer">Automatico Studio</a></p>
-    <p class="mt-0">Development: <a class="credits-link" href="https://lucabunino.com/" target="_blank" rel="noopener noreferrer">Luca Bunino</a></p>
+    <p>Visual Identity and UI: <a class="credits-link" href="https://www.automaticostudio.com/" target="_blank" rel="noopener noreferrer">Automatico Studio ↗</a></p>
+    <p class="mt-0">Development: <a class="credits-link" href="https://lucabunino.com/" target="_blank" rel="noopener noreferrer">Luca Bunino ↗</a></p>
   </div>
 {/if}
 
 
 
 <style>
-/* Header */
 .mobile-only {
   display: none !important;
 }
+/* Header */
 header {
   position: fixed;
   top: 0;
@@ -569,7 +573,12 @@ nav {
 
 /* Main */
 main {
+  transition: var(--transition);
   min-height: calc(100vh - (.777rem*4*1.2 + var(--gutter)*6));
+  opacity: 1;
+}
+main.loaded {
+  opacity: 1;
 }
 main>div {
   display: grid;

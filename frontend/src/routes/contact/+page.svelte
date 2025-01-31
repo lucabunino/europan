@@ -142,4 +142,12 @@ form:last-of-type {
     grid-column: 1 / span 4;
   }
 }
+@media screen and (max-width: 380px) {
+  .contact-grid > *:nth-child(1) {
+    grid-column: 1 / span 4;
+  }
+  .contact-grid > *:nth-child(2) {
+    grid-column: 1 / span 4;
+  }
+}
 </style>
