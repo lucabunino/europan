@@ -99,4 +99,7 @@ $effect(() => {
 article + article {
   margin-top: 10rem;
 }
+.news-img {
+  object-fit: cover;
+}
 </style>

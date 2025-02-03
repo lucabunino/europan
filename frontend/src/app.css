@@ -243,13 +243,13 @@ a.active::before {
 .swiper-container-container {
   width: 100%;
   display:flex;
-  aspect-ratio: var(--aspectRatioWide);
+  aspect-ratio: var(--aspectRatio);
   background-color: var(--gray);
   margin-bottom: var(--gutter);
 }
 swiper-container {
   width: 100%;
-  aspect-ratio: var(--aspectRatioWide);
+  aspect-ratio: var(--aspectRatio);
   opacity: 0;
 }
 swiper-container.loaded {
@@ -257,12 +257,12 @@ swiper-container.loaded {
 }
 swiper-slide {
   width: 100%;
-  aspect-ratio: var(--aspectRatioWide);
+  aspect-ratio: var(--aspectRatio);
 }
 swiper-slide img {
   height: 100%;
   width: 100%;
-  aspect-ratio: var(--aspectRatioWide);
+  aspect-ratio: var(--aspectRatio);
 }
 .thumbnail {
   background-color: var(--gray);
