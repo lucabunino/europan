@@ -61,7 +61,7 @@ $effect(() => {
     >
     {#each news.images as image}
       <swiper-slide>
-        <img class="news-img" src={urlFor(image).width(1080)} alt="Image for {news.title}">
+        <img class="news-img" src={urlFor(image).width(1920)} alt="Image for {news.title}">
       </swiper-slide>
     {/each}
     </swiper-container>
