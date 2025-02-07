@@ -77,11 +77,29 @@ export default {
       type: 'array',
       of: [
         {
-          type: 'image',
-          options: {
-            accept: 'image/jpg,image/jpeg,image/png,image/webp',
-          },
-        }
+          name: 'imageWithFit',
+          type: 'object',
+          title: 'Image with Fit',
+          fields: [
+            {
+              name: 'image',
+              type: 'image',
+              options: { hotspot: true }
+            },
+            {
+              name: 'objectFit',
+              type: 'string',
+              options: {
+                list: [
+                  { title: 'Cover', value: 'cover' },
+                  { title: 'Contain', value: 'contain' }
+                ],
+                layout: 'radio'
+              },
+              initialValue: "contain",
+            }
+          ]
+        }        
       ],
     },
     {

@@ -62,7 +62,8 @@ let innerWidth = $state()
     >
     {#each data.news[0].images as image}
       <swiper-slide>
-        <img class="news-img" src={urlFor(image).width(1920)} alt="Image for {data.news[0].title}">
+        <img class="news-img {image.objectFit}" src={urlFor(image.image).width(1920)} alt="Image for {data.news[0].title}">
+        <!-- <img class="news-img" src={urlFor(image).width(1920)} alt="Image for {data.news[0].title}"> -->
       </swiper-slide>
     {/each}
     </swiper-container>
