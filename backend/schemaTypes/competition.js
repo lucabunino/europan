@@ -148,14 +148,30 @@ export default {
       type: 'array',
       of: [
         {
-          name: 'site',
-          type: 'reference',
-          to: [{ type: 'site' }],
-          options: {
-            filter: ({ document }) => ({
-              filter: 'language == $language',
-              params: { language: document?.language },
-            }),
+          name: 'featuredSite',
+          type: 'object',
+          icon: MarkerIcon,
+          fields: [
+            {
+              name: 'site',
+              type: 'reference',
+              to: [{ type: 'site' }],
+              options: {
+                filter: ({ document }) => ({
+                  filter: 'language == $language',
+                  params: { language: document?.language },
+                }),
+              },
+            },
+            {
+              name: 'siteUrl',
+              type: 'url',
+            },
+          ],
+          preview: {
+            select: {
+              title: 'site.title',
+            },
           },
         },
       ],

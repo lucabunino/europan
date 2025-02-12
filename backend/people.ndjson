@@ -1,0 +1,18 @@
+{ "_type": "person", "name": "Andreas", "surname": "Linn", "jobs": ["Directeur"], "language": "fr", "email": "", "city": "Bâle", "country": "CH" }
+{ "_type": "person", "name": "Gianpietro", "surname": "Mondada", "jobs": ["Mobag S.A."], "language": "fr", "email": "", "city": "Genève", "country": "CH" }
+{ "_type": "person", "name": "Martine", "surname": "Ridiaux", "jobs": ["Architecte"], "language": "fr", "email": "", "city": "", "country": "BE" }
+{ "_type": "person", "name": "Emmanuel", "surname": "Laurent", "jobs": ["Head of Property Development Department, ArcelorMittal Belgium Real Estate (and Holland)"], "language": "fr", "email": "", "city": "", "country": "BE" }
+{ "_type": "person", "name": "Anne-Mie", "surname": "Depuydt", "jobs": ["Architecte, bureau uapS"], "language": "fr", "email": "", "city": "", "country": "FR" }
+{ "_type": "person", "name": "Laura", "surname": "Falcone", "jobs": ["Architecte, équipe Due di Quatro, lauréat Europan 11"], "language": "fr", "email": "", "city": "", "country": "IT" }
+{ "_type": "person", "name": "Makan", "surname": "Rafatdjou", "jobs": ["Architecte-urbaniste, Agence Makan RAFATDJOU"], "language": "fr", "email": "", "city": "", "country": "FR" }
+{ "_type": "person", "name": "Bernard", "surname": "Deffet", "jobs": ["Architecte-urbaniste, bureau Baumans-Deffet"], "language": "fr", "email": "", "city": "", "country": "BE" }
+{ "_type": "person", "name": "Bernard", "surname": "Reichen", "jobs": ["Architecte-urbaniste, bureau Reichen et Robert Associés"], "language": "fr", "email": "", "city": "", "country": "FR" }
+{ "_type": "person", "name": "Jean-Michel", "surname": "Degraeve", "jobs": ["Architecte Urbaniste, V-P d’EUROPAN Belgique, Bureau Habitat-Concept"], "language": "fr", "email": "", "city": "", "country": "BE" }
+{ "_type": "person", "name": "Fabienne", "surname": "Hennequin", "jobs": ["Architecte-urbaniste, ir-architecte urbaniste"], "language": "fr", "email": "", "city": "", "country": "BE" }
+{ "_type": "person", "name": "Robert", "surname": "Prost", "jobs": ["Ingénieur ENSAM, architecte DESA"], "language": "fr", "email": "", "city": "", "country": "CH" }
+{ "_type": "person", "name": "Daniele", "surname": "Marques", "jobs": ["Architecte ETHZ FAS SIA, président du jury, Marques AG"], "language": "fr", "email": "", "city": "", "country": "CH" }
+{ "_type": "person", "name": "Léonard", "surname": "Verest", "jobs": ["Urbaniste, Agence Malnati & Verest Sàrl"], "language": "fr", "email": "", "city": "", "country": "CH" }
+{ "_type": "person", "name": "Cristina", "surname": "Woods", "jobs": ["Architecte, Verzone Woods Architectes, paysage, urbanisme, architecture"], "language": "fr", "email": "", "city": "", "country": "CH" }
+{ "_type": "person", "name": "Pierre-Alain", "surname": "Dupraz", "jobs": ["Architecte ETS FAS, Pierre-Alain Dupraz architectes"], "language": "fr", "email": "", "city": "", "country": "CH" }
+{ "_type": "person", "name": "Paul", "surname": "Rambert", "jobs": ["Architecte EPFZ, membre du conseil d’administration Mobimo Management SA"], "language": "fr", "email": "", "city": "", "country": "CH" }
+{ "_type": "person", "name": "Sofie", "surname": "Troch", "jobs": ["Responsable de projets, Vlaams Bouwmeester"], "language": "fr", "email": "", "city": "", "country": "BE" }

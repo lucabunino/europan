@@ -126,7 +126,10 @@ export async function getLastCompetition() {
 			...,
 			juryPresident->{...,},
 			jury[]->,
-			featuredSites[]->{...} | order(title asc),
+			featuredSites[]{
+				"site": site->,
+				"siteUrl": siteUrl
+			} | order(site.title asc),
 			"featuredProjects": *[_type == "project" && references(^._id)] {
 				...,
 				competition->{...},
@@ -160,6 +163,7 @@ export async function getCompetition(slug) {
 	return await client.fetch(`
     *[_type == "competition" && language == "fr" && slug.current == $slug] {
 			...,
+			juryPresident->{...,},
 			jury[]->,
 			featuredSites[]->{...} | order(title asc),
 			"featuredProjects": *[_type == "project" && references(^._id)] {

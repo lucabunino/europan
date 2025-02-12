@@ -287,7 +287,7 @@ onmouseleave={() => {
           }}
           >
             {#if data.competition.topicBody}
-            <li class="menu-item-container"><a class="menu-item" data-item="1" class:off={activeSubmenuItem && activeSubmenuItem !== '1'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href="/concours/sujet">Sujet</a></li>{/if}
+            <li class="menu-item-container"><a class="menu-item" data-item="1" class:off={activeSubmenuItem && activeSubmenuItem !== '1'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href="/concours/sujet">Sujet E{data.competition.edition}</a></li>{/if}
             {#if data.competition.processBody}
             <li class="menu-item-container"><a class="menu-item" data-item="2" class:off={activeSubmenuItem && activeSubmenuItem !== '2'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href="/concours/deroulement">Déroulement</a></li>{/if}
             {#if data.competition.featuredSites?.length > 0}
@@ -393,7 +393,8 @@ onmouseleave={() => {
       </ul>
       <ul>
         <li><a class="active" href="/fr">→ Français</a></li>
-        <li><a href="/de">→ Deutsch</a></li>
+        <!-- HERE -->
+        <!-- <li><a href="/de">→ Deutsch</a></li> -->
         <li>© Copyright</li>
         <li>Europan {new Date().getFullYear()}</li>
       </ul>
@@ -405,7 +406,8 @@ onmouseleave={() => {
       </ul>
       <ul>
         <li><a class:active={$page.url.pathname == '/contact'} href="/contact">Contact</a></li>
-        <li><a class:active={$page.url.pathname == '/newsletter'} href="/newsletter">Newsletter</a></li>
+        <!-- HERE -->
+        <!-- <li><a class:active={$page.url.pathname == '/newsletter'} href="/newsletter">Newsletter</a></li> -->
         <li> <a href="https://www.instagram.com/europan_europe/" target="_blank" rel="noopener noreferrer">Instagram ↗</a></li>
         <li><button class:active={creditsOpen} onclick={(e) => toggleCredits()}>{#if !creditsOpen}Credits{:else}Fermer{/if}</button></li>
       </ul>
@@ -421,8 +423,10 @@ onmouseleave={() => {
 </footer>
 {#if creditsOpen}
   <div id="credits" class="text-xs" bind:clientHeight={creditsHeight} in:slide={{ delay: 0, duration: 200 }} out:slide={{ delay: 0, duration: 200 }}>
-    <p>Visual Identity and UI: <a class="credits-link" href="https://www.automaticostudio.com/" target="_blank" rel="noopener noreferrer">Automatico Studio ↗</a></p>
+    <p>Identité visuelle et UI: <a class="credits-link" href="https://www.automaticostudio.com/" target="_blank" rel="noopener noreferrer">Automatico Studio ↗</a></p>
     <p class="mt-0">Development: <a class="credits-link" href="https://lucabunino.com/" target="_blank" rel="noopener noreferrer">Luca Bunino ↗</a></p>
+    <p class="mt-0">Référent du projet: <a class="credits-link" href="https://www.studio-af.ch/" target="_blank" rel="noopener noreferrer">Alberto Figuccio ↗</a></p>
+    <p class="mt-0">Rédacteurs: <a class="credits-link" href="https://www.studio-af.ch/" target="_blank" rel="noopener noreferrer">Alberto Figuccio ↗</a> et <a class="credits-link" href="https://csarch.co/" target="_blank" rel="noopener noreferrer">Konrad Scheffer ↗</a></p>
   </div>
 {/if}
 

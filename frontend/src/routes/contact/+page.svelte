@@ -94,7 +94,7 @@ $effect(() => {
         </button>
       </div>
     </form>
-
+    <!-- HERE
     <h3>Newsletter</h3>
     <p class="contact-newsletter-info">{data.contact[0].newsletterMessage}</p>
     <form action="">
@@ -104,7 +104,7 @@ $effect(() => {
           Inscription
         </button>
       </div>
-    </form>
+    </form> -->
   </div>
 </section>
 

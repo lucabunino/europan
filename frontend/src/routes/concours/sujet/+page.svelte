@@ -7,7 +7,7 @@ import PortableTextStyle from '$lib/components/portableTextStyle.svelte';
 
 <article class="content">
   <section class="page-title">
-    <h2 class="text-l">Sujet</h2>
+    <h2 class="text-l">Sujet E{data.competition.edition}</h2>
   </section>
   <section class="body">
     <PortableText
