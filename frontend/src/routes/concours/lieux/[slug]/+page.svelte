@@ -14,15 +14,3 @@ import Project from '$lib/components/project.svelte';
     {/each}
   </section>
 </article>
-
-<style>
-.jury {
-  margin-bottom: calc(var(--gutter)*3)
-}
-.jury h4 {
-  margin-bottom: .5em;
-}
-.jury p {
-  max-width: 700px;
-}
-</style>

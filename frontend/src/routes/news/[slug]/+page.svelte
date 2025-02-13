@@ -93,6 +93,6 @@ let innerWidth = $state()
         <p class={i > 0 ? 'mt-0' : ''}><a href={attachment.url} target="_blank" rel="noopener noreferrer">{attachment.title} ↧</a></p>
       {/each}
     {/if}
-    <p><a href=/news>See more news →</a></p>
+    <p><a href=/news>Voir plus d’actualités →</a></p>
   </section>
 </article>

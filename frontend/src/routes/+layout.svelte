@@ -426,7 +426,7 @@ onmouseleave={() => {
     <p>Identité visuelle et UI: <a class="credits-link" href="https://www.automaticostudio.com/" target="_blank" rel="noopener noreferrer">Automatico Studio ↗</a></p>
     <p class="mt-0">Development: <a class="credits-link" href="https://lucabunino.com/" target="_blank" rel="noopener noreferrer">Luca Bunino ↗</a></p>
     <p class="mt-0">Référent du projet: <a class="credits-link" href="https://www.studio-af.ch/" target="_blank" rel="noopener noreferrer">Alberto Figuccio ↗</a></p>
-    <p class="mt-0">Rédacteurs: <a class="credits-link" href="https://www.studio-af.ch/" target="_blank" rel="noopener noreferrer">Alberto Figuccio ↗</a> et <a class="credits-link" href="https://csarch.co/" target="_blank" rel="noopener noreferrer">Konrad Scheffer ↗</a></p>
+    <p class="mt-0">Rédacteurs: <a class="credits-link" href="https://www.studio-af.ch/" target="_blank" rel="noopener noreferrer">Alberto Figuccio ↗</a>, <a class="credits-link" href="https://urbanites.ch/bureau/" target="_blank" rel="noopener noreferrer">Marine Girault ↗</a> et <a class="credits-link" href="https://csarch.co/" target="_blank" rel="noopener noreferrer">Konrad Scheffer ↗</a></p>
   </div>
 {/if}
 

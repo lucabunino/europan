@@ -44,6 +44,8 @@ import PortableTextStyle from '$lib/components/portableTextStyle.svelte';
         />
       {/if}
     </div>
-    <a class="externalLink" target="_blank" rel="noopener noreferrer" href={project.europanEuropeUrl}>Voir le projet sur Europan Europe ↗</a>
+    {#if project.europanEuropeUrl}
+      <a class="externalLink" target="_blank" rel="noopener noreferrer" href={project.europanEuropeUrl}>Voir le projet sur Europan Europe ↗</a>
+    {/if}
   </div>
 </div>

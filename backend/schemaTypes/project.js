@@ -33,9 +33,9 @@ export default {
       },
     },
     {
-      name: 'site',
+      name: 'competition',
       type: 'reference',
-      to: [{type: 'site'}],
+      to: [{type: 'competition'}],
       options: {
         filter: ({ document }) => ({
           filter: 'language == $language',
@@ -44,9 +44,9 @@ export default {
       },
     },
     {
-      name: 'competition',
+      name: 'site',
       type: 'reference',
-      to: [{type: 'competition'}],
+      to: [{type: 'site'}],
       options: {
         filter: ({ document }) => ({
           filter: 'language == $language',

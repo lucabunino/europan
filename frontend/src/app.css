@@ -135,7 +135,7 @@ ul + p.portableText {
   margin-bottom: 5rem;
 }
 .page-subtitle {
-  margin-top: calc(1em);
+  margin-top: calc(.5em);
 }
 p + .subtitle {
   margin-top: 1em;
