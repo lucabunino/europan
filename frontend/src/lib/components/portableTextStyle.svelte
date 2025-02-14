@@ -1,8 +1,15 @@
 <!-- PortableTextStyle -->
-<script>
-  let { portableText, children } = $props();
-  let { value } = $derived(portableText);
-  let { style, listItem } = $derived(value);
+<script lang="ts">
+  import type {BlockComponentProps} from '@portabletext/svelte'
+
+  interface Props {
+    portableText: BlockComponentProps;
+    children?: import('svelte').Snippet;
+  }
+
+  let { portableText, children }: Props = $props();
+  let {value} = $derived(portableText)
+  let {style, listItem} = $derived(value);
 </script>
 
 {#if style === 'normal' && !listItem}
