@@ -1,7 +1,7 @@
 <script>
 const { data } = $props()
-import Project from '$src/lib/components/Project.svelte';
-import Person from '$lib/components/Person.svelte';
+import Project from "$lib/components/Project.svelte";
+import Person from "$lib/components/Person.svelte";
 </script>
 
 <article class="content">
