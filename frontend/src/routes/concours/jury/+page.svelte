@@ -1,6 +1,6 @@
 <script>
 const { data } = $props()
-import Person from '$lib/components/Person.svelte';
+import Person from '$lib/components/person.svelte';
 </script>
 
 <div class="page-title">

@@ -1,6 +1,6 @@
 <script>
 const { data } = $props()
-import Project from '$lib/components/Project.svelte';
+import Project from '$lib/components/project.svelte';
 </script>
 
 <div class="content projects-grid">

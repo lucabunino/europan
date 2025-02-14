@@ -1,7 +1,7 @@
-<script>
+<!-- <script>
 const { data } = $props()
-import Project from "$lib/components/Project.svelte";
-import Person from "$lib/components/Person.svelte";
+import Project from "$lib/components/project.svelte";
+import Person from "$lib/components/person.svelte";
 </script>
 
 <article class="content">
@@ -14,16 +14,6 @@ import Person from "$lib/components/Person.svelte";
       <Project project={project} result={project.result}/>
     {/each}
   </section>
-
-  <!-- {#if data.singleCompetition[0].jury}
-    <section class="jury">
-        <p class="mt-0">Jury: 
-          {#each data.singleCompetition[0].jury as person, i}
-            {person.name} {person.surname} ({person.country}){#if i+1 < data.singleCompetition[0].jury.length}{@html ', '}{/if}
-          {/each}
-        </p>
-    </section>
-  {/if} -->
 
   {#if data.singleCompetition[0].jury}
     <section class="jury">
@@ -38,7 +28,7 @@ import Person from "$lib/components/Person.svelte";
       </div>
     </section>
   {/if}
-</article>
+</article> -->
 
 <style>
 .jury {
