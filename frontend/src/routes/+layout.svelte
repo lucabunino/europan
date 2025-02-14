@@ -34,7 +34,7 @@ onMount(() => {
   }, 700);
 })
 $effect(() => {
-  console.log(activeMenuItem);
+  $inspect(activeMenuItem);
 })
 
 function isDesktop() {
@@ -48,7 +48,7 @@ function startCloseMenu() {
 }
 
 function closeMenu() {
-  console.log("CLOSED!!");
+  $inspect("CLOSED!!");
   
   activeMenu = false;
   activeMenuItem = false;
@@ -90,7 +90,7 @@ function handleMenuTouch(e) {
   activeSubmenuItem = false
 
   const submenuContainer = e.target.nextElementSibling;
-  console.log(submenuContainer);
+  $inspect(submenuContainer);
   
   if (submenuContainer) {
     const submenu = submenuContainer.querySelector('.submenu');
@@ -98,10 +98,10 @@ function handleMenuTouch(e) {
       const submenuHeight = submenu.offsetHeight;
       mobileMargin = submenuHeight
     } else {
-      console.log('No .submenu found inside the .submenu-container');
+      $inspect('No .submenu found inside the .submenu-container');
     }
   } else {
-    console.log('No .submenu-container found for the clicked element');
+    $inspect('No .submenu-container found for the clicked element');
   }
 }
 function handleMenuLeave(e) {
@@ -127,7 +127,7 @@ function toggleCredits() {
   creditsOpen = !creditsOpen;
   setTimeout(() => {
     const pageHeight = document.body.scrollHeight
-    console.log(creditsHeight);
+    $inspect(creditsHeight);
     
     window.scrollTo({
       top: pageHeight + creditsHeight,
@@ -168,7 +168,7 @@ function toggleCredits() {
 class:on={activeMenu}
 onmouseenter={() => {
   if (innerWidth > 900) {
-    console.log("timerMenuReset");
+    $inspect("timerMenuReset");
     clearTimeout(timer);
   }
 }}
@@ -184,7 +184,7 @@ onmouseleave={() => {
     if (!activeMenu) {
       activeMenu = true;
     }
-    console.log("timerMenuReset");
+    $inspect("timerMenuReset");
     clearTimeout(timer);
     setTimeout(() => {
       if (!activeMenuItem) {
@@ -277,9 +277,9 @@ onmouseleave={() => {
           <ul class="submenu"
           class:on={activeSubmenu && activeMenuItem === '1' || activeSubmenu && activeMenuItemLast === '1'}
           onmouseenter={(e) => {
-            console.log("timerMenuReset");
+            $inspect("timerMenuReset");
             clearTimeout(timer);
-            console.log("timerSubmenuReset");
+            $inspect("timerSubmenuReset");
             clearTimeout(timer2);
           }}
           onmouseleave={(e) => {
@@ -335,9 +335,9 @@ onmouseleave={() => {
             <ul class="submenu"
             class:on={activeSubmenu && activeMenuItem === '3' || activeSubmenu && activeMenuItemLast === '3'}
             onmouseenter={(e) => {
-              console.log("timerMenuReset");
+              $inspect("timerMenuReset");
               clearTimeout(timer);
-              console.log("timerSubmenuReset");
+              $inspect("timerSubmenuReset");
               clearTimeout(timer2);
             }}
             onmouseleave={(e) => {
@@ -392,7 +392,7 @@ onmouseleave={() => {
         <li>Svizzera</li>
       </ul>
       <ul>
-        <li><a class="active" href="/fr">→ Français</a></li>
+        <li><a class="active" href="/">→ Français</a></li>
         <!-- HERE -->
         <!-- <li><a href="/de">→ Deutsch</a></li> -->
         <li>© Copyright</li>
@@ -451,12 +451,16 @@ header.on {
   pointer-events: all;
 }
 .logo {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   height: 4.444rem;
   z-index: 2;
   gap: .5rem;
   cursor: pointer;
   pointer-events: all;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
 }
 .logo>div {
@@ -475,6 +479,8 @@ header.on {
   top: -100%;
   left: 0;
   background-color: var(--blackOpacity);
+  -webkit-transition: var(--transition);
+  -o-transition: var(--transition);
   transition: var(--transition);
 }
 .logo.type>div:first-of-type::after,
@@ -484,6 +490,8 @@ header.on {
 .logo>div svg {
   width: auto;
   height: 100%;
+  -webkit-transition: var(--transition);
+  -o-transition: var(--transition);
   transition: var(--transition);
   vertical-align: middle;
 }
@@ -496,9 +504,12 @@ header.on {
 .logo:hover>div:last-of-type svg {
   background-color: var(--grayOpacity);
   fill: var(--black);
-  transform: rotate3d(0, 0, 1, -1turn)
+  -webkit-transform: rotate3d(0, 0, 1, -1turn);
+          transform: rotate3d(0, 0, 1, -1turn)
 }
 nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   width: -webkit-fill-available;
   padding-top: .7rem;
@@ -510,11 +521,18 @@ nav {
 }
 .menu,
 .submenu {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   gap: .7rem;
   list-style: none;
   padding: 0;
+  width: -webkit-max-content;
+  width: -moz-max-content;
   width: max-content;
   position: relative;
   /* border: solid green; */
@@ -532,31 +550,43 @@ nav {
 }
 .menu-container.off .menu-item,
 .submenu:not(.on) .menu-item {
-  transform: translateX(-101%);
+  -webkit-transform: translateX(-101%);
+      -ms-transform: translateX(-101%);
+          transform: translateX(-101%);
 }
 .menu-item-container {
   overflow: hidden;
+  -webkit-transition: var(--transition);
+  -o-transition: var(--transition);
   transition: var(--transition);
-  transition-delay: .3s;
+  -webkit-transition-delay: .3s;
+       -o-transition-delay: .3s;
+          transition-delay: .3s;
 }
 .menu-item-container.undelayed {
-  transition-delay: 0s;
+  -webkit-transition-delay: 0s;
+       -o-transition-delay: 0s;
+          transition-delay: 0s;
 }
 .menu-item {
   display: inline-block;
   width: auto;
   position: relative;
   background-color: var(--grayOpacity);
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
+  -webkit-transition: var(--transition);
+  -o-transition: var(--transition);
   transition: var(--transition);
   line-height: 1;
   padding: .1em .1em;
 }
-.menu-item-container:nth-child(1) .menu-item {transition-delay: 0.00s;}
-.menu-item-container:nth-child(2) .menu-item {transition-delay: 0.03s;}
-.menu-item-container:nth-child(3) .menu-item {transition-delay: 0.06s;}
-.menu-item-container:nth-child(4) .menu-item {transition-delay: 0.09s;}
-.menu-item-container:nth-child(5) .menu-item {transition-delay: 0.12s;}
+.menu-item-container:nth-child(1) .menu-item {-webkit-transition-delay: 0.00s;-o-transition-delay: 0.00s;transition-delay: 0.00s;}
+.menu-item-container:nth-child(2) .menu-item {-webkit-transition-delay: 0.03s;-o-transition-delay: 0.03s;transition-delay: 0.03s;}
+.menu-item-container:nth-child(3) .menu-item {-webkit-transition-delay: 0.06s;-o-transition-delay: 0.06s;transition-delay: 0.06s;}
+.menu-item-container:nth-child(4) .menu-item {-webkit-transition-delay: 0.09s;-o-transition-delay: 0.09s;transition-delay: 0.09s;}
+.menu-item-container:nth-child(5) .menu-item {-webkit-transition-delay: 0.12s;-o-transition-delay: 0.12s;transition-delay: 0.12s;}
 .menu-item:before {
   content: '';
   display: block;
@@ -566,6 +596,8 @@ nav {
   position: absolute;
   left: 0;
   z-index: 1;
+  -webkit-transition: var(--transition);
+  -o-transition: var(--transition);
   transition: var(--transition);
 }
 .menu-item.off::before {
@@ -577,6 +609,8 @@ nav {
 
 /* Main */
 main {
+  -webkit-transition: var(--transition);
+  -o-transition: var(--transition);
   transition: var(--transition);
   min-height: calc(100vh - (.777rem*4*1.2 + var(--gutter)*6));
   opacity: 1;
@@ -585,9 +619,13 @@ main.loaded {
   opacity: 1;
 }
 main>div {
+  display: -ms-grid;
   display: grid;
+  -ms-grid-columns: 1fr var(--gutter) 1fr var(--gutter) 1fr var(--gutter) 1fr var(--gutter) 1fr var(--gutter) 1fr;
   grid-template-columns: repeat(6, 1fr);
-  column-gap: var(--gutter);
+  -webkit-column-gap: var(--gutter);
+     -moz-column-gap: var(--gutter);
+          column-gap: var(--gutter);
   padding: var(--gutter) var(--gutter);
 }
 @media screen and (max-width: 1200px) {
@@ -635,6 +673,8 @@ main>div {
     display: none !important;
   }
   .mobile-only {
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
     display: flex !important;
   }
 }
@@ -642,29 +682,49 @@ main>div {
 
 /* Footer */
 footer {
+  display: -ms-grid;
   display: grid;
+  -ms-grid-columns: 1fr var(--gutter) 1fr var(--gutter) 1fr var(--gutter) 1fr var(--gutter) 1fr var(--gutter) 1fr;
   grid-template-columns: repeat(6, 1fr);
   padding: calc(var(--gutter)*5) var(--gutter) var(--gutter);
-  column-gap: var(--gutter);
+  -webkit-column-gap: var(--gutter);
+     -moz-column-gap: var(--gutter);
+          column-gap: var(--gutter);
 }
 /* footer>*:nth-child(1) {
   grid-column: 1 / span 2;
 } */
 footer>*:nth-child(1) {
+  -ms-grid-column: 3;
+  -ms-grid-column-span: 4;
   grid-column: 3 / span 4;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  column-gap: var(--gutter);
-  justify-content: space-between;
-  align-items: flex-end;
+  -webkit-column-gap: var(--gutter);
+     -moz-column-gap: var(--gutter);
+          column-gap: var(--gutter);
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
 }
 footer>*:nth-child(1) div {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  column-gap: var(--gutter);
+  -webkit-column-gap: var(--gutter);
+     -moz-column-gap: var(--gutter);
+          column-gap: var(--gutter);
   width: 100%;
 }
 footer ul {
   list-style: none;
   padding: 0;
+  width: -webkit-max-content;
+  width: -moz-max-content;
   width: max-content;
 }
 footer img {
@@ -674,10 +734,14 @@ footer img {
 footer button {
   padding: 0;
   color: var(--black);
+  -webkit-transition: none;
+  -o-transition: none;
   transition: none;
 }
 footer button:hover {
   color: var(--gray);
+  -webkit-transition: none;
+  -o-transition: none;
   transition: none;
 }
 #credits {
@@ -688,6 +752,8 @@ footer button:hover {
 
 @media screen and (max-width: 1200px) {
   footer>*:nth-child(1) {
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 6;
     grid-column: 1 / span 6;
   }
 }
@@ -696,12 +762,15 @@ footer button:hover {
 @media screen and (max-width: 900px) {
   footer div,
   footer p {
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 3;
     grid-column: 1 / 4;
   }
 }
 
 @media screen and (max-width: 600px) {
   section:not(#hero) {
+    -ms-grid-columns: (1fr)[1];
     grid-template-columns: repeat(1, 1fr);
   }
   section:not(#hero)>div {

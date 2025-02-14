@@ -1,7 +1,6 @@
 <script>
-  const { data } = $props()
-  $inspect(data)
-  import { urlFor } from '$lib/utils/image';
+const { data } = $props()
+$inspect(data)
 </script>
 
 <article class="content">

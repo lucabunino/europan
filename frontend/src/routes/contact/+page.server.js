@@ -49,8 +49,8 @@ export const actions = {
       
       const mail = {
         from: EMAIL,
-        // to: "bureau@europan.swiss",
-        to: "hello@lucabunino.com",
+        to: "bureau@europan.swiss",
+        // to: "hello@lucabunino.com",
         subject: `Europan Suisse | Message from ${email}`,
         text: body,
         html: html,

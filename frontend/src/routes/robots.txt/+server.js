@@ -4,7 +4,7 @@ export async function GET() {
 		User-agent: *
 		Disallow: 
 		Disallow: /cgi-bin/
-		Sitemap: https://lucabunino.com/sitemap.xml
+		Sitemap: https://europan.ch/sitemap.xml
 		`.trim(),
 	);
 }

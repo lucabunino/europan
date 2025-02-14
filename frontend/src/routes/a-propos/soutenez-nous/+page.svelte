@@ -2,7 +2,7 @@
 const { data } = $props()
 import { enhance, applyAction } from '$app/forms';
 import { PortableText } from '@portabletext/svelte'
-import PortableTextStyle from '$lib/components/portableTextStyle.svelte';
+import PortableTextStyle from '$lib/components/PortableTextStyle.svelte';
 
 let isSubmitted = $state(false);
 let isSubmitting = $state(false);
@@ -18,7 +18,6 @@ let isEmptyMessage = $state(false);
 
 const handleEnhance = ({ formElement, formData, action, cancel }) => {
   return async ({ result }) => {
-    console.log(result);
     if (result.data.success) {
       isSubmitted = true;
       formElement.reset()
