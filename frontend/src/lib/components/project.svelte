@@ -5,7 +5,7 @@ const {
 } = $props();
 import { urlFor } from '$lib/utils/image';
 import { PortableText } from '@portabletext/svelte'
-import PortableTextStyle from '$lib/components/portableTextStyle.svelte';
+import PortableTextStyle from '$lib/components/PortableTextStyle.svelte';
 </script>
 
 <div class="project">

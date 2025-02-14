@@ -34,7 +34,7 @@ onMount(() => {
   }, 700);
 })
 $effect(() => {
-  $inspect(activeMenuItem);
+  // $inspect(activeMenuItem);
 })
 
 function isDesktop() {
@@ -47,9 +47,7 @@ function startCloseMenu() {
   }, 3000);
 }
 
-function closeMenu() {
-  $inspect("CLOSED!!");
-  
+function closeMenu() {  
   activeMenu = false;
   activeMenuItem = false;
   activeMenuItemLast = false;
@@ -90,18 +88,13 @@ function handleMenuTouch(e) {
   activeSubmenuItem = false
 
   const submenuContainer = e.target.nextElementSibling;
-  $inspect(submenuContainer);
   
   if (submenuContainer) {
     const submenu = submenuContainer.querySelector('.submenu');
     if (submenu) {
       const submenuHeight = submenu.offsetHeight;
       mobileMargin = submenuHeight
-    } else {
-      $inspect('No .submenu found inside the .submenu-container');
     }
-  } else {
-    $inspect('No .submenu-container found for the clicked element');
   }
 }
 function handleMenuLeave(e) {
@@ -127,7 +120,6 @@ function toggleCredits() {
   creditsOpen = !creditsOpen;
   setTimeout(() => {
     const pageHeight = document.body.scrollHeight
-    $inspect(creditsHeight);
     
     window.scrollTo({
       top: pageHeight + creditsHeight,
@@ -168,7 +160,6 @@ function toggleCredits() {
 class:on={activeMenu}
 onmouseenter={() => {
   if (innerWidth > 900) {
-    $inspect("timerMenuReset");
     clearTimeout(timer);
   }
 }}
@@ -179,6 +170,7 @@ onmouseleave={() => {
 }}
 >
   <a class="logo no-hover desktop-only" href="/" data-item="0"
+  aria-label="logo"
   class:type={headerType}
   onmouseenter={(e) => {
     if (!activeMenu) {
@@ -212,7 +204,7 @@ onmouseleave={() => {
       </svg>
     </div>
   </a>
-  <div class="logo no-hover mobile-only"
+  <button class="logo no-hover mobile-only"
   data-item="0"
   class:type={headerType}
   onclick={() => {
@@ -232,7 +224,7 @@ onmouseleave={() => {
         <path d="M49.76 40.15v10.42H18.54V15.53h15.89v10.42H30.9v1.89h11.13v10.42H30.9v1.89h18.86z"/>
       </svg>
     </div>
-  </div>
+  </button>
    
   <nav class="text-l">
     <div class="menu-container" class:off={!activeMenu}>
@@ -264,22 +256,19 @@ onmouseleave={() => {
             }}
           >Concours</a>
 
-          <p class="menu-item mobile-only"
-          href="/concours"
+          <button class="menu-item mobile-only black"
           data-item="1"
           class:off={activeMenuItem && activeMenuItem !== '1'}
           onmouseenter={(e) => handleMenuEnterTouch(e)}
           onclick={(e) => {
             handleMenuTouch(e)
           }}
-          >Concours</p>
+          >Concours</button>
           <div class="submenu-container">
           <ul class="submenu"
           class:on={activeSubmenu && activeMenuItem === '1' || activeSubmenu && activeMenuItemLast === '1'}
           onmouseenter={(e) => {
-            $inspect("timerMenuReset");
             clearTimeout(timer);
-            $inspect("timerSubmenuReset");
             clearTimeout(timer2);
           }}
           onmouseleave={(e) => {
@@ -322,22 +311,19 @@ onmouseleave={() => {
           onclick={(e) => {closeMenu()}}
           >A propos</a>
 
-          <p class="menu-item mobile-only"
-          href="/concours"
+          <button class="menu-item mobile-only black"
           data-item="3"
           class:off={activeMenuItem && activeMenuItem !== '3'}
           onmouseenter={(e) => handleMenuEnterTouch(e)}
           onclick={(e) => {
             handleMenuTouch(e)
           }}
-          >A propos</p>
+          >A propos</button>
           <div class="submenu-container">
             <ul class="submenu"
             class:on={activeSubmenu && activeMenuItem === '3' || activeSubmenu && activeMenuItemLast === '3'}
             onmouseenter={(e) => {
-              $inspect("timerMenuReset");
               clearTimeout(timer);
-              $inspect("timerSubmenuReset");
               clearTimeout(timer2);
             }}
             onmouseleave={(e) => {
@@ -433,6 +419,9 @@ onmouseleave={() => {
 
 
 <style>
+.black {
+  color: var(--black);
+}
 .mobile-only {
   display: none !important;
 }
@@ -769,13 +758,6 @@ footer button:hover {
 }
 
 @media screen and (max-width: 600px) {
-  section:not(#hero) {
-    -ms-grid-columns: (1fr)[1];
-    grid-template-columns: repeat(1, 1fr);
-  }
-  section:not(#hero)>div {
-    grid-column: unset;
-  }
   footer ul {
     width: 25%
   }

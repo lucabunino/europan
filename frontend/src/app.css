@@ -179,6 +179,9 @@ p + .subtitle {
   }
 }
 @media screen and (max-width: 600px) {
+  .page-title {
+    white-space: normal;
+  }
   .text-xl {
     font-size: 50vw;
   }
@@ -287,12 +290,15 @@ swiper-slide img {
 
 /* Contact/SupportUs */
 button {
-  color: #fff;
   background-color: transparent;
   border: none;
+  cursor: pointer;
+  padding: unset;
+}
+button:not(.logo) {
+  color: #fff;
   padding: .7rem 3rem .7rem 1rem;
   text-align: left;
-  cursor: pointer;
   transition: var(--transition);
 }
 .button-container {
@@ -382,6 +388,9 @@ select {
 }
 
 /* News */
+.news + .news {
+  margin-top: 10rem;
+}
 .news-img {
   width: 100%;
   height: 100%;
