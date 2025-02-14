@@ -5,7 +5,7 @@ const {
 
 import { urlFor } from '$lib/utils/image';
 import { PortableText } from '@portabletext/svelte'
-import PortableTextStyle from '$lib/components/PortableTextStyle.svelte';
+import PortableTextStyle from '$lib/components/portableTextStyle.svelte';
 import { formatDate } from "$lib/utils/date";
 import { register } from 'swiper/element/bundle';register();
 
