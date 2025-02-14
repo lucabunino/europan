@@ -1,5 +1,5 @@
 <script>
-  import { urlFor } from '$lib/utils/image'
+  import { urlFor } from '$lib/utils/image';
   const { 
     person = [],
     president = false,

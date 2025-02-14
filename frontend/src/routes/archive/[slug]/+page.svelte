@@ -1,4 +1,4 @@
-<!-- <script>
+<script>
 const { data } = $props()
 import Project from "$lib/components/project.svelte";
 import Person from "$lib/components/person.svelte";
@@ -28,7 +28,7 @@ import Person from "$lib/components/person.svelte";
       </div>
     </section>
   {/if}
-</article> -->
+</article>
 
 <style>
 .jury {
