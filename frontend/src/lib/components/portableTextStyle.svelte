@@ -2,26 +2,30 @@
 <script lang="ts">
   import type {BlockComponentProps} from '@portabletext/svelte'
 
-  export let portableText: BlockComponentProps
+  interface Props {
+    portableText: BlockComponentProps;
+    children?: import('svelte').Snippet;
+  }
 
-  $: ({global, value} = portableText)
-  $: ({style, listItem} = value);  
+  let { portableText, children }: Props = $props();
+  let {value} = $derived(portableText)
+  let {style, listItem} = $derived(value);
 </script>
 
 {#if style === 'normal' && !listItem}
-  <p class="portableText"><slot /></p>
+  <p class="portableText">{@render children()}</p>
 {:else if style=== 'h3'}
-  <h3 class="text-m"><slot /></h3>
+  <h3 class="text-m">{@render children()}</h3>
 {:else if style=== 'h4'}
-  <h4><slot /></h4>
+  <h4>{@render children()}</h4>
 {:else if value.href}
   <a class="link" href={value.href} target={value.blank ? '_blank' : undefined}>
-    <slot />
+    {@render children()}
   </a>
 {:else if listItem == 'bullet'}
-  <li><slot /></li>
+  <li>{@render children()}</li>
 {:else if listItem == 'bumber'}
-  <li><slot /></li>
+  <li>{@render children()}</li>
 {/if}
 
 <style>

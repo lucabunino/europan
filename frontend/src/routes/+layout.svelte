@@ -33,9 +33,6 @@ onMount(() => {
     activeMenu = false
   }, 700);
 })
-$effect(() => {
-  // $inspect(activeMenuItem);
-})
 
 function isDesktop() {
   return window.matchMedia("(hover: hover)").matches;
@@ -176,7 +173,6 @@ onmouseleave={() => {
     if (!activeMenu) {
       activeMenu = true;
     }
-    $inspect("timerMenuReset");
     clearTimeout(timer);
     setTimeout(() => {
       if (!activeMenuItem) {
