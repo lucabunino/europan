@@ -1,4 +1,4 @@
-<!-- <script>
+<script>
 const { data } = $props()
 import { enhance, applyAction } from '$app/forms';
 import { PortableText } from '@portabletext/svelte'
@@ -127,4 +127,4 @@ $effect(() => {
       </form>
     </div>
   </section>
-</article> -->
+</article>

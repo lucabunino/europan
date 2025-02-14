@@ -1,6 +1,5 @@
 <script>
 const { data } = $props()
-
 let innerWidth = $state()
 let innerHeight = $state()
 let activeNews = $state(true)
