@@ -1,8 +1,8 @@
 <script>
 const { data } = $props()
 $inspect(data)
-import Project from '$lib/components/project.svelte';
-import Person from '$lib/components/person.svelte';
+import Project from '$lib/components/Project.svelte';
+import Person from '$lib/components/Person.svelte';
 </script>
 
 <article class="content">

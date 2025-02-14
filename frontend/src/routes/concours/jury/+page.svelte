@@ -1,7 +1,7 @@
 <script>
 const { data } = $props()
 $inspect(data)
-import Person from '$lib/components/person.svelte';
+import Person from '$lib/components/Person.svelte';
 </script>
 
 <div class="page-title">

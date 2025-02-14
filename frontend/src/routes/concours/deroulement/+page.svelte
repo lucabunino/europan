@@ -2,7 +2,7 @@
 const { data } = $props()
 $inspect(data)
 import { PortableText } from '@portabletext/svelte'
-import PortableTextStyle from '$lib/components/portableTextStyle.svelte';
+import PortableTextStyle from '$lib/components/PortableTextStyle.svelte';
 </script>
 
 <article class="content">
