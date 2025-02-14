@@ -1,6 +1,5 @@
 <script>
 const { data } = $props()
-$inspect(data)
 
 let innerWidth = $state()
 let innerHeight = $state()

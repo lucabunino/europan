@@ -5,7 +5,6 @@ import { page } from '$app/stores';
 import { onMount } from "svelte";
 import { fade, slide } from 'svelte/transition'
 const { data, children } = $props()
-$inspect(data)
 
 // Variables
 let headerType = $state(true)
@@ -201,6 +200,7 @@ onmouseleave={() => {
     </div>
   </a>
   <button class="logo no-hover mobile-only"
+  aria-label="logo"
   data-item="0"
   class:type={headerType}
   onclick={() => {
@@ -635,15 +635,6 @@ main>div {
   .menu-item {
     cursor: pointer;
   }
-  p.menu-item:hover::before {
-    width: 0;
-  }
-  /* .menu-container {
-    pointer-events: none;
-  }
-  .menu-container * {
-    pointer-events: all;
-  } */
   .menu-item-container {
     width: calc(100vw - var(--gutter)*2);
   }
@@ -712,10 +703,6 @@ footer ul {
   width: -moz-max-content;
   width: max-content;
 }
-footer img {
-  height: 2.2rem;
-  width: auto;
-}
 footer button {
   padding: 0;
   color: var(--black);
@@ -745,8 +732,7 @@ footer button:hover {
 
 
 @media screen and (max-width: 900px) {
-  footer div,
-  footer p {
+  footer div {
     -ms-grid-column: 1;
     -ms-grid-column-span: 3;
     grid-column: 1 / 4;

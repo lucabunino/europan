@@ -1,7 +1,7 @@
-<script>
+<!-- <script>
 const { data } = $props()
 import { PortableText } from '@portabletext/svelte'
-import PortableTextStyle from '$lib/components/PortableTextStyle.svelte';
+import PortableTextStyle from '$lib/components/PortableTextStyle.svelte'
 </script>
 
 <article class="content">
@@ -24,4 +24,4 @@ import PortableTextStyle from '$lib/components/PortableTextStyle.svelte';
     }}
     />
   </div>
-</article>
+</article> -->

@@ -1,6 +1,5 @@
 <script>
 const { data } = $props()
-$inspect(data)
 import Project from '$lib/components/Project.svelte';
 </script>
 

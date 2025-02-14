@@ -1,6 +1,5 @@
 <script>
 const { data } = $props()
-$inspect(data)
 </script>
 
 <article class="content">
@@ -28,8 +27,6 @@ $inspect(data)
 .logo {
   height: 6rem;
   max-width: 40%;
-  /* max-width: 50%; */
-  /* aspect-ratio: 1; */
   margin-bottom: 1rem;
   display: flex;
   align-items: center;
