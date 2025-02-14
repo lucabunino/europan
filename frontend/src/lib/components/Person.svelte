@@ -27,7 +27,7 @@
 </div>
 
 <style>
-.jury p {
+.juror p {
   max-width: 700px;
 }
 </style>
