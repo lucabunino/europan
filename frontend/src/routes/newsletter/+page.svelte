@@ -1,4 +1,4 @@
-<!-- <script>
+<script>
 const { data } = $props()
 $inspect(data)
 </script>
@@ -46,4 +46,4 @@ h3, form {
     width: auto;
   }
 }
-</style> -->
+</style>
