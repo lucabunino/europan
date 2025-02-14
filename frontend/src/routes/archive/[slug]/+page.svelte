@@ -1,6 +1,6 @@
 <script>
 const { data } = $props()
-import Project from '$lib/components/Project.svelte';
+import Project from '$src/lib/components/Project.svelte';
 import Person from '$lib/components/Person.svelte';
 </script>
 
