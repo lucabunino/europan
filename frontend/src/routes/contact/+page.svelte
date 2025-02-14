@@ -108,13 +108,13 @@ $effect(() => {
 </section>
 
 <style>
-h3,
+/* h3,
 form:last-of-type {
   margin-top: 1em;
 }
 .contact-newsletter-info {
   width: calc(50% - var(--gutter)/2);
-}
+} */
 .contact-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);

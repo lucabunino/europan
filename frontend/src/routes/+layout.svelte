@@ -374,7 +374,7 @@ onmouseleave={() => {
         <li>Svizzera</li>
       </ul>
       <ul>
-        <li><a class="active" href="/">→ Français</a></li>
+        <li><a class="active" href="#">→ Français</a></li>
         <!-- HERE -->
         <!-- <li><a href="/de">→ Deutsch</a></li> -->
         <li>© Copyright</li>

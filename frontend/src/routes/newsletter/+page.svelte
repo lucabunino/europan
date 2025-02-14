@@ -21,8 +21,7 @@ $inspect(data)
 </section>
 
 <style>
-h3,
-form:last-of-type {
+h3, form {
   margin-top: 1em;
 }
 .newsletter-newsletter-info {
