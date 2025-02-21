@@ -11,8 +11,8 @@ import { i18n } from '$lib/i18n'
 import { availableLanguageTags, languageTag } from "$lib/paraglide/runtime.js";
 import * as m from "$lib/paraglide/messages"
 
-import Footer from '$lib/components/footer.svelte';
-import Header from '$lib/components/header.svelte';
+import Footer from '$lib/components/Footer.svelte';
+import Header from '$lib/components/Header.svelte';
 
 // Variables
 let isLoaded = $state(false);
