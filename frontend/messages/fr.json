@@ -1,0 +1,28 @@
+{
+    "$schema": "https://inlang.com/schema/inlang-message-format",
+    "language": "Français",
+
+    "homepage": "Homepage",
+
+    "about": "A propos",
+    "partners": "Partenaires",
+    "supportUs": "Soutenez-nous",
+    "team": "Equipe",
+    "whatIsEuropan": "Qu’est-ce qu’Europan ?",
+
+    "archive": "Archive",
+    "contact": "Contact",
+
+    "competitions": "Concours",
+    "jury": "Jury",
+    "process": "Deroulement",
+    "results": "Resultats",
+    "sites": "Lieux",
+    "topic": "Sujet",
+
+    "news": "News",
+    "newsletter": "Newsletter",
+
+    "credits" : "Credits",
+    "close" : "Fermer"
+}

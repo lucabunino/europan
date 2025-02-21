@@ -120,9 +120,9 @@ export async function getJury() {
 }
 
 // Last competition
-export async function getLastCompetition() {
+export async function getLastCompetition(lang) {
 	return await client.fetch(`
-		*[_type == "competition" && language == "fr" && !(_id in path('drafts.**'))] | order(edition desc)[0] {
+		*[_type == "competition" && language == $lang && !(_id in path('drafts.**'))] | order(edition desc)[0] {
 			...,
 			juryPresident->{...,},
 			jury[]->,
@@ -137,7 +137,7 @@ export async function getLastCompetition() {
 				site->{...}
 			} | order(site.title asc, result)
 		}
-	`);
+	`, { lang });
 }
 
 // Archive

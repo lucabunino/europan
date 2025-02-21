@@ -8,18 +8,20 @@
 		"preview": "vite preview"
 	},
 	"devDependencies": {
-		"@portabletext/svelte": "^2.1.11",
+		"@portabletext/svelte": "^3.0.0",
 		"@sveltejs/adapter-auto": "^3.0.0",
 		"@sveltejs/adapter-vercel": "^5.5.3",
 		"@sveltejs/kit": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^4.0.0",
 		"svelte": "^5.0.0",
-		"vite": "^5.0.3"
+		"vite": "^5.0.3",
+		"@inlang/paraglide-js": "1.11.8"
 	},
 	"dependencies": {
 		"@sanity/client": "^6.24.3",
 		"@sanity/image-url": "^1.1.0",
 		"nodemailer": "^6.9.16",
-		"swiper": "^11.1.15"
+		"swiper": "^11.1.15",
+		"@inlang/paraglide-sveltekit": "0.15.5"
 	}
 }
