@@ -8,25 +8,25 @@ if (!PUBLIC_SANITY_PROJECT_ID || !PUBLIC_SANITY_DATASET) {
 export const client = createClient({
 	projectId: PUBLIC_SANITY_PROJECT_ID,
 	dataset: PUBLIC_SANITY_DATASET,
-	useCdn: false, // `false` if you want to ensure fresh data
+	useCdn: true, // `false` if you want to ensure fresh data
 	apiVersion: '2025-01-15', // date of setup
 });
 
 
 
 // Newses
-export async function getNewses() {
+export async function getNewses(lang) {
 	return await client.fetch(`
-		*[_type == "news" && language == "fr" && !(_id in path('drafts.**'))] | order(date desc) {
+		*[_type == "news" && language == $lang && !(_id in path('drafts.**'))] | order(date desc) {
 			...,
 		}
-	`);
+	`, { lang });
 }
 
 // Featured Newses
-export async function getFeaturedNewses() {
+export async function getFeaturedNewses(lang) {
 	return await client.fetch(`
-		*[_type == "featuredNews" && language == "fr" && !(_id in path('drafts.**'))] | order(date desc) {
+		*[_type == "featuredNews" && language == $lang && !(_id in path('drafts.**'))] | order(date desc) {
 			...,
 			featuredNews[]->{
 				...,
@@ -36,87 +36,92 @@ export async function getFeaturedNewses() {
 				},
 			}
 		}
-	`);
+	`, { lang });
 }
 
 // News
-export async function getNews(slug) {
+export async function getNews(slug, lang) {
 	return await client.fetch(`
-		*[_type == "news" && language == "fr" && slug.current == $slug] {
+		*[_type == "news" && language == $lang && slug.current == $slug] {
 			...,
 			attachments[] {
 				"title": attachmentTitle,
 				"url": attachmentFile.asset->url
 			},
+			"_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{
+				title,
+				slug,
+				language
+			}
 		}
-	`, { slug });
+	`, { slug, lang });
 }
 
 // Team
-export async function getTeam() {
+export async function getTeam(lang) {
 	return await client.fetch(`
-		*[_type == "team" && language == "fr" && !(_id in path('drafts.**'))] {
+		*[_type == "team" && language == $lang && !(_id in path('drafts.**'))] {
 			title,
 			team[]->{...}
 		}
-	`);
+	`, { lang });
 }
 
 // Partners
-export async function getPartners() {
+export async function getPartners(lang) {
 	return await client.fetch(`
-		*[_type == "partner" && language == "fr" && !(_id in path('drafts.**'))] {
+		*[_type == "partner" && language == $lang && !(_id in path('drafts.**'))] | order(title asc) {
 			...,
 			"logoUrl": logo.asset->url
 		}
-	`);
+	`, { lang });
 }
 
 // Support Us
-export async function getSupportUs() {
+export async function getSupportUs(lang) {
 	return await client.fetch(`
-		*[_type == "supportUs" && language == "fr" && !(_id in path('drafts.**'))] {
+		*[_type == "supportUs" && language == $lang && !(_id in path('drafts.**'))][0] {
 			...,
 		}
-	`);
+	`, { lang });
 }
 
 // Contact
-export async function getContact() {
+export async function getContact(lang) {
 	return await client.fetch(`
-		*[_type == "contact" && language == "fr" && !(_id in path('drafts.**'))] {
+		*[_type == "contact" && language == $lang && !(_id in path('drafts.**'))][0] {
 			...,
 		}
-	`);
+	`, { lang });
 }
 
 // What is Europan?
-export async function getWhatIsEuropan() {
+export async function getWhatIsEuropan(lang) {
 	return await client.fetch(`
-		*[_type == "whatIsEuropan" && language == "fr" && !(_id in path('drafts.**'))] {
+		*[_type == "whatIsEuropan" && language == $lang && !(_id in path('drafts.**'))][0] {
 			...,
 		}
-	`);
+	`, { lang });
 }
 
 // Topic
-export async function getTopic() {
+export async function getTopic(lang) {
 	return await client.fetch(`
-    	*[_type == "competition" && language == "fr"] | order(edition desc)[0] {
+			*[_type == "competition" && language == $lang] | order(edition desc)[0] {
 				...,
 			}
-    }
-	`);
+	`, { lang });
 }
 
+
 // Jury
-export async function getJury() {
+export async function getJury(lang) {
 	return await client.fetch(`
-    *[_type == "competition" && language == "fr"] | order(edition desc)[0] {
+    *[_type == "competition" && language == $lang] | order(edition desc)[0] {
 			juryPresident {...},
 			jury[]->{...}
     }
-	`);
+	`, { lang });
 }
 
 // Last competition
@@ -141,9 +146,9 @@ export async function getLastCompetition(lang) {
 }
 
 // Archive
-export async function getArchive() {
+export async function getArchive(lang) {
 	return await client.fetch(`
-    *[_type == "competition" && language == "fr"] | order(edition desc)[1..-1] {
+    *[_type == "competition" && language == $lang] | order(edition desc)[1..-1] {
 			title,
 			subtitle,
 			slug,
@@ -155,31 +160,36 @@ export async function getArchive() {
 			} | order(title asc),
 			edition
     }
-	`);
+	`, { lang });
 }
 
 // Competition
-export async function getCompetition(slug) {
+export async function getCompetition(slug, lang) {
 	return await client.fetch(`
-    *[_type == "competition" && language == "fr" && slug.current == $slug] {
+    *[_type == "competition" && language == $lang && slug.current == $slug] {
 			...,
 			juryPresident->{...,},
 			jury[]->,
 			featuredSites[]->{...} | order(title asc),
+			"_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{
+				title,
+				slug,
+				language
+			},
 			"featuredProjects": *[_type == "project" && references(^._id)] {
 				...,
 				competition->{...},
 				team[]->{...},
 				site->{...}
-			} | order(site.title asc, result)
+			} | order(site.title asc, result),
     }
-	`, { slug });
+	`, { slug, lang });
 }
 
 // Competition
-export async function getSite(slug) {
+export async function getSite(slug, lang) {
   return await client.fetch(`
-    *[_type == "site" && language == "fr" && slug.current == $slug && !(_id in path('drafts.**'))][0] {
+    *[_type == "site" && language == $lang && slug.current == $slug && !(_id in path('drafts.**'))][0] {
 			title,
       "referencingProjects": *[_type == "project" && references(^._id) && !(_id in path('drafts.**'))] {
         ...,
@@ -188,34 +198,34 @@ export async function getSite(slug) {
         site->{title, slug}
       } | order(competition.edition desc)
     }
-  `, { slug });
+  `, { slug, lang });
 }
 
 // SEO
-export async function getSEO() {
+export async function getSEO(lang) {
 	return await client.fetch(`
-		*[_type == "seo" && !(_id in path('drafts.**'))] {
-			SEOTitle,
-			SEODescription,
-			SEOImage
-		}
-	`);
+			*[_type == "seo" && language == $lang && !(_id in path('drafts.**'))][0] {
+					SEOTitle,
+					SEODescription,
+					SEOImage
+			}
+	`, { lang });
 }
 
 // Cookies
-export async function getCookies() {
+export async function getCookies(lang) {
 	return await client.fetch(`
-		*[_type == "policy" && kind =='cookies'] {
+		*[_type == "policy" && kind =='cookies' && language == $lang][0] {
 			...,
 		}[0...1]
-	`
-)};
+	`, { lang });
+}
 
 // Privacy
-export async function getPrivacy() {
+export async function getPrivacy(lang) {
 	return await client.fetch(`
-		*[_type == "policy" && kind =='privacy'] {
+		*[_type == "policy" && kind =='privacy' && language == $lang][0] {
 			...,
 		}[0...1]
-	`
-)};
+	`, { lang });
+}

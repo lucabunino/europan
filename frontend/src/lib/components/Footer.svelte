@@ -1,15 +1,42 @@
 <script>
+let {data} = $props()
+
 // Imports
-import { page } from '$app/stores';
+import { fade, slide } from "svelte/transition"
 
 // Multilanguage
 import { i18n } from '$lib/i18n'
 import { availableLanguageTags, languageTag } from "$lib/paraglide/runtime.js";
 import * as m from "$lib/paraglide/messages"
 
+// Stores
+import { getTranslations } from "$lib/stores/translations.svelte.js";
+let translations = getTranslations()
+
+let alternativeHref = $state()
+if (translations.translations) {
+  if (languageTag() === "fr") {
+    alternativeHref = translations.translations.find(t => t.language === "de")?.slug.current
+  }
+  if (languageTag() === "de") {
+    alternativeHref = translations.translations.find(t => t.language === "fr")?.slug.current
+  }
+}
+
 // Variables
 let creditsOpen = $state(false);
 let creditsHeight = $state();
+function toggleCredits() {
+  creditsOpen = !creditsOpen;
+  setTimeout(() => {
+    const pageHeight = document.body.scrollHeight
+    
+    window.scrollTo({
+      top: pageHeight + creditsHeight,
+      behavior: "smooth" // Smooth scrolling effect
+    });
+  }, 200);
+}
 </script>
 
 <footer class="text-xs">
@@ -24,46 +51,50 @@ let creditsHeight = $state();
       <ul>
         {#each availableLanguageTags as lang}
           <li class="switch">
-            <a
-            class={languageTag()}
-            href={i18n.route($page.url.pathname)}
-            hreflang={lang}
-            aria-current={lang === languageTag() ? "page" : undefined}
-            >→ {lang === "fr" ? "Français" : ""}{lang === "de" ? "Deutsch" : ""}</a>
+            {#if data.pathname.includes(m.newsSlug()) || data.pathname.includes(m.archiveSlug())}
+              <a
+              data-sveltekit-reload
+              class={languageTag() === lang ? "active" : ""}
+              href={lang !== languageTag() && alternativeHref ? alternativeHref : i18n.route(data.pathname)}
+              hreflang={lang}
+              aria-current={lang === languageTag() ? "page" : undefined}
+              >→ {lang === "fr" ? "Français" : ""}{lang === "de" ? "Deutsch" : ""}</a>
+            {:else}
+              <a
+              data-sveltekit-reload
+              class={languageTag() === lang ? "active" : ""}
+              href={i18n.route(data.pathname)}
+              hreflang={lang}
+              aria-current={lang === languageTag() ? "page" : undefined}
+              >→ {lang === "fr" ? "Français" : ""}{lang === "de" ? "Deutsch" : ""}</a>
+            {/if}
           </li>
         {/each}
         <li>© Copyright</li>
         <li>Europan {new Date().getFullYear()}</li>
       </ul>
       <ul>
-        <li><a class:active={$page.url.pathname == '/competitions' || $page.url.pathname.includes('/competitions/')} href="/competitions">{m.competitions()}</a></li>
-        <li><a class:active={$page.url.pathname == '/archive' || $page.url.pathname.includes('/archive/')} href="/archive">{m.archive()}</a></li>
-        <li><a class:active={$page.url.pathname == '/about' || $page.url.pathname.includes('/about/')} href="/about">{m.about()}</a></li>
-        <li><a class:active={$page.url.pathname == '/news' || $page.url.pathname.includes('/news/')} href="/news">{m.news()}</a></li>
+        <li><a class:active={data.pathname == m.competitionsSlug() || data.pathname.includes(m.competitionsSlug())} href="/competitions">{m.competitions()}</a></li>
+        <li><a class:active={data.pathname == m.archiveSlug() || data.pathname.includes(m.archiveSlug())} href="/archive">{m.archive()}</a></li>
+        <li><a class:active={data.pathname == m.aboutSlug() || data.pathname.includes(m.aboutSlug())} href="/about">{m.about()}</a></li>
+        <li><a class:active={data.pathname == m.newsSlug() || data.pathname.includes(m.newsSlug())} href="/news">{m.news()}</a></li>
       </ul>
       <ul>
-        <li><a class:active={$page.url.pathname == '/contact'} href="/contact">{m.contact()}</a></li>
+        <li><a class:active={data.pathname == m.contactSlug()} href="/contact">{m.contact()}</a></li>
         <!-- HERE -->
-        <!-- <li><a class:active={$page.url.pathname == '/newsletter'} href="/newsletter">Newsletter</a></li> -->
+        <!-- <li><a class:active={data.pathname == '/newsletter'} href="/newsletter">Newsletter</a></li> -->
         <li> <a href="https://www.instagram.com/europan_europe/" target="_blank" rel="noopener noreferrer">Instagram ↗</a></li>
         <li><button class:active={creditsOpen} onclick={(e) => toggleCredits()}>{#if !creditsOpen}{m.credits()}{:else}{m.close()}{/if}</button></li>
       </ul>
     </div>
-    <!-- <div>
-      <a class="no-hover" target="_blank" href="https://www.sia.ch/"><img src="/logo/sia.svg" alt="sia logo"></a>
-      <a class="no-hover" target="_blank" href="https://www.bsla.ch/"><img src="/logo/fsap.svg" alt="bsla logo"></a>
-      <a class="no-hover" target="_blank" href="https://gvb.ch/"><img src="/logo/gvb.svg" alt="gvb logo"></a>
-      <a class="no-hover" target="_blank" href="https://www.bsa-fas.ch/"><img src="/logo/bsafas.svg" alt="bsafas logo"></a>
-      <a class="no-hover" target="_blank" href="https://www.geneve.ch/"><img src="/logo/geneve.svg" alt="geneve logo"></a>
-    </div> -->
   </div>
 </footer>
 {#if creditsOpen}
   <div id="credits" class="text-xs" bind:clientHeight={creditsHeight} in:slide={{ delay: 0, duration: 200 }} out:slide={{ delay: 0, duration: 200 }}>
-    <p>Identité visuelle et UI: <a class="credits-link" href="https://www.automaticostudio.com/" target="_blank" rel="noopener noreferrer">Automatico Studio ↗</a></p>
-    <p class="mt-0">Development: <a class="credits-link" href="https://lucabunino.com/" target="_blank" rel="noopener noreferrer">Luca Bunino ↗</a></p>
-    <p class="mt-0">Référent du projet: <a class="credits-link" href="https://www.studio-af.ch/" target="_blank" rel="noopener noreferrer">Alberto Figuccio ↗</a></p>
-    <p class="mt-0">Rédacteurs: <a class="credits-link" href="https://www.studio-af.ch/" target="_blank" rel="noopener noreferrer">Alberto Figuccio ↗</a>, <a class="credits-link" href="https://urbanites.ch/bureau/" target="_blank" rel="noopener noreferrer">Marine Girault ↗</a> et <a class="credits-link" href="https://csarch.co/" target="_blank" rel="noopener noreferrer">Konrad Scheffer ↗</a></p>
+    <p>{m.visualIdentity()}: <a class="credits-link" href="https://www.automaticostudio.com/" target="_blank" rel="noopener noreferrer">Automatico Studio ↗</a></p>
+    <p class="mt-0">{m.development()}: <a class="credits-link" href="https://lucabunino.com/" target="_blank" rel="noopener noreferrer">Luca Bunino ↗</a></p>
+    <p class="mt-0">{m.projectLeader()}: <a class="credits-link" href="https://www.studio-af.ch/" target="_blank" rel="noopener noreferrer">Alberto Figuccio ↗</a></p>
+    <p class="mt-0">{m.editors()}: <a class="credits-link" href="https://www.studio-af.ch/" target="_blank" rel="noopener noreferrer">Alberto Figuccio ↗</a>, <a class="credits-link" href="https://urbanites.ch/bureau/" target="_blank" rel="noopener noreferrer">Marine Girault ↗</a> et <a class="credits-link" href="https://csarch.co/" target="_blank" rel="noopener noreferrer">Konrad Scheffer ↗</a></p>
   </div>
 {/if}
 

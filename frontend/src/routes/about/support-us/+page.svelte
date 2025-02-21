@@ -4,6 +4,9 @@ import { enhance, applyAction } from '$app/forms';
 import { PortableText } from '@portabletext/svelte'
 import PortableTextStyle from '$lib/components/PortableTextStyle.svelte';
 
+// Multilanguage
+import * as m from "$lib/paraglide/messages"
+
 let isSubmitted = $state(false);
 let isSubmitting = $state(false);
 let isErrorous = $state(false);
@@ -70,24 +73,26 @@ $effect(() => {
   
 <article class="content">
   <section class="page-title">
-    <h2 class="text-l">{data.supportUs[0].title}</h2>
+    <h2 class="text-l">{data.supportUs.title}</h2>
   </section>
   <section class="supportUs-grid text-xs">
     <div>
-      <PortableText
-      value={data.supportUs[0].body}
-      components={{
-        block: {
-          normal: PortableTextStyle,
-          h3: PortableTextStyle,
-          h4: PortableTextStyle,
-        },
-        listItem: PortableTextStyle,
-        marks: {
-          link: PortableTextStyle,
-        },
-      }}
-      />
+      {#if data.supportUs.body}
+        <PortableText
+        value={data.supportUs.body}
+        components={{
+          block: {
+            normal: PortableTextStyle,
+            h3: PortableTextStyle,
+            h4: PortableTextStyle,
+          },
+          listItem: PortableTextStyle,
+          marks: {
+            link: PortableTextStyle,
+          },
+        }}
+        />
+      {/if}
     </div>
     <div>
       <form
@@ -96,31 +101,31 @@ $effect(() => {
       method="POST"
       use:enhance={handleEnhance}
       >
-        <input type="text" id="name" name="name" placeholder="Nom et prénom" class:empty={isEmptyName} onclick={() => isEmptyName = false}>
-        <input type="text" id="company" name="company" placeholder="Société" class:empty={isEmptyCompany} onclick={() => isEmptyCompany = false}>
-        <input type="text" id="adress" name="adress" placeholder="Adresse" class:empty={isEmptyAdress} onclick={() => isEmptyAdress = false}>
-        <input type="email" id="email" name="email" placeholder="E-mail" class:empty={isEmptyEmail} onclick={() => isEmptyEmail = false}>
-        <input type="tel" id="phone" name="phone" placeholder="Phone" class:empty={isEmptyPhone} onclick={() => isEmptyPhone = false}>
+        <input type="text" id="name" name="name" placeholder={m.nameAndSurname()} class:empty={isEmptyName} onclick={() => isEmptyName = false}>
+        <input type="text" id="company" name="company" placeholder={m.company()} class:empty={isEmptyCompany} onclick={() => isEmptyCompany = false}>
+        <input type="text" id="adress" name="adress" placeholder={m.adress()} class:empty={isEmptyAdress} onclick={() => isEmptyAdress = false}>
+        <input type="email" id="email" name="email" placeholder={m.email()} class:empty={isEmptyEmail} onclick={() => isEmptyEmail = false}>
+        <input type="tel" id="phone" name="phone" placeholder={m.phone()} class:empty={isEmptyPhone} onclick={() => isEmptyPhone = false}>
         <select id="membership" name="membership" class:empty={isEmptyMembership} onclick={() => isEmptyMembership = false}>
-          <option value="" disabled selected>Type de membre</option>
-          <option value="partner_or_sponsor">Membre partenaire ou sponsor : >CHF 500.-</option>
-          <option value="collective_member">Membre collectif / personne morale-entreprise : CHF 500.-</option>
-          <option value="individual_member">Membre individuel / personne physique : CHF 100.-</option>
-          <option value="student_member">Membre étudiant (joindre une attestation) : CHF 50.-</option>
+          <option value="" disabled selected>{m.memberKind()}</option>
+          <option value="partner_or_sponsor">{m.memberPartner()}</option>
+          <option value="collective_member">{m.memberCollective()}</option>
+          <option value="individual_member">{m.memberIndividual()}</option>
+          <option value="student_member">{m.memberStudent()}</option>
         </select>
-        <textarea id="message" name="message" rows="5" placeholder="Message" class:empty={isEmptyMessage} onclick={() => isEmptyMessage = false}></textarea>
+        <textarea id="message" name="message" rows="5" placeholder={m.message()} class:empty={isEmptyMessage} onclick={() => isEmptyMessage = false}></textarea>
         <div class="button-container">
           <button type="submit" onclick={() => isSubmitting = true} style="{isErrorous ? 'widht:100%' : 'width:9rem'}{isEmpty ? 'widht:100%' : ''}">
             {#if isSubmitted}
-              Envoyé
+              {m.sent()}
             {:else if isSubmitting}
-              En cours
+              {m.sending()}
             {:else if isErrorous}
-              Erreur lors de l'envoi. Veuillez réessayer.
+              {m.sendError()}
             {:else if isEmpty}
-              Champs vides
+              {m.emptyFields()}
             {:else}
-              Envoyer
+              {m.send()}
             {/if}
           </button>
         </div>

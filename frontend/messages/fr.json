@@ -9,20 +9,61 @@
     "supportUs": "Soutenez-nous",
     "team": "Equipe",
     "whatIsEuropan": "Qu’est-ce qu’Europan ?",
-
     "archive": "Archive",
     "contact": "Contact",
-
     "competitions": "Concours",
     "jury": "Jury",
     "process": "Deroulement",
     "results": "Resultats",
     "sites": "Lieux",
     "topic": "Sujet",
-
     "news": "News",
     "newsletter": "Newsletter",
 
-    "credits" : "Credits",
-    "close" : "Fermer"
+    "aboutSlug": "a-propos",
+    "partnersSlug": "partenaires",
+    "supportUsSlug": "soutenez-nous",
+    "teamSlug": "equipe",
+    "whatIsEuropanSlug": "qu-est-ce-qu-europan",
+    "archiveSlug": "archive",
+    "contactSlug": "contact",
+    "competitionsSlug": "concours",
+    "jurySlug": "jury",
+    "processSlug": "deroulement",
+    "resultsSlug": "resultats",
+    "sitesSlug": "lieux",
+    "topicSlug": "sujet",
+    "newsSlug": "news",
+    "newsletterSlug": "newsletter",
+
+    "credits": "Credits",
+    "close": "Fermer",
+
+    "visualIdentity": "Identité visuelle et UI",
+    "development": "Development",
+    "projectLeader": "Référent du projet",
+    "editors": "Rédacteurs",
+
+    "message": "Message",
+    "nameAndSurname": "Nom et prénom",
+    "email": "E-mail",
+    "company": "Société",
+    "phone": "Phone",
+    "memberKind": "Type de membre",
+    "adress": "Adresse",
+
+    "send": "Envoyer",
+    "sent": "Envoyé",
+    "sending": "En cours",
+    "sendError": "Erreur lors de l'envoi. Veuillez réessayer.",
+    "emptyFields": "Champs vides",
+    
+    "seeMoreNews": "Voir plus d’actualités",
+
+    "memberPartner": "Membre partenaire ou sponsor : >CHF 500.-",
+    "memberCollective": "Membre collectif / personne morale-entreprise : CHF 500.-",
+    "memberIndividual": "Membre individuel / personne physique : CHF 100.-",
+    "memberStudent": "Membre étudiant (joindre une attestation) : CHF 50.-",
+
+    "noTranslations": "Il n'y a pas de traduction pour ce contenu."
 }

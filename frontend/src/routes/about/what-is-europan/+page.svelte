@@ -6,11 +6,11 @@ import PortableTextStyle from '$lib/components/PortableTextStyle.svelte'
 
 <article class="content">
   <section class="page-title">
-    <h2 class="text-l page-title">{data.whatIsEuropan[0].title}</h2>
+    <h2 class="text-l page-title">{data.whatIsEuropan.title}</h2>
   </section>
   <div class="body">
     <PortableText
-    value={data.whatIsEuropan[0].body}
+    value={data.whatIsEuropan.body}
     components={{
       block: {
         normal: PortableTextStyle,

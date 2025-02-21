@@ -1,5 +1,7 @@
 <script>
 import { enhance, applyAction } from '$app/forms';
+import * as m from "$lib/paraglide/messages"
+
 const { data } = $props()
 $inspect(data)
 
@@ -55,9 +57,9 @@ $effect(() => {
   <h2 class="text-l">Contact</h2>
 </section>
 <section class="content contact-grid text-xs">
-  <p>{data.contact[0].description}</p>
+  <p>{data.contact.description}</p>
   <div>
-    {#each data.contact[0].adresses as adress}
+    {#each data.contact.adresses as adress}
       <p>{adress.adressName}</p>
       <p class="mt-0">{adress.adressLine1}</p>
       <p class="mt-0">{adress.adressLine2}</p>
@@ -74,9 +76,9 @@ $effect(() => {
     method="POST"
     use:enhance={handleEnhance}
     >
-      <textarea id="message" name="message" rows="5" placeholder="Message" class:empty={isEmptyMessage} onclick={() => isEmptyMessage = false}></textarea>
-      <input type="text" id="name" name="name" placeholder="Nom et prénom" class:empty={isEmptyName} onclick={() => isEmptyName = false}>
-      <input type="email" id="email" name="email" placeholder="E-mail" class:empty={isEmptyEmail} onclick={() => isEmptyEmail = false}>
+      <textarea id="message" name="message" rows="5" placeholder={m.message()} class:empty={isEmptyMessage} onclick={() => isEmptyMessage = false}></textarea>
+      <input type="text" id="name" name="name" placeholder={m.nameAndSurname()} class:empty={isEmptyName} onclick={() => isEmptyName = false}>
+      <input type="email" id="email" name="email" placeholder={m.email()} class:empty={isEmptyEmail} onclick={() => isEmptyEmail = false}>
       <div class="button-container">
         <button type="submit" onclick={() => isSubmitting = true} style="{isErrorous ? 'widht:100%' : 'width:9rem'}{isEmpty ? 'widht:100%' : ''}">
           {#if isSubmitted}

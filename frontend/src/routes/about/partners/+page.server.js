@@ -1,8 +1,9 @@
 import { getPartners } from '$lib/utils/sanity';
 import { error } from '@sveltejs/kit';
 
-export async function load({ url }) {
-	const partners = await getPartners();
+export async function load({ depends, locals }) {
+	depends("paraglide:lang")
+	const partners = await getPartners(locals.paraglide.lang);
 	
 	if (partners) {
 		return {

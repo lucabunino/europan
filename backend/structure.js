@@ -40,10 +40,8 @@ export const myStructure = (S, context) => {
   ];
   const siteSettings = [
     S.divider(),
-    S.listItem()
-      .title('SEO')
-      .icon(EarthGlobeIcon)
-      .child(S.document().schemaType('seo').documentId('seo')),
+    S.documentTypeListItem('seo')
+      .title('SEO'),
     S.documentTypeListItem('policy')
       .title('Policy'),
     S.documentTypeListItem('translation.metadata')

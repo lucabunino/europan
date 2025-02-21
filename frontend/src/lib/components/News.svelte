@@ -8,6 +8,7 @@ import { PortableText } from '@portabletext/svelte'
 import PortableTextStyle from '$lib/components/PortableTextStyle.svelte';
 import { formatDate } from "$lib/utils/date";
 import { register } from 'swiper/element/bundle';register();
+import * as m from "$lib/paraglide/messages"
 
 let innerWidth = $state()
 let swiperLoaded = $state(false)
@@ -96,6 +97,6 @@ $effect(() => {
         <p class={i > 0 ? 'mt-0' : ''}><a href={attachment.url} target="_blank" rel="noopener noreferrer">{attachment.title} ↧</a></p>
       {/each}
     {/if}
-    <p><a href=/news>Voir plus d’actualités →</a></p>
+    <p><a href=/news>{m.seeMoreNews()} →</a></p>
   </section>
 </article>

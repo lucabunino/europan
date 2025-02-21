@@ -1,29 +1,52 @@
+import {EarthGlobeIcon} from '@sanity/icons'
+
 export default {
   name: 'seo',
   title: 'SEO',
+  icon: EarthGlobeIcon,
   type: 'document',
   fieldsets: [
 
   ],
   fields: [
     {
+      name: 'language',
+      type: 'string',
+      readOnly: true,
+      options: {
+        list: [
+          { title: 'German', value: 'de' },
+          { title: 'French', value: 'fr' },
+        ],
+      },
+    },
+    {
       name: 'SEOTitle',
-      title: 'Titolo SEO',
       type: 'string',
     },
     {
       name: 'SEODescription',
-      title: 'Descrizione SEO',
       type: 'text',
       rows: 5,
     },
     {
       name: 'SEOImage',
-      title: 'Immagine SEO',
       type: 'image',
       options: {
         accept: 'image/jpg,image/jpeg,image/png,image/webp',
       },
     },
   ],
+  preview: {
+    select: {
+      title: 'SEOTitle',
+      language: 'language',
+    },
+    prepare({ title, language }) {
+      return {
+        title: title,
+        subtitle: `[${language ? language.toUpperCase() : 'Undefined'}]`,
+      };
+    },
+  },
 }

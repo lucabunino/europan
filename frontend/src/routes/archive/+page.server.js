@@ -1,8 +1,9 @@
 import { getArchive } from '$lib/utils/sanity';
 import { error } from '@sveltejs/kit';
 
-export async function load({ url }) {
-	const archive = await getArchive();
+export async function load({ depends, locals }) {
+	depends("paraglide:lang")
+	const archive = await getArchive(locals.paraglide.lang);
 	
 	if (archive) {
 		archive.forEach((competition) => {

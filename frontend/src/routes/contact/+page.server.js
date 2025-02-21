@@ -3,8 +3,9 @@ import transporter from "$lib/utils/emailSetup.server.js";
 import { getContact } from '$lib/utils/sanity';
 import { error } from '@sveltejs/kit';
 
-export async function load({ url }) {
-	const contact = await getContact();
+export async function load({ depends, locals }) {
+  depends("paraglide:lang")
+	const contact = await getContact(locals.paraglide.lang);
 	
 	if (contact) {
 		return {

@@ -29,31 +29,19 @@ let viewGrid = $state(false)
 const gridColumnsDesktop = 6
 const gridColumnsMobile = 4
 function handleKey({key}) {if (key === 'G') {viewGrid = !viewGrid}}
-
-function toggleCredits() {
-  creditsOpen = !creditsOpen;
-  setTimeout(() => {
-    const pageHeight = document.body.scrollHeight
-    
-    window.scrollTo({
-      top: pageHeight + creditsHeight,
-      behavior: "smooth" // Smooth scrolling effect
-    });
-  }, 200);
-}
 </script>
 
 <svelte:head>
-  <title>Europan Suisse</title>
-  <meta name="description" content="Europan Suisse est un concours d'idées dans le domaine de l'architecture et l'urbanisme, adressé aux architectes et aménagistes du territoire de moins de quarante ans et organisé périodiquement tous les deux ans.">
+  <title>{data.seo?.SEOTitle}</title>
+  <meta name="description" content={data.seo?.SEODescription}>
   <link rel="canonical" href={$page.url}>
   <meta name="robots" content="index,follow">
   <meta name="googlebot" content="index,follow">
-  <meta property="og:title" content="Europan Suisse">
-  <meta property="og:description" content="Europan Suisse est un concours d'idées dans le domaine de l'architecture et l'urbanisme, adressé aux architectes et aménagistes du territoire de moins de quarante ans et organisé périodiquement tous les deux ans.">
+  <meta property="og:title" content={data.seo?.SEOTitle}>
+  <meta property="og:description" content={data.seo?.SEODescription}>
   <meta property="og:url" content={$page.url}>
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Europan Suisse">
+  <meta property="og:site_name" content={data.seo?.SEOTitle}>
 </svelte:head>
 
 <svelte:window onkeyup={handleKey}></svelte:window>
@@ -80,7 +68,7 @@ function toggleCredits() {
 </ParaglideJS>
 
 <ParaglideJS {i18n}>
-  <Footer/>
+  <Footer {data}/>
 </ParaglideJS>
 
 <style>

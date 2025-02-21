@@ -16,14 +16,17 @@
   </div>
   {#if person.thumbnail}<p class="mt-0">{person.role}</p>{/if}
   {#if president}<p>Président</p>{/if}
+  {#if person.role}<p>{person.role}</p>{/if}
   {#if person.email}
     <h2 class="mt-0"><a href="mailto:{person.email}">{person.name} {person.surname}{#if person.country}{@html ` (${person.country})`}{/if} ↗</a></h2>
+    <p class="mt-0">{person.email}</p>
   {:else}
     <h2 class="mt-0">{person.name} {person.surname}{#if person.country}{@html ` (${person.country})`}{/if}</h2>
   {/if}
   {#each person.jobs as job, i}
     <p class="mt-0">{job}</p>
   {/each}
+  {#if person.city}<p class="mt-0">{person.city}</p>{/if}
 </div>
 
 <style>

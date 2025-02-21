@@ -2,6 +2,21 @@
 const { data } = $props()
 import Project from "$lib/components/Project.svelte";
 import Person from "$lib/components/Person.svelte";
+
+// Stores
+import { getTranslations } from "$lib/stores/translations.svelte.js";
+let translations = getTranslations()
+
+if (data.singleCompetition[0]?._translations) {
+  translations.setTranslations(data.singleCompetition[0]?._translations)
+} else {
+  translations.setTranslations(null)
+}
+$effect(() => {
+  return () => {
+    translations.setTranslations(null)
+  };
+})
 </script>
 
 <article class="content">

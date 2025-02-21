@@ -1,6 +1,6 @@
 <script>
 const { data } = $props()
-import { urlFor } from '$lib/utils/image';
+import Person from "$lib/components/Person.svelte";
 </script>
 
 <section class="page-title">
@@ -8,7 +8,8 @@ import { urlFor } from '$lib/utils/image';
 </section>
 <section class="content grid cols-3 text-xs">
   {#each data.team[0].team as member, i}
-  <div class="member">
+    <Person person={member}/>
+  <!-- <div class="member">
     <div class="thumbnail">
       {#if member.thumbnail}
         <img src={urlFor(member.thumbnail)} alt="">
@@ -22,8 +23,8 @@ import { urlFor } from '$lib/utils/image';
     {#each member.jobs as job, i}
       <p class="mt-0">{job}</p>
     {/each}
-    <p class="mt-0">{member.city}</p>
-  </div>
+    {#if member.city}<p class="mt-0">{member.city}</p>{/if}
+  </div> -->
   {/each}
 </section>
 

@@ -1,8 +1,9 @@
 import { getCompetition } from '$lib/utils/sanity';
 import { error } from '@sveltejs/kit';
 
-export async function load({ params }) {
-  const singleCompetition = await getCompetition(params.slug);
+export async function load({ params, depends, locals }) {
+  depends("paraglide:lang")
+  const singleCompetition = await getCompetition(params.slug, locals.paraglide.lang);
   if (singleCompetition) {
     return {
       singleCompetition,

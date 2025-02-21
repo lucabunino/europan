@@ -1,8 +1,9 @@
 import { getSite } from '$lib/utils/sanity';
 import { error } from '@sveltejs/kit';
 
-export async function load({ params }) {
-  const singleSite = await getSite(params.slug);
+export async function load({ params, depends, locals }) {
+  depends("paraglide:lang")
+  const singleSite = await getSite(params.slug, locals.paraglide.lang);
   if (singleSite) {
     // Step 1: Find the latest competition edition
     const latestEdition = Math.max(

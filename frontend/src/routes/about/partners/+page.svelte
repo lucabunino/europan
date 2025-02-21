@@ -1,10 +1,13 @@
 <script>
 const { data } = $props()
+
+// Multilanguage
+import * as m from "$lib/paraglide/messages"
 </script>
 
 <article class="content">
   <section class="page-title">
-    <h2 class="text-l page-title">Partenaires</h2>
+    <h2 class="text-l page-title">{m.partners()}</h2>
   </section>
   <section class="grid cols-3 text-xs">
     {#each data.partners as partner, i}

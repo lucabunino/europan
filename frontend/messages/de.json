@@ -1,3 +1,69 @@
 {
-    "$schema": "https://inlang.com/schema/inlang-message-format"
+    "$schema": "https://inlang.com/schema/inlang-message-format",
+    "language": "Deutsch",
+
+    "homepage": "Startseite",
+
+    "about": "Über uns",
+    "partners": "Partner",
+    "supportUs": "Unterstützen Sie uns",
+    "team": "Mannschaft",
+    "whatIsEuropan": "Was ist Europan?",
+    "archive": "Archiv",
+    "contact": "Kontakt",
+    "competitions": "Wettbewerbe",
+    "jury": "Jury",
+    "process": "Ablauf",
+    "results": "Ergebnisse",
+    "sites": "Standorte",
+    "topic": "Thema",
+    "news": "Nachrichten",
+    "newsletter": "Newsletter",
+
+    "aboutSlug": "uber-uns",
+    "partnersSlug": "partner",
+    "supportUsSlug": "unterstutzen-sie-uns",
+    "teamSlug": "mannschaft",
+    "whatIsEuropanSlug": "was-ist-europan",
+    "archiveSlug": "archiv",
+    "contactSlug": "kontakt",
+    "competitionsSlug": "wettbewerbe",
+    "jurySlug": "jury",
+    "processSlug": "ablauf",
+    "resultsSlug": "ergebnisse",
+    "sitesSlug": "standorte",
+    "topicSlug": "thema",
+    "newsSlug": "nachrichten",
+    "newsletterSlug": "newsletter",
+
+    "credits": "Impressum",
+    "close": "Schließen",
+
+    "visualIdentity": "Visuelle Identität und UI",
+    "development": "Entwicklung",
+    "projectLeader": "Projektleiter",
+    "editors": "Redakteure",
+
+    "message": "Nachricht",
+    "nameAndSurname": "Name und Nachname",
+    "email": "E-mail",
+    "company": "Unternehmen",
+    "phone": "Telefon",
+    "memberKind": "Mitgliedstyp",
+    "adress": "Adresse",
+
+    "send": "Senden",
+    "sent": "Gesendet",
+    "sending": "Wird gesendet",
+    "sendError": "Fehler beim Senden. Bitte versuchen Sie es erneut.",
+    "emptyFields": "Leere Felder",
+
+    "seeMoreNews": "Mehr nachrichten anzeigen",
+
+    "memberPartner": "Partner- oder Sponsormitglied: >CHF 500.-",
+    "memberCollective": "Kollektivmitglied / juristische Person-Unternehmen: CHF 500.-",
+    "memberIndividual": "Einzelmitglied / natürliche Person: CHF 100.-",
+    "memberStudent": "Studentisches Mitglied (Bescheinigung beilegen): CHF 50.-",
+
+    "noTranslations": "Es gibt keine Übersetzung für diesen Inhalt."
 }

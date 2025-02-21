@@ -1,8 +1,9 @@
 import { getWhatIsEuropan } from '$lib/utils/sanity';
 import { error } from '@sveltejs/kit';
 
-export async function load({ url }) {
-	const whatIsEuropan = await getWhatIsEuropan();
+export async function load({ depends, locals }) {
+	depends("paraglide:lang")
+	const whatIsEuropan = await getWhatIsEuropan(locals.paraglide.lang);
 	
 	if (whatIsEuropan) {
 		return {

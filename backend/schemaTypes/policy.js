@@ -9,6 +9,17 @@ export default {
   ],
   fields: [
     {
+      name: 'language',
+      type: 'string',
+      readOnly: true,
+      options: {
+        list: [
+          { title: 'German', value: 'de' },
+          { title: 'French', value: 'fr' },
+        ],
+      },
+    },
+    {
       name: 'title',
       type: 'string',
     },
@@ -70,4 +81,16 @@ export default {
       ]
     },
   ],
+  preview: {
+    select: {
+      title: 'title',
+      language: 'language',
+    },
+    prepare({ title, language }) {
+      return {
+        title: title,
+        subtitle: `[${language ? language.toUpperCase() : 'Undefined'}]`,
+      };
+    },
+  },
 }
