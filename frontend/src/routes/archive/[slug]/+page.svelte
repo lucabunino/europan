@@ -12,11 +12,6 @@ if (data.singleCompetition[0]?._translations) {
 } else {
   translations.setTranslations(null)
 }
-$effect(() => {
-  return () => {
-    translations.setTranslations(null)
-  };
-})
 </script>
 
 <article class="content">
