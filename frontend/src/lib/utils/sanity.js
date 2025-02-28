@@ -229,3 +229,12 @@ export async function getPrivacy(lang) {
 		}[0...1]
 	`, { lang });
 }
+
+// Privacy
+export async function getDataProtection(lang) {
+	return await client.fetch(`
+		*[_type == "policy" && kind =='dataProtection' && language == $lang][0] {
+			...,
+		}
+	`, { lang });
+}

@@ -19,6 +19,7 @@
     "topic": "Thema",
     "news": "Nachrichten",
     "newsletter": "Newsletter",
+    "dataProtection": "Datenschutz",
 
     "aboutSlug": "uber-uns",
     "partnersSlug": "partner",
@@ -35,6 +36,7 @@
     "topicSlug": "thema",
     "newsSlug": "nachrichten",
     "newsletterSlug": "newsletter",
+    "dataProtectionSlug": "datenschutz",
 
     "credits": "Impressum",
     "close": "Schließen",

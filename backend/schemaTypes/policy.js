@@ -30,8 +30,8 @@ export default {
         list: [
           {title: 'Cookie policy', value: 'cookies'},
           {title: 'Privacy policy', value: 'privacy'},
+          {title: 'Data protection', value: 'dataProtection'},
         ],
-        layout: 'radio'
       },
       initialValue: 'cookies',
       validation: (Rule) => Rule.required(),

@@ -80,6 +80,10 @@ export const i18n = createI18n(runtime, {
 			fr: "/fermer",
 			de: "/schliessen",
 		},
+		"/data-protection": {
+			fr: "/protection-donnees",
+			de: "/datenshutz",
+		},
 	},
 
 	// Matchers can be added if needed

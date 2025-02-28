@@ -25,7 +25,7 @@
   </a>
 {:else if listItem == 'bullet'}
   <li>{@render children()}</li>
-{:else if listItem == 'bumber'}
+{:else if listItem == 'number'}
   <li>{@render children()}</li>
 {/if}
 

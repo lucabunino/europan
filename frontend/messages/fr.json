@@ -19,6 +19,7 @@
     "topic": "Sujet",
     "news": "News",
     "newsletter": "Newsletter",
+    "dataProtection": "Protection des donnees",
 
     "aboutSlug": "a-propos",
     "partnersSlug": "partenaires",
@@ -35,6 +36,7 @@
     "topicSlug": "sujet",
     "newsSlug": "news",
     "newsletterSlug": "newsletter",
+    "dataProtectionSlug": "protection-donnees",
 
     "credits": "Credits",
     "close": "Fermer",

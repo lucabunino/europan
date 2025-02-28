@@ -1,7 +1,6 @@
 <script>
 const { data } = $props()
 $inspect(data)
-
 import * as m from "$lib/paraglide/messages"
 </script>
 

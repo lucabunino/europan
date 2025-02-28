@@ -3,6 +3,7 @@ let {data} = $props()
 
 // Imports
 import { fade, slide } from "svelte/transition"
+import { page } from '$app/stores';
 
 // Multilanguage
 import { i18n } from '$lib/i18n'
@@ -49,27 +50,30 @@ function toggleCredits() {
         <li>Svizzera</li>
       </ul>
       <ul>
-        {#each availableLanguageTags as lang}
-          <li class="switch">
-            {#if data.pathname.includes(m.newsSlug()) || data.pathname.includes(m.archiveSlug())}
-              <a
-              data-sveltekit-reload
-              class={languageTag() === lang ? "active" : ""}
-              href={lang !== languageTag() && alternativeHref ? alternativeHref : i18n.route(data.pathname)}
-              hreflang={lang}
-              aria-current={lang === languageTag() ? "page" : undefined}
-              >→ {lang === "fr" ? "Français" : ""}{lang === "de" ? "Deutsch" : ""}</a>
-            {:else}
-              <a
-              data-sveltekit-reload
-              class={languageTag() === lang ? "active" : ""}
-              href={i18n.route(data.pathname)}
-              hreflang={lang}
-              aria-current={lang === languageTag() ? "page" : undefined}
-              >→ {lang === "fr" ? "Français" : ""}{lang === "de" ? "Deutsch" : ""}</a>
-            {/if}
-          </li>
-        {/each}
+        {#if $page.url.hostname !== "europan.ch"}
+        {$page.url.hostname}
+          {#each availableLanguageTags as lang}
+            <li class="switch">
+              {#if data.pathname.includes(m.newsSlug()) || data.pathname.includes(m.archiveSlug())}
+                <a
+                data-sveltekit-reload
+                class={languageTag() === lang ? "active" : ""}
+                href={lang !== languageTag() && alternativeHref ? alternativeHref : i18n.route(data.pathname)}
+                hreflang={lang}
+                aria-current={lang === languageTag() ? "page" : undefined}
+                >→ {lang === "fr" ? "Français" : ""}{lang === "de" ? "Deutsch" : ""}</a>
+              {:else}
+                <a
+                data-sveltekit-reload
+                class={languageTag() === lang ? "active" : ""}
+                href={i18n.route(data.pathname)}
+                hreflang={lang}
+                aria-current={lang === languageTag() ? "page" : undefined}
+                >→ {lang === "fr" ? "Français" : ""}{lang === "de" ? "Deutsch" : ""}</a>
+              {/if}
+            </li>
+          {/each}
+        {/if}
         <li>© Copyright</li>
         <li>Europan {new Date().getFullYear()}</li>
       </ul>
@@ -84,6 +88,7 @@ function toggleCredits() {
         <!-- HERE -->
         <!-- <li><a class:active={data.pathname == '/newsletter'} href="/newsletter">Newsletter</a></li> -->
         <li> <a href="https://www.instagram.com/europan_europe/" target="_blank" rel="noopener noreferrer">Instagram ↗</a></li>
+        <li><a class:active={data.pathname == m.dataProtectionSlug()} href="/data-protection">{m.dataProtection()}</a></li>
         <li><button class:active={creditsOpen} onclick={(e) => toggleCredits()}>{#if !creditsOpen}{m.credits()}{:else}{m.close()}{/if}</button></li>
       </ul>
     </div>
