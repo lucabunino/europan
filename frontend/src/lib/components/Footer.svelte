@@ -50,7 +50,7 @@ function toggleCredits() {
         <li>Svizzera</li>
       </ul>
       <ul>
-        {#if $page.url.hostname !== "europan.ch"}
+        {#if $page.url.hostname !== "www.europan.ch"}
         {$page.url.hostname}
           {#each availableLanguageTags as lang}
             <li class="switch">
