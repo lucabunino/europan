@@ -51,7 +51,6 @@ function toggleCredits() {
       </ul>
       <ul>
         {#if $page.url.hostname !== "www.europan.ch"}
-        {$page.url.hostname}
           {#each availableLanguageTags as lang}
             <li class="switch">
               {#if data.pathname.includes(m.newsSlug()) || data.pathname.includes(m.archiveSlug())}

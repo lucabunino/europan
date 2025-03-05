@@ -9,20 +9,20 @@ export const i18n = createI18n(runtime, {
 			de: "/uber-uns",
 		},
 		"/about/partners": {
-			fr: "/partenaires",
-			de: "/partner",
+			fr: "/a-propos/partenaires",
+			de: "/uber-uns/partner",
 		},
 		"/about/support-us": {
-			fr: "/soutenez-nous",
-			de: "/unterstützen-sie-uns",
+			fr: "/a-propos/soutenez-nous",
+			de: "/uber-uns/unterstützen-sie-uns",
 		},
 		"/about/team": {
-			fr: "/equipe",
-			de: "/team",
+			fr: "/a-propos/equipe",
+			de: "/uber-uns/team",
 		},
 		"/about/what-is-europan": {
-			fr: "/qu-est-ce-qu-europan",
-			de: "/was-ist-europan",
+			fr: "/a-propos/qu-est-ce-qu-europan",
+			de: "/uber-uns/was-ist-europan",
 		},
 		"/archive": {
 			fr: "/archive",
@@ -41,24 +41,24 @@ export const i18n = createI18n(runtime, {
 			de: "/wettbewerbe",
 		},
 		"/competitions/jury": {
-			fr: "/jury",
-			de: "/jury",
+			fr: "/concours/jury",
+			de: "/wettbewerbe/jury",
 		},
 		"/competitions/process": {
-			fr: "/deroulement",
-			de: "/prozess",
+			fr: "/concours/deroulement",
+			de: "/wettbewerbe/prozess",
 		},
 		"/competitions/results": {
-			fr: "/resultats",
-			de: "/ergebnisse",
+			fr: "/concours/resultats",
+			de: "/wettbewerbe/ergebnisse",
 		},
 		"/competitions/sites": {
-			fr: "/lieux",
-			de: "/orte",
+			fr: "/concours/lieux",
+			de: "/wettbewerbe/orte",
 		},
 		"/competitions/topic": {
-			fr: "/sujet",
-			de: "/thema",
+			fr: "/concours/sujet",
+			de: "/wettbewerbe/thema",
 		},
 		"/news": {
 			fr: "/news",
