@@ -92,6 +92,15 @@ $effect(() => {
     />
   </section>
   <section>
+    {#if news.links}
+      {#each news.links as link, i}
+        {#if link.blank}
+          <p class={i > 0 ? 'mt-0' : ''}><a href={link.href} target="_blank" rel="noopener noreferrer">{link.callToAction} →</a></p>
+        {:else}
+          <p class={i > 0 ? 'mt-0' : ''}><a href={link.href}>{link.callToAction} →</a></p>
+        {/if}
+      {/each}
+    {/if}
     {#if news.attachments}
       {#each news.attachments as attachment, i}
         <p class={i > 0 ? 'mt-0' : ''}><a href={attachment.url} target="_blank" rel="noopener noreferrer">{attachment.title} ↧</a></p>

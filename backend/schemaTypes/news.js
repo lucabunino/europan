@@ -143,6 +143,31 @@ export default {
       ],
     },
     {
+      name: 'links',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            {
+              name: 'callToAction',
+              type: 'string',
+            },
+            {
+              name: 'href',
+              type: 'string',
+            },
+            {
+              title: 'Open in new tab',
+              name: 'blank',
+              description: 'Meant to be used when the link is from another domain',
+              type: 'boolean'
+            }
+          ]
+        }
+      ],
+    },
+    {
       name: 'attachments',
       type: 'array',
       of: [
