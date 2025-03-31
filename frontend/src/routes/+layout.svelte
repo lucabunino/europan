@@ -101,37 +101,4 @@ main>div {
     margin-top: 6rem;
   }
 }
-@media screen and (max-width: 900px) {
-  nav {
-    height: calc(100vh - var(--gutter)*2);
-    overflow: scroll;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    overflow-y: scroll;
-  }
-  nav::-webkit-scrollbar {
-    display: none; /* For Chrome, Safari, and Edge */
-  }
-  .menu-item {
-    cursor: pointer;
-  }
-  .menu-item-container {
-    width: calc(100vw - var(--gutter)*2);
-  }
-  .submenu-container {
-    position: unset;
-  }
-  .submenu {
-    padding-left: 0;
-    padding-top: .7rem;
-  }
-  .desktop-only {
-    display: none !important;
-  }
-  .mobile-only {
-    display: -webkit-box !important;
-    display: -ms-flexbox !important;
-    display: flex !important;
-  }
-}
 </style>
