@@ -12,9 +12,9 @@ import * as m from "$lib/paraglide/messages"
 
 let innerWidth = $state()
 let swiperLoaded = $state(false)
+let swiperEl = $state(undefined)
 $effect(() => {
   if (news.images) {
-    const swiperEl = document.querySelector('swiper-container');
     const swiperParams = {
       slidesPerView: 1,
       injectStyles: [
@@ -63,11 +63,11 @@ $effect(() => {
     navigation={true}
     loop={true}
     speed={400}
+	bind:this={swiperEl}
     >
     {#each news.images as image}
       <swiper-slide>
         <img class="news-img {image.objectFit}" src={urlFor(image.image).width(1920)} alt="Image for {news.title}">
-        <!-- <img class="news-img" src={urlFor(image).width(1920)} alt="Image for {news.title}"> -->
       </swiper-slide>
     {/each}
     </swiper-container>
