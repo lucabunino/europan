@@ -2,7 +2,7 @@ import nodemailer from "nodemailer";
 import { EMAIL, EMAIL_PASSWORD } from "$env/static/private";
 
 let transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
+  host: "mail.gandi.net",
   port: 465,
   secure: true,
   auth: {
