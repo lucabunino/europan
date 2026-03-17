@@ -14,15 +14,13 @@
       <p class="text-m">{Array.from(person.name)[0]}{Array.from(person.surname)[0]}</p>
     {/if}
   </div>
-  {#if person.thumbnail}<p class="mt-0">{person.role}</p>{/if}
+  <!-- {#if person.thumbnail}<p class="mt-0">{person.role}</p>{/if} -->
   {#if president}<p>Président</p>{/if}
-  {#if person.role}<p>{person.role}</p>{/if}
+  <h2 class="mt-0">{person.name} {person.surname}{#if person.country}{@html ` (${person.country})`}{/if}</h2>
   {#if person.email}
-    <h2 class="mt-0"><a href="mailto:{person.email}">{person.name} {person.surname}{#if person.country}{@html ` (${person.country})`}{/if} ↗</a></h2>
-    <p class="mt-0">{person.email}</p>
-  {:else}
-    <h2 class="mt-0">{person.name} {person.surname}{#if person.country}{@html ` (${person.country})`}{/if}</h2>
+    <h2 class="mt-0"><a href="mailto:{person.email}">{person.email} ↗</a></h2>
   {/if}
+  {#if person.role}<p class="mt-0">{person.role}</p>{/if}
   {#each person.jobs as job, i}
     <p class="mt-0">{job}</p>
   {/each}
