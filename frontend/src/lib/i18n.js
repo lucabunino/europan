@@ -38,7 +38,7 @@ export const i18n = createI18n(runtime, {
 		},
 		"/competitions": {
 			fr: "/concours",
-			de: "/wettbewerbe",
+			de: "/wettbewerb",
 		},
 		"/competitions/jury": {
 			fr: "/jury",
@@ -62,11 +62,11 @@ export const i18n = createI18n(runtime, {
 		},
 		"/news": {
 			fr: "/news",
-			de: "/nachrichten",
+			de: "/news",
 		},
     "/news/[slug]" : {
       fr: "/news/[slug]",
-			de: "/nachrichten/[slug]",
+			de: "/news/[slug]",
 		},
 		"/newsletter": {
 			fr: "/newsletter",
@@ -82,7 +82,7 @@ export const i18n = createI18n(runtime, {
 		},
 		"/data-protection": {
 			fr: "/protection-donnees",
-			de: "/datenshutz",
+			de: "/datenschutz",
 		},
 	},
 

@@ -4,6 +4,7 @@ import {myStructure} from './structure'
 import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './schemaTypes'
 import {documentInternationalization} from '@sanity/document-internationalization'
+import {orderableDocumentListDeskItem} from '@sanity/orderable-document-list'
 
 const singletonActions = new Set(['publish', 'discardChanges', 'restore'])
 const singletonTypes = new Set(['homepage', 'network'])
