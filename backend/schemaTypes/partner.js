@@ -1,4 +1,5 @@
 import {TokenIcon} from '@sanity/icons'
+import { orderRankField } from '@sanity/orderable-document-list'
 
 export default {
   name: 'partner',
@@ -8,6 +9,7 @@ export default {
 
   ],
   fields: [
+	orderRankField({ type: 'partner' }),
     {
       name: 'language',
       type: 'string',

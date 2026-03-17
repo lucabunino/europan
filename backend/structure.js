@@ -1,4 +1,5 @@
-import { UsersIcon, EarthGlobeIcon, InfoOutlineIcon} from '@sanity/icons'
+import { UsersIcon, InfoOutlineIcon, TokenIcon} from '@sanity/icons'
+import { orderableDocumentListDeskItem } from '@sanity/orderable-document-list'
 
 export const myStructure = (S, context) => {
   const entities = [
@@ -8,6 +9,33 @@ export const myStructure = (S, context) => {
     S.documentTypeListItem('featuredNews')
       .title('Featured News'),
   ];
+
+  const partnersMenu = S.listItem()
+    .title('Partners')
+    .icon(TokenIcon)
+    .child(
+      S.list()
+        .title('Partners by Language')
+        .items([
+          orderableDocumentListDeskItem({
+            type: 'partner',
+            title: 'Partners [DE]',
+            id: 'partners-de',
+            filter: `language == "de"`,
+            S,
+            context
+          }),
+          orderableDocumentListDeskItem({
+            type: 'partner',
+            title: 'Partners [FR]',
+            id: 'partners-fr',
+            filter: `language == "fr"`,
+            S,
+            context
+          })
+        ])
+    );
+
   const pages = [
     S.divider(),
     S.listItem()
@@ -19,8 +47,7 @@ export const myStructure = (S, context) => {
           .items([
             S.documentTypeListItem('whatIsEuropan'),
             S.documentTypeListItem('team'),
-            S.documentTypeListItem('partner')
-              .title('Partners'),
+            partnersMenu,
             S.documentTypeListItem('supportUs')
           ])
       ),
