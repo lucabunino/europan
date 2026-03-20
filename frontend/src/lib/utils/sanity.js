@@ -69,12 +69,12 @@ export async function getTeam(lang) {
 
 // Partners
 export async function getPartners(lang) {
-	return await client.fetch(`
-		*[_type == "partner" && language == $lang && !(_id in path('drafts.**'))] | order(title asc) {
-			...,
-			"logoUrl": logo.asset->url
-		}
-	`, { lang });
+    return await client.fetch(`
+        *[_type == "partner" && language == $lang && !(_id in path('drafts.**'))] | order(orderRank asc) {
+            ...,
+            "logoUrl": logo.asset->url
+        }
+    `, { lang });
 }
 
 // Support Us
