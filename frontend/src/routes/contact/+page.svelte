@@ -54,7 +54,7 @@ $effect(() => {
 </script>
 
 <section class="page-title">
-  <h2 class="text-l">Contact</h2>
+  <h2 class="text-l">{m.contact()}</h2>
 </section>
 <section class="content contact-grid text-xs">
 {#if data.contact.description}
