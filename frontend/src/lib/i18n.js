@@ -28,8 +28,8 @@ export const i18n = createI18n(runtime, {
 			fr: "/archive",
 			de: "/archiv",
 		},
-    "/archive/[slug]" : {
-      fr: "/archive/[slug]",
+		"/archive/[slug]" : {
+		fr: "/archive/[slug]",
 			de: "/archiv/[slug]",
 		},
 		"/contact": {
@@ -64,8 +64,8 @@ export const i18n = createI18n(runtime, {
 			fr: "/news",
 			de: "/news",
 		},
-    "/news/[slug]" : {
-      fr: "/news/[slug]",
+		"/news/[slug]" : {
+		fr: "/news/[slug]",
 			de: "/news/[slug]",
 		},
 		"/newsletter": {

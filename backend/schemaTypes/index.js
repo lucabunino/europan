@@ -9,6 +9,7 @@ import contact from './contact'
 import competition from './competition'
 import site from './site'
 import project from './project'
+import page from './page'
 import policy from './policy'
 import seo from './seo'
 
@@ -24,6 +25,7 @@ export const schemaTypes = [
   competition,
   site,
   project,
+  page,
   policy,
   seo
 ]

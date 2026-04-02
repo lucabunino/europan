@@ -51,7 +51,9 @@ export const myStructure = (S, context) => {
             S.documentTypeListItem('supportUs')
           ])
       ),
-    S.documentTypeListItem('contact')
+    S.documentTypeListItem('contact'),
+	S.documentTypeListItem('page')
+      .title('Pages'),
   ];
   const competition = [
     S.divider(),

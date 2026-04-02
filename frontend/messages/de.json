@@ -62,10 +62,10 @@
 
     "seeMoreNews": "Mehr nachrichten anzeigen",
 
-    "memberPartner": "Partner- oder Sponsormitglied: >CHF 500.-",
-    "memberCollective": "Kollektivmitglied / juristische Person-Unternehmen: CHF 500.-",
-    "memberIndividual": "Einzelmitglied / natürliche Person: CHF 100.-",
-    "memberStudent": "Studentisches Mitglied (Bescheinigung beilegen): CHF 50.-",
+    "memberPartner": "Partner / Sponsor: >CHF 500.-",
+    "memberCollective": "Kollektivmitglied / Firmenmitglied: CHF 500.-",
+    "memberIndividual": "Einzelmitglied: CHF 100.-",
+    "memberStudent": "Studentisches Mitglied (mit Bescheinigung): CHF 50.-",
 
     "noTranslations": "Es gibt keine Übersetzung für diesen Inhalt."
 }

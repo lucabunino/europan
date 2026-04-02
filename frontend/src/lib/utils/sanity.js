@@ -124,6 +124,15 @@ export async function getJury(lang) {
 	`, { lang });
 }
 
+// Pages
+export async function getPages(lang) {
+	return await client.fetch(`
+		*[_type == "page" && language == $lang && !(_id in path('drafts.**'))] {
+			...,
+		}
+	`, { lang });
+}
+
 // Last competition
 export async function getLastCompetition(lang) {
 	return await client.fetch(`
