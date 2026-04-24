@@ -99,6 +99,20 @@ use:enhance={handleEnhance}
 
 <style>
 	form {
+		margin-top: 5rem;
 		grid-column: 3 / span 2;
 	}
+
+	@media screen and (max-width: 1200px) {
+		form {
+			grid-column: 1 / span 3;
+		}
+	}
+
+	@media screen and (max-width: 600px) {
+		form {
+			grid-column: 1 / span 6;
+		}
+	}
+
 </style>

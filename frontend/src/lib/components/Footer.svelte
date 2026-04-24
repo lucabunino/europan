@@ -187,8 +187,21 @@ footer button:hover {
 }
 
 @media screen and (max-width: 600px) {
+	footer>*:nth-child(1) div {
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-column-gap: var(--gutter);
+			-moz-column-gap: var(--gutter);
+				column-gap: var(--gutter);
+		width: 100%;
+		flex-wrap: wrap;
+		-webkit-row-gap: var(--gutter);
+			-moz-row-gap: var(--gutter);
+				row-gap: var(--gutter);
+	}
   footer ul {
-    width: 25%
+    width: calc((100% - var(--gutter))/2)
   }
 }
 </style>
