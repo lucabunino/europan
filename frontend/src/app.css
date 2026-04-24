@@ -267,6 +267,36 @@ swiper-slide img {
   width: 100%;
   aspect-ratio: var(--aspectRatio);
 }
+swiper-container::part(button-prev),
+swiper-container::part(button-next) {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" fill="none"><circle cx="18.803" cy="18.803" r="18.803" fill="%23000"/><path d="m4.932 19.111 21.27-12.28v24.56l-21.27-12.28Z" fill="%23fff"/></svg>');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  width: 38px;
+  height: 38px;
+  color: transparent; 
+  transition: var(--transition);
+}
+swiper-container::part(button-next) {
+  transform: rotate(180deg);
+}
+swiper-container::part(button-prev):hover,
+swiper-container::part(button-next):hover {
+  background-color: var(--grayOpacity);
+  border-radius: 50%;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" fill="none"><circle cx="18.803" cy="18.803" r="18.803" fill="%23fff"/><path d="m4.932 19.111 21.27-12.28v24.56l-21.27-12.28Z" fill="%23000"/></svg>');
+}
+swiper-container::part(button-prev):hover {
+  transform: rotate3d(0, 0, 1, -1turn);
+}
+swiper-container::part(button-next):hover {
+  transform: rotate(180deg) rotate3d(0, 0, 1, -1turn);
+}
+swiper-container::part(button-prev)::after,
+swiper-container::part(button-next)::after {
+  display: none;
+}
 .thumbnail {
   background-color: var(--gray);
   width: 50%;
@@ -385,6 +415,15 @@ select {
   background-color: var(--gray);
   background-position: right 1rem center; /* Position the arrow */
   background-size: .7em; /* Adjust arrow size */
+}
+
+/* Pages */
+.page-img {
+  width: 100%;
+  height: 100%;
+}
+.overlay {
+	filter: brightness(.95);
 }
 
 /* News */

@@ -4,11 +4,14 @@
 
     "homepage": "Homepage",
 
+	"whatIsEuropan": "Qu’est-ce qu’Europan ?",
+    "europanSwitzerland": "Europan Suisse",
+	"promoter": "Organisateur",
+
     "about": "A propos",
     "partners": "Partenaires",
     "supportUs": "Soutenez-nous",
     "team": "Equipe",
-    "whatIsEuropan": "Qu’est-ce qu’Europan ?",
     "archive": "Archive",
     "contact": "Contact",
     "competitions": "Concours",
@@ -25,7 +28,6 @@
     "partnersSlug": "partenaires",
     "supportUsSlug": "soutenez-nous",
     "teamSlug": "equipe",
-    "whatIsEuropanSlug": "qu-est-ce-qu-europan",
     "archiveSlug": "archive",
     "contactSlug": "contact",
     "competitionsSlug": "concours",

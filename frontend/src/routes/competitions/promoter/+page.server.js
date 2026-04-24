@@ -1,13 +1,13 @@
-import { getWhatIsEuropan } from '$lib/utils/sanity';
+import { getPage } from '$lib/utils/sanity';
 import { error } from '@sveltejs/kit';
 
 export async function load({ depends, locals }) {
 	depends("paraglide:lang")
-	const whatIsEuropan = await getWhatIsEuropan(locals.paraglide.lang);
+	const page = await getPage('promoter', locals.paraglide.lang);
 	
-	if (whatIsEuropan) {
+	if (page) {
 		return {
-			whatIsEuropan,
+			page,
 		};
 	}
   throw error(404, 'Not found');

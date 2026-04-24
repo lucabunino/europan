@@ -10,6 +10,7 @@ import competition from './competition'
 import site from './site'
 import project from './project'
 import page from './page'
+import pageSelector from './pageSelector'
 import policy from './policy'
 import seo from './seo'
 
@@ -26,6 +27,7 @@ export const schemaTypes = [
   site,
   project,
   page,
+  pageSelector,
   policy,
   seo
 ]

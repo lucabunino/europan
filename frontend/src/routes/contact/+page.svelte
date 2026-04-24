@@ -109,28 +109,23 @@ $effect(() => {
         </button>
       </div>
     </form>
-    <!-- HERE
-    <h3>Newsletter</h3>
-    <p class="contact-newsletter-info">{data.contact[0].newsletterMessage}</p>
-    <form action="">
-      <input type="email" id="email" name="email" placeholder="E-mail">
-      <div class="button-container">
-        <button type="submit" onclick={() => isSubmitting = true} style="{isErrorous ? 'widht:100%' : 'width:9rem'}{isEmpty ? 'widht:100%' : ''}">
-          Inscription
-        </button>
-      </div>
-    </form> -->
+	<!-- NOT ACTIVE
+	<div class="newsletter">
+		<h3>Newsletter</h3>
+		{#if data.contact.newsletterMessage}<p class="contact-newsletter-info">{data.contact.newsletterMessage}</p>{/if}
+		<form action="">
+		<input type="email" id="email" name="email" placeholder="E-mail">
+		<div class="button-container">
+			<button type="submit" onclick={() => isSubmitting = true} style="{isErrorous ? 'widht:100%' : 'width:9rem'}{isEmpty ? 'widht:100%' : ''}">
+			Inscription
+			</button>
+		</div>
+		</form>
+	</div> -->
   </div>
 </section>
 
 <style>
-/* h3,
-form:last-of-type {
-  margin-top: 1em;
-}
-.contact-newsletter-info {
-  width: calc(50% - var(--gutter)/2);
-} */
 .contact-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -164,5 +159,18 @@ form:last-of-type {
   .contact-grid > *:nth-child(2) {
     grid-column: 1 / span 4;
   }
+}
+
+.newsletter,
+.newsletter>form {
+  margin-top: 1em;
+}
+.contact-newsletter-info {
+	width: calc(50% - var(--gutter)/2);
+}
+@media screen and (max-width: 600px) {
+	.contact-newsletter-info {
+		width: auto;
+	}
 }
 </style>

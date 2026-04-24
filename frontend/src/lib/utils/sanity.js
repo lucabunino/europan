@@ -1,5 +1,6 @@
 import { createClient } from '@sanity/client';
 import { PUBLIC_SANITY_DATASET, PUBLIC_SANITY_PROJECT_ID } from '$env/static/public';
+import { dev } from '$app/environment';
 
 if (!PUBLIC_SANITY_PROJECT_ID || !PUBLIC_SANITY_DATASET) {
 	throw new Error('Did you forget to run sanity init --env?');
@@ -8,11 +9,9 @@ if (!PUBLIC_SANITY_PROJECT_ID || !PUBLIC_SANITY_DATASET) {
 export const client = createClient({
 	projectId: PUBLIC_SANITY_PROJECT_ID,
 	dataset: PUBLIC_SANITY_DATASET,
-	useCdn: true, // `false` if you want to ensure fresh data
-	apiVersion: '2025-01-15', // date of setup
+	useCdn: !dev,
+	apiVersion: '2025-01-15',
 });
-
-
 
 // Newses
 export async function getNewses(lang) {
@@ -93,6 +92,31 @@ export async function getContact(lang) {
 			...,
 		}
 	`, { lang });
+}
+
+// Page
+export async function getPage(id, lang) {
+  const pageField = lang === 'fr' ? 'pageFrench' : 'pageGerman';
+  // Define the "other" field to get the translation link
+  const translationField = lang === 'fr' ? 'pageGerman' : 'pageFrench';
+
+  return await client.fetch(`
+    *[_id == $id && !(_id in path('drafts.**'))][0] {
+      "content": ${pageField}->{
+        ...
+      },
+      "_translations": [
+        ${translationField}->{
+          "slug": slug.current,
+          language,
+          title
+        }
+      ]
+    } {
+      ...content,
+      _translations
+    }
+  `, { id, lang });
 }
 
 // What is Europan?

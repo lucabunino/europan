@@ -67,6 +67,12 @@ export default {
                 layout: 'radio'
               },
               initialValue: "contain",
+            },
+			{
+              name: 'overlay',
+			  description: 'Adds a subtle gray overlay to the image, to distinguish it from website’s background.',
+              type: 'boolean',
+              initialValue: false,
             }
           ]
         }        

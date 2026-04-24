@@ -5,8 +5,8 @@ import * as m from "$lib/paraglide/messages"
 </script>
 
 <div class="content pages-grid">
-  <a class="page no-hover" href="/about/what-is-europan">
-    <h2 class="text-m">{m.whatIsEuropan()}</h2>
+  <a class="page no-hover" href="/about/europan-switzerland">
+    <h2 class="text-m">{m.europanSwitzerland()}</h2>
   </a>
   <a class="page no-hover" href="/about/team">
     <h2 class="text-m">{m.team()}</h2>
