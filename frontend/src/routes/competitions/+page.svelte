@@ -34,4 +34,7 @@ import * as m from "$lib/paraglide/messages"
 			<h2 class="text-m">{m.results()}</h2>
 		</a>
 	{/if}
+	<a class="page no-hover" href="/competitions/promoter">
+    	<h2 class="text-m">{m.promoter()}</h2>
+	</a>
 </section>
