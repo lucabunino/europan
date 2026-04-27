@@ -2,7 +2,6 @@
 const { data } = $props()
 import News from '$lib/components/News.svelte';
 import * as m from "$lib/paraglide/messages"
-import { onMount } from 'svelte';
 
 // Stores
 import { getTranslations } from "$lib/stores/translations.svelte.js";

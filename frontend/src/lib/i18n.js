@@ -9,19 +9,19 @@ export const i18n = createI18n(runtime, {
 			de: "/uber-uns",
 		},
 		"/about/partners": {
-			fr: "/uber-uns/partenaires",
+			fr: "/a-propos/partenaires",
 			de: "/uber-uns/partner",
 		},
 		"/about/support-us": {
-			fr: "/uber-uns/soutenez-nous",
+			fr: "/a-propos/soutenez-nous",
 			de: "/uber-uns/unterstützen-sie-uns",
 		},
 		"/about/team": {
-			fr: "/uber-uns/equipe",
+			fr: "/a-propos/equipe",
 			de: "/uber-uns/team",
 		},
 		"/about/europan-switzerland": {
-			fr: "/uber-uns/europan-suisse",
+			fr: "/a-propos/europan-suisse",
 			de: "/uber-uns/europan-schweiz",
 		},
 		"/archive": {
@@ -41,31 +41,31 @@ export const i18n = createI18n(runtime, {
 			de: "/wettbewerb",
 		},
 		"/competitions/what-is-europan": {
-			fr: "/wettbewerb/qu-est-ce-qu-europan",
+			fr: "/concours/qu-est-ce-qu-europan",
 			de: "/wettbewerb/was-ist-europan",
 		},
 		"/competitions/promoter": {
-			fr: "/wettbewerb/organisateur",
+			fr: "/concours/organisateur",
 			de: "/wettbewerb/auslober-in",
 		},
 		"/competitions/jury": {
-			fr: "/wettbewerb/jury",
+			fr: "/concours/jury",
 			de: "/wettbewerb/jury",
 		},
 		"/competitions/process": {
-			fr: "/wettbewerb/deroulement",
+			fr: "/concours/deroulement",
 			de: "/wettbewerb/prozess",
 		},
 		"/competitions/results": {
-			fr: "/wettbewerb/resultats",
+			fr: "/concours/resultats",
 			de: "/wettbewerb/ergebnisse",
 		},
 		"/competitions/sites": {
-			fr: "/wettbewerb/lieux",
+			fr: "/concours/lieux",
 			de: "/wettbewerb/orte",
 		},
 		"/competitions/topic": {
-			fr: "/wettbewerb/sujet",
+			fr: "/concours/sujet",
 			de: "/wettbewerb/thema",
 		},
 		"/news": {
