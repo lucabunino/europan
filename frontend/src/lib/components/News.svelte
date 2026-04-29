@@ -12,12 +12,33 @@ import * as m from "$lib/paraglide/messages"
 
 let innerWidth = $state()
 let swiperLoaded = $state(false)
-
+let swiperEl = $state(undefined)
 $effect(() => {
   if (news.images) {
-    const swiperEl = document.querySelector('swiper-container');
     const swiperParams = {
       slidesPerView: 1,
+      injectStyles: [
+        `
+        .swiper-button-prev,
+        .swiper-button-next {
+          background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" fill="none"><circle cx="18.803" cy="18.803" r="18.803" fill="%23fff"/><path d="m4.932 19.111 21.27-12.28v24.56l-21.27-12.28Z" fill="%23000"/></svg>');
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: contain;
+          width: 38px; /* Match the SVG dimensions */
+          height: 38px;
+          border: none; /* Remove any default button styles */
+          cursor: pointer;
+        }
+        .swiper-button-next {
+          transform: rotate(180deg);
+        }
+        .swiper-button-next svg,
+        .swiper-button-prev svg {
+          display: none;
+        }
+        `,
+      ],
     };
     Object.assign(swiperEl, swiperParams);
     swiperEl.initialize();
@@ -42,10 +63,11 @@ $effect(() => {
     navigation={true}
     loop={true}
     speed={400}
+	bind:this={swiperEl}
     >
     {#each news.images as image}
       <swiper-slide>
-        <img class="news-img {image.objectFit} {image.overlay ? 'overlay' : ''}" src={urlFor(image.image).width(1920)} alt="Image for {news.title}">
+        <img class="news-img {image.objectFit}" src={urlFor(image.image).width(1920)} alt="Image for {news.title}">
       </swiper-slide>
     {/each}
     </swiper-container>
@@ -70,6 +92,15 @@ $effect(() => {
     />
   </section>
   <section>
+    {#if news.links}
+      {#each news.links as link, i}
+        {#if link.blank}
+          <p class={i > 0 ? 'mt-0' : ''}><a href={link.href} target="_blank" rel="noopener noreferrer">{link.callToAction} →</a></p>
+        {:else}
+          <p class={i > 0 ? 'mt-0' : ''}><a href={link.href}>{link.callToAction} →</a></p>
+        {/if}
+      {/each}
+    {/if}
     {#if news.attachments}
       {#each news.attachments as attachment, i}
         <p class={i > 0 ? 'mt-0' : ''}><a href={attachment.url} target="_blank" rel="noopener noreferrer">{attachment.title} ↧</a></p>
