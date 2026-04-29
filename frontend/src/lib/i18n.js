@@ -93,7 +93,6 @@ export const i18n = createI18n(runtime, {
 			de: "/datenschutz",
 		},
 	},
-	prefixDefault: "always",
     strategy: ["localStorage", "preferredLanguage", "url", "baseLocale"],
 	// Matchers can be added if needed
 	// matchers: { int }
