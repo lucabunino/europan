@@ -187,14 +187,14 @@ export default {
       title: 'Date (Newest first)',
       name: 'dateDesc',
       by: [
-        { field: 'from', direction: 'desc' },
+        { field: 'date', direction: 'desc' },
       ],
     },
     {
       title: 'Date (Oldest first)',
       name: 'dateAsc',
       by: [
-        { field: 'from', direction: 'asc' },
+        { field: 'date', direction: 'asc' },
       ],
     },
   ],

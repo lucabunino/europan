@@ -71,6 +71,7 @@ $effect(() => {
   <h1 class="text-m content">{m.noTranslations()}</h1>
 {/if}
 
+<p class="form-intro">{m.formIntro()}</p>
 <form
 id="form"
 action="?/create"
@@ -98,12 +99,19 @@ use:enhance={handleEnhance}
 </form>
 
 <style>
-	form {
+	.form-intro {
 		margin-top: 5rem;
+		margin-bottom: 2rem;
+		grid-column: 3 / span 4;
+	}
+	form {
 		grid-column: 3 / span 2;
 	}
 
 	@media screen and (max-width: 1200px) {
+		.form-intro {
+			grid-column: 1 / span 6;
+		}
 		form {
 			grid-column: 1 / span 3;
 		}

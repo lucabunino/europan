@@ -1,5 +1,7 @@
 <script>
   import { urlFor } from '$lib/utils/image';
+  import * as m from "$lib/paraglide/messages"
+  
   const { 
     person = [],
     president = false,
@@ -15,9 +17,9 @@
     {/if}
   </div>
   <!-- {#if person.thumbnail}<p class="mt-0">{person.role}</p>{/if} -->
-  {#if president}<p>Président</p>{/if}
+  {#if president}<p>{m.president()}</p>{/if}
   <!-- <h2 class="mt-0">{person.name} {person.surname}{#if person.country}{@html ` (${person.country})`}{/if}</h2> -->
-  <h2 class="mt-0">{person.surname} {person.name}</h2>
+  <h2 class="mt-0">{person.name} {person.surname}</h2>
   {#if person.email}
     <h2 class="mt-0"><a href="mailto:{person.email}">{person.email} ↗</a></h2>
   {/if}

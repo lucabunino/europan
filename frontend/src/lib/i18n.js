@@ -18,7 +18,7 @@ export const i18n = createI18n(runtime, {
 		},
 		"/about/team": {
 			fr: "/a-propos/equipe",
-			de: "/uber-uns/team",
+			de: "/uber-uns/vorstand",
 		},
 		"/about/europan-switzerland": {
 			fr: "/a-propos/europan-suisse",
@@ -93,7 +93,11 @@ export const i18n = createI18n(runtime, {
 			de: "/datenschutz",
 		},
 	},
-
+	prefixDefault: "always", 
+    seo: {
+        useAlternativeLangLinks: true
+    },
+    strategy: "prefix"
 	// Matchers can be added if needed
 	// matchers: { int }
 });

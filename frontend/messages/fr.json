@@ -7,6 +7,7 @@
 	"whatIsEuropan": "Qu’est-ce qu’Europan ?",
     "europanSwitzerland": "Europan Suisse",
 	"promoter": "Organisateur",
+	"formIntro": "N'hésitez pas à nous contacter pour un entretien individuel. Nous serons ravis de vous présenter les différentes possibilités pour organiser un concours Europan.",
 
     "about": "A propos",
     "partners": "Partenaires",
@@ -22,7 +23,8 @@
     "topic": "Sujet",
     "news": "News",
     "newsletter": "Newsletter",
-    "dataProtection": "Protection des donnees",
+    "dataProtection": "Protection <br>des donnees",
+	"president": "Président",
 
     "aboutSlug": "a-propos",
     "partnersSlug": "partenaires",

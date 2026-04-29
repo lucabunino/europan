@@ -14,15 +14,17 @@ import * as m from "$lib/paraglide/messages"
 import { getTranslations } from "$lib/stores/translations.svelte.js";
 let translations = getTranslations()
 
-let alternativeHref = $state()
-if (translations.translations) {
+let alternativeHref = $derived.by(() => {
+  if (!translations.translations) return null;
+
   if (languageTag() === "fr") {
-    alternativeHref = translations.translations.find(t => t.language === "de")?.slug.current
+    return translations.translations.find(t => t.language === "de")?.slug.current;
   }
   if (languageTag() === "de") {
-    alternativeHref = translations.translations.find(t => t.language === "fr")?.slug.current
+    return translations.translations.find(t => t.language === "fr")?.slug.current;
   }
-}
+  return null;
+});
 
 // Variables
 let creditsOpen = $state(false);
@@ -43,38 +45,36 @@ function toggleCredits() {
 <footer class="text-xs">
   <div>
     <div>
+		<ul>
+			{#if $page.url.hostname !== "europan.ch"}
+			{#each availableLanguageTags as lang}
+				<li class="switch">
+				{#if data.pathname.includes(m.newsSlug()) || data.pathname.includes(m.archiveSlug())}
+					<a
+					data-sveltekit-reload
+					class={languageTag() === lang ? "active" : ""}
+					href={lang !== languageTag() && alternativeHref ? alternativeHref : i18n.route(data.pathname)}
+					hreflang={lang}
+					aria-current={lang === languageTag() ? "page" : undefined}
+					>→ {lang === "fr" ? "Français" : ""}{lang === "de" ? "Deutsch" : ""}</a>
+				{:else}
+					<a
+					data-sveltekit-reload
+					class={languageTag() === lang ? "active" : ""}
+					href={i18n.route(data.pathname)}
+					hreflang={lang}
+					aria-current={lang === languageTag() ? "page" : undefined}
+					>→ {lang === "fr" ? "Français" : ""}{lang === "de" ? "Deutsch" : ""}</a>
+				{/if}
+				</li>
+			{/each}
+			{/if}
+      </ul>
       <ul>
         <li>Europan</li>
         <li>Schweiz</li>
         <li>Suisse</li>
         <li>Svizzera</li>
-      </ul>
-      <ul>
-        {#if $page.url.hostname !== "europan.ch"}
-          {#each availableLanguageTags as lang}
-            <li class="switch">
-              {#if data.pathname.includes(m.newsSlug()) || data.pathname.includes(m.archiveSlug())}
-                <a
-                data-sveltekit-reload
-                class={languageTag() === lang ? "active" : ""}
-                href={lang !== languageTag() && alternativeHref ? alternativeHref : i18n.route(data.pathname)}
-                hreflang={lang}
-                aria-current={lang === languageTag() ? "page" : undefined}
-                >→ {lang === "fr" ? "Français" : ""}{lang === "de" ? "Deutsch" : ""}</a>
-              {:else}
-                <a
-                data-sveltekit-reload
-                class={languageTag() === lang ? "active" : ""}
-                href={i18n.route(data.pathname)}
-                hreflang={lang}
-                aria-current={lang === languageTag() ? "page" : undefined}
-                >→ {lang === "fr" ? "Français" : ""}{lang === "de" ? "Deutsch" : ""}</a>
-              {/if}
-            </li>
-          {/each}
-        {/if}
-        <li>© Copyright</li>
-        <li>Europan {new Date().getFullYear()}</li>
       </ul>
       <ul>
         <li><a class:active={data.pathname == m.competitionsSlug() || data.pathname.includes(m.competitionsSlug())} href="/competitions">{m.competitions()}</a></li>
@@ -87,8 +87,12 @@ function toggleCredits() {
         <!-- HERE -->
         <!-- <li><a class:active={data.pathname == '/newsletter'} href="/newsletter">Newsletter</a></li> -->
         <li> <a href="https://www.instagram.com/europan_europe/" target="_blank" rel="noopener noreferrer">Instagram ↗</a></li>
-        <li><a class:active={data.pathname == m.dataProtectionSlug()} href="/data-protection">{m.dataProtection()}</a></li>
-        <li><button class:active={creditsOpen} onclick={(e) => toggleCredits()}>{#if !creditsOpen}{m.credits()}{:else}{m.close()}{/if}</button></li>
+        <li><a class:active={data.pathname == m.dataProtectionSlug()} href="/data-protection">{@html m.dataProtection()}</a></li>
+      </ul>
+	   <ul>
+        <li>© Copyright</li>
+        <li>Europan {new Date().getFullYear()}</li>
+		<li><button class:active={creditsOpen} onclick={(e) => toggleCredits()}>{#if !creditsOpen}{m.credits()}{:else}{m.close()}{/if}</button></li>
       </ul>
     </div>
   </div>
