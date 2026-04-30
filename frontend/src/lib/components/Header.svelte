@@ -472,7 +472,9 @@ nav {
 .menu-item:before {
   content: '';
   display: block;
-  height: 1.3em;
+  height: -webkit-fill-available;
+  height: -moz-available;
+  height: stretch;
   top: -.1em;
   background-color: var(--blackOpacity);
   position: absolute;
