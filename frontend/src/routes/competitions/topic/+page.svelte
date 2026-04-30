@@ -10,7 +10,7 @@ import * as m from "$lib/paraglide/messages"
 
 <article class="content">
   <section class="page-title">
-    <h2 class="text-l">{m.topic()} E{data.competition.edition}</h2>
+    <h2 class="text-l">E{data.competition.edition}: {m.topic()}</h2>
   </section>
   <section class="body">
     <PortableText

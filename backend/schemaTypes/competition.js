@@ -13,6 +13,9 @@ export default {
     { name: 'jury'},
     { name: 'sites'},
   ],
+  fieldsets: [
+	{ name: 'juryPresident' }
+  ],
   fields: [
     {
       name: 'language',
@@ -184,6 +187,8 @@ export default {
     },
     {
       name: 'juryPresident',
+	  title: 'Person',
+	  fieldset: 'juryPresident',
       type: 'reference',
       to: [{type: 'person'}],
       options: {
@@ -192,6 +197,13 @@ export default {
           params: { language: document?.language },
         }),
       },
+      group: 'jury',
+    },
+	{
+      name: 'juryPresidentFeminine',
+	  title: 'Use Feminine',
+	  fieldset: 'juryPresident',
+      type: 'boolean',
       group: 'jury',
     },
     {

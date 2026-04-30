@@ -6,13 +6,13 @@
 
 	"whatIsEuropan": "Qu’est-ce qu’Europan ?",
     "europanSwitzerland": "Europan Suisse",
-	"promoter": "Devenez organisateur·trice",
+	"promoter": "Devenez porteur de projet",
 	"formIntro": "N'hésitez pas à nous contacter pour un entretien individuel. Nous serons ravis de vous présenter les différentes possibilités pour organiser un concours Europan.",
 
     "about": "A propos",
     "partners": "Partenaires",
     "supportUs": "Soutenez-nous",
-    "team": "Equipe",
+    "team": "Comité",
     "archive": "Archive",
     "contact": "Contact",
     "competitions": "Concours",
@@ -25,6 +25,7 @@
     "newsletter": "Newsletter",
     "dataProtection": "Protection <br>des donnees",
 	"president": "Président",
+	"presidentFeminine": "Présidente",
 
     "aboutSlug": "a-propos",
     "partnersSlug": "partenaires",

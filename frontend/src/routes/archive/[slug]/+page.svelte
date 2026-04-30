@@ -30,7 +30,7 @@ if (data.singleCompetition[0]?._translations) {
       <p class="mt-0 jury-title text-m">Jury
       <div class="content grid cols-3 text-xs">
         {#if data.singleCompetition[0].juryPresident}
-          <Person person={data.singleCompetition[0].juryPresident} president={true}/>
+          <Person person={data.singleCompetition[0].juryPresident} president={true}  presidentFeminine={data.singleCompetition[0].juryPresidentFeminine ? true : false}/>
         {/if}      
         {#each data.singleCompetition[0].jury as juror, i}
           <Person person={juror}/>

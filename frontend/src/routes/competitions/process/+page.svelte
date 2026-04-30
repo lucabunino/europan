@@ -8,7 +8,7 @@ import * as m from "$lib/paraglide/messages"
 
 <article class="content">
   <section class="page-title">
-    <h2 class="text-l page-title">{m.process()}</h2>
+    <h2 class="text-l page-title">E{data.competition.edition}: {m.process()}</h2>
   </section>
   <div class="body">
     <PortableText
