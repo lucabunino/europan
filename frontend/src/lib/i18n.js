@@ -17,7 +17,7 @@ export const i18n = createI18n(runtime, {
 			de: "/uber-uns/unterstützen-sie-uns",
 		},
 		"/about/team": {
-			fr: "/a-propos/equipe",
+			fr: "/a-propos/comite",
 			de: "/uber-uns/vorstand",
 		},
 		"/about/europan-switzerland": {
