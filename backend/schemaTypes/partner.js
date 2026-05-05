@@ -13,7 +13,7 @@ export default {
     {
       name: 'language',
       type: 'string',
-      readOnly: true,
+      readOnly: false,
       options: {
         list: [
           { title: 'German', value: 'de' },

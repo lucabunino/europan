@@ -23,7 +23,7 @@ export const myStructure = (S, context) => {
             id: 'partners-de',
             filter: `language == "de"`,
             S,
-            context
+            context,
           }),
           orderableDocumentListDeskItem({
             type: 'partner',
@@ -31,8 +31,17 @@ export const myStructure = (S, context) => {
             id: 'partners-fr',
             filter: `language == "fr"`,
             S,
-            context
-          })
+            context,
+          }),
+		  S.listItem()
+          .title('Partners [Unassigned]')
+          .icon(EmptyIcon)
+          .child(
+            S.documentList()
+              .title('Unassigned Partners')
+              .schemaType('partner')
+              .filter('_type == "partner" && !defined(language)')
+          )
         ])
     );
 
