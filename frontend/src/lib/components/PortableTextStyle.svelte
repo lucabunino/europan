@@ -34,6 +34,9 @@
   color: var(--blue);
   text-decoration: underline;
 }
+a {
+	display: inline;
+}
 a:hover {
   text-decoration: none;
 }

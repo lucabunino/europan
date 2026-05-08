@@ -1,10 +1,10 @@
-import {BellIcon} from '@sanity/icons'
+import {DocumentIcon} from '@sanity/icons'
 import {isUniqueOtherThanLanguage} from "./_isUniqueOtherThanLanguage.js";
 import {formatDate} from "./_formatDate.js";
 
 export default {
-  name: 'news',
-  icon: BellIcon,
+  name: 'page',
+  icon: DocumentIcon,
   type: 'document',
   fieldsets: [
     {
@@ -26,15 +26,10 @@ export default {
     },
     {
       name: 'title',
-      type: 'text',
-      rows: 2,
-    },
-    {
-      name: 'subtitle',
       type: 'string',
     },
     {
-      name: 'place',
+      name: 'subtitle',
       type: 'string',
     },
     {
@@ -45,31 +40,6 @@ export default {
         source: 'title',
         maxLength: 96,
         isUnique: isUniqueOtherThanLanguage,
-      },
-    },
-    {
-      name: 'date',
-      type: 'date',
-      options: {
-        dateFormat: 'DD.MM.YY',
-      },
-      initialValue: () => new Date().toISOString().split('T')[0],
-      validation: (Rule) => Rule.required(),
-    },
-    {
-      name: 'from',
-      fieldset: 'duration',
-      type: 'date',
-      options: {
-        dateFormat: 'DD.MM.YY',
-      },
-    },
-    {
-      name: 'to',
-      fieldset: 'duration',
-      type: 'date',
-      options: {
-        dateFormat: 'DD.MM.YY',
       },
     },
     {
@@ -149,31 +119,6 @@ export default {
       ],
     },
     {
-      name: 'links',
-      type: 'array',
-      of: [
-        {
-          type: 'object',
-          fields: [
-            {
-              name: 'callToAction',
-              type: 'string',
-            },
-            {
-              name: 'href',
-              type: 'string',
-            },
-            {
-              title: 'Open in new tab',
-              name: 'blank',
-              description: 'Meant to be used when the link is from another domain',
-              type: 'boolean'
-            }
-          ]
-        }
-      ],
-    },
-    {
       name: 'attachments',
       type: 'array',
       of: [
@@ -212,14 +157,14 @@ export default {
       title: 'Date (Newest first)',
       name: 'dateDesc',
       by: [
-        { field: 'date', direction: 'desc' },
+        { field: 'from', direction: 'desc' },
       ],
     },
     {
       title: 'Date (Oldest first)',
       name: 'dateAsc',
       by: [
-        { field: 'date', direction: 'asc' },
+        { field: 'from', direction: 'asc' },
       ],
     },
   ],

@@ -17,19 +17,19 @@ export const i18n = createI18n(runtime, {
 			de: "/uber-uns/unterstützen-sie-uns",
 		},
 		"/about/team": {
-			fr: "/a-propos/equipe",
-			de: "/uber-uns/team",
+			fr: "/a-propos/comite",
+			de: "/uber-uns/vorstand",
 		},
-		"/about/what-is-europan": {
-			fr: "/a-propos/qu-est-ce-qu-europan",
-			de: "/uber-uns/was-ist-europan",
+		"/about/europan-switzerland": {
+			fr: "/a-propos/europan-suisse",
+			de: "/uber-uns/europan-schweiz",
 		},
 		"/archive": {
 			fr: "/archive",
 			de: "/archiv",
 		},
-    "/archive/[slug]" : {
-      fr: "/archive/[slug]",
+		"/archive/[slug]" : {
+		fr: "/archive/[slug]",
 			de: "/archiv/[slug]",
 		},
 		"/contact": {
@@ -40,32 +40,40 @@ export const i18n = createI18n(runtime, {
 			fr: "/concours",
 			de: "/wettbewerb",
 		},
+		"/competitions/what-is-europan": {
+			fr: "/concours/qu-est-ce-qu-europan",
+			de: "/wettbewerb/was-ist-europan",
+		},
+		"/competitions/promoter": {
+			fr: "/concours/organisateur",
+			de: "/wettbewerb/auslober-in",
+		},
 		"/competitions/jury": {
 			fr: "/concours/jury",
-			de: "/wettbewerbe/jury",
+			de: "/wettbewerb/jury",
 		},
 		"/competitions/process": {
 			fr: "/concours/deroulement",
-			de: "/wettbewerbe/prozess",
+			de: "/wettbewerb/prozess",
 		},
 		"/competitions/results": {
 			fr: "/concours/resultats",
-			de: "/wettbewerbe/ergebnisse",
+			de: "/wettbewerb/ergebnisse",
 		},
 		"/competitions/sites": {
 			fr: "/concours/lieux",
-			de: "/wettbewerbe/orte",
+			de: "/wettbewerb/orte",
 		},
 		"/competitions/topic": {
 			fr: "/concours/sujet",
-			de: "/wettbewerbe/thema",
+			de: "/wettbewerb/thema",
 		},
 		"/news": {
 			fr: "/news",
 			de: "/news",
 		},
-    "/news/[slug]" : {
-      fr: "/news/[slug]",
+		"/news/[slug]" : {
+		fr: "/news/[slug]",
 			de: "/news/[slug]",
 		},
 		"/newsletter": {
@@ -85,7 +93,7 @@ export const i18n = createI18n(runtime, {
 			de: "/datenschutz",
 		},
 	},
-
+    strategy: ["localStorage", "preferredLanguage", "url", "baseLocale"],
 	// Matchers can be added if needed
 	// matchers: { int }
 });

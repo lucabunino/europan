@@ -1,4 +1,4 @@
-import { UsersIcon, InfoOutlineIcon, TokenIcon} from '@sanity/icons'
+import { UsersIcon, InfoOutlineIcon, TokenIcon, EmptyIcon, InfoFilledIcon, DocumentIcon} from '@sanity/icons'
 import { orderableDocumentListDeskItem } from '@sanity/orderable-document-list'
 
 export const myStructure = (S, context) => {
@@ -23,7 +23,7 @@ export const myStructure = (S, context) => {
             id: 'partners-de',
             filter: `language == "de"`,
             S,
-            context
+            context,
           }),
           orderableDocumentListDeskItem({
             type: 'partner',
@@ -31,8 +31,17 @@ export const myStructure = (S, context) => {
             id: 'partners-fr',
             filter: `language == "fr"`,
             S,
-            context
-          })
+            context,
+          }),
+		  S.listItem()
+          .title('Partners [Unassigned]')
+          .icon(EmptyIcon)
+          .child(
+            S.documentList()
+              .title('Unassigned Partners')
+              .schemaType('partner')
+              .filter('_type == "partner" && !defined(language)')
+          )
         ])
     );
 
@@ -45,22 +54,47 @@ export const myStructure = (S, context) => {
         S.list()
           .title('About')
           .items([
-            S.documentTypeListItem('whatIsEuropan'),
+			S.listItem()
+				.title('Europan Switzerland')
+				.icon(DocumentIcon)
+				.child(
+				S.document()
+					.schemaType('pageSelector')
+					.documentId('europan-switzerland')
+					.title('Europan Switzerland')
+				),
             S.documentTypeListItem('team'),
             partnersMenu,
             S.documentTypeListItem('supportUs')
           ])
       ),
-    S.documentTypeListItem('contact')
+    S.documentTypeListItem('contact'),
+	S.documentTypeListItem('page')
+      .title('Pages'),
   ];
   const competition = [
     S.divider(),
-    S.documentTypeListItem('competition')
-      .title('Competitions'),
-    S.documentTypeListItem('site')
-      .title('Sites'),
-    S.documentTypeListItem('project')
-      .title('Projects'),
+    S.listItem()
+      .title('What is Europan')
+      .icon(DocumentIcon)
+      .child(
+        S.document()
+          .schemaType('pageSelector')
+          .documentId('what-is-europan')
+          .title('What is Europan')
+      ),
+	S.listItem()
+      .title('Promoter')
+      .icon(DocumentIcon)
+      .child(
+        S.document()
+          .schemaType('pageSelector')
+          .documentId('promoter')
+          .title('promoter')
+      ),
+    S.documentTypeListItem('competition').title('Competitions'),
+    S.documentTypeListItem('site').title('Sites'),
+    S.documentTypeListItem('project').title('Projects'),
     S.documentTypeListItem('person')
       .title('People')
       .icon(UsersIcon),

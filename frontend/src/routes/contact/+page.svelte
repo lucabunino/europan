@@ -54,9 +54,10 @@ $effect(() => {
 </script>
 
 <section class="page-title">
-  <h2 class="text-l">Contact</h2>
+  <h2 class="text-l">{m.contact()}</h2>
 </section>
 <section class="content contact-grid text-xs">
+{#if data.contact.description}
   <p>{data.contact.description}</p>
   <div>
     {#each data.contact.adresses as adress}
@@ -69,6 +70,19 @@ $effect(() => {
       <p class="mt-0"><a href="{adress.adressWebsiteUrl}" target="_blank" rel="noopener noreferrer">{adress.adressWebsite} ↗</a></p>
     {/each}
   </div>
+{:else}
+    {#each data.contact.adresses as adress}
+		<div>
+		<p>{adress.adressName}</p>
+		<p class="mt-0">{adress.adressLine1}</p>
+		<p class="mt-0">{adress.adressLine2}</p>
+		<p class="mt-0">{adress.adressCountry}</p>
+		<p class="mt-0"><a href="tel:{adress.adressPhone}">{adress.adressPhone}</a></p>
+		<p class="mt-0"><a href="mailto:{adress.adressEmail}">{adress.adressEmail}</a></p>
+		<p class="mt-0"><a href="{adress.adressWebsiteUrl}" target="_blank" rel="noopener noreferrer">{adress.adressWebsite} ↗</a></p>
+		</div>
+    {/each}
+{/if}
   <div>
     <form
     id="form"
@@ -81,42 +95,37 @@ $effect(() => {
       <input type="email" id="email" name="email" placeholder={m.email()} class:empty={isEmptyEmail} onclick={() => isEmptyEmail = false}>
       <div class="button-container">
         <button type="submit" onclick={() => isSubmitting = true} style="{isErrorous ? 'widht:100%' : 'width:9rem'}{isEmpty ? 'widht:100%' : ''}">
-          {#if isSubmitted}
-            Envoyé
-          {:else if isSubmitting}
-            En cours
-          {:else if isErrorous}
-            Erreur lors de l'envoi. Veuillez réessayer.
-          {:else if isEmpty}
-            Champs vides
-          {:else}
-            Envoyer
-          {/if}
+          	{#if isSubmitted}
+              {m.sent()}
+            {:else if isSubmitting}
+              {m.sending()}
+            {:else if isErrorous}
+              {m.sendError()}
+            {:else if isEmpty}
+              {m.emptyFields()}
+            {:else}
+              {m.send()}
+            {/if}
         </button>
       </div>
     </form>
-    <!-- HERE
-    <h3>Newsletter</h3>
-    <p class="contact-newsletter-info">{data.contact[0].newsletterMessage}</p>
-    <form action="">
-      <input type="email" id="email" name="email" placeholder="E-mail">
-      <div class="button-container">
-        <button type="submit" onclick={() => isSubmitting = true} style="{isErrorous ? 'widht:100%' : 'width:9rem'}{isEmpty ? 'widht:100%' : ''}">
-          Inscription
-        </button>
-      </div>
-    </form> -->
+	<!-- NOT ACTIVE
+	<div class="newsletter">
+		<h3>Newsletter</h3>
+		{#if data.contact.newsletterMessage}<p class="contact-newsletter-info">{data.contact.newsletterMessage}</p>{/if}
+		<form action="">
+		<input type="email" id="email" name="email" placeholder="E-mail">
+		<div class="button-container">
+			<button type="submit" onclick={() => isSubmitting = true} style="{isErrorous ? 'widht:100%' : 'width:9rem'}{isEmpty ? 'widht:100%' : ''}">
+			Inscription
+			</button>
+		</div>
+		</form>
+	</div> -->
   </div>
 </section>
 
 <style>
-/* h3,
-form:last-of-type {
-  margin-top: 1em;
-}
-.contact-newsletter-info {
-  width: calc(50% - var(--gutter)/2);
-} */
 .contact-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -150,5 +159,18 @@ form:last-of-type {
   .contact-grid > *:nth-child(2) {
     grid-column: 1 / span 4;
   }
+}
+
+.newsletter,
+.newsletter>form {
+  margin-top: 1em;
+}
+.contact-newsletter-info {
+	width: calc(50% - var(--gutter)/2);
+}
+@media screen and (max-width: 600px) {
+	.contact-newsletter-info {
+		width: auto;
+	}
 }
 </style>

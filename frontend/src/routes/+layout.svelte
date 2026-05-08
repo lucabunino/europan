@@ -1,5 +1,7 @@
 <script>
 const { data, children } = $props()
+$inspect(data)
+
 // Import
 import '../app.css'
 import { page } from '$app/stores';
