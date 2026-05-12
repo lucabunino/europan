@@ -3,6 +3,8 @@ const {
   news = [],
 } = $props();
 
+$inspect(news)
+
 import { urlFor } from '$lib/utils/image';
 import { PortableText } from '@portabletext/svelte'
 import PortableTextStyle from '$lib/components/PortableTextStyle.svelte';
@@ -67,7 +69,7 @@ $effect(() => {
     >
     {#each news.images as image}
       <swiper-slide>
-        <img class="news-img {image.objectFit}" src={urlFor(image.image).width(1920)} alt="Image for {news.title}">
+        <img class="news-img {image.objectFit} {image.overlay ? 'overlay' : undefined}" src={urlFor(image.image).width(1920)} alt="Image for {news.title}">
       </swiper-slide>
     {/each}
     </swiper-container>
@@ -95,7 +97,7 @@ $effect(() => {
     {#if news.links}
       {#each news.links as link, i}
         {#if link.blank}
-          <p class={i > 0 ? 'mt-0' : ''}><a href={link.href} target="_blank" rel="noopener noreferrer">{link.callToAction} →</a></p>
+          <p class={i > 0 ? 'mt-0' : ''}><a href={link.href} target="_blank" rel="noopener noreferrer">{link.callToAction} ↗</a></p>
         {:else}
           <p class={i > 0 ? 'mt-0' : ''}><a href={link.href}>{link.callToAction} →</a></p>
         {/if}

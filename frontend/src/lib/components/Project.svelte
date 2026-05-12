@@ -6,6 +6,7 @@ const {
 import { urlFor } from '$lib/utils/image';
 import { PortableText } from '@portabletext/svelte'
 import PortableTextStyle from '$lib/components/PortableTextStyle.svelte';
+import * as m from "$lib/paraglide/messages"
 </script>
 
 <div class="project">
@@ -45,7 +46,7 @@ import PortableTextStyle from '$lib/components/PortableTextStyle.svelte';
       {/if}
     </div>
     {#if project.europanEuropeUrl}
-      <a class="externalLink" target="_blank" rel="noopener noreferrer" href={project.europanEuropeUrl}>Voir le projet sur Europan Europe ↗</a>
+      <a class="externalLink" target="_blank" rel="noopener noreferrer" href={project.europanEuropeUrl}>{m.voir_project()} ↗</a>
     {/if}
   </div>
 </div>
