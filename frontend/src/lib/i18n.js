@@ -93,7 +93,7 @@ export const i18n = createI18n(runtime, {
 			de: "/datenschutz",
 		},
 	},
-    strategy: ["localStorage", "preferredLanguage", "url", "baseLocale"],
+    strategy: ["localStorage", "cookie", "url", "baseLocale"],
 	// Matchers can be added if needed
 	// matchers: { int }
 });
