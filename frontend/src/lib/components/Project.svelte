@@ -18,9 +18,9 @@ import * as m from "$lib/paraglide/messages"
     <div>
       <p class="mt-0">{project.title}</p>
       <p class="mt-0">{project.site.title}</p>
-      {#if result == 1}<p class="mt-0">Winner</p>{/if}
-      {#if result == 2}<p class="mt-0">Finalist</p>{/if}
-      {#if result == 3}<p class="mt-0">Special Mention</p>{/if}
+      {#if result == 1}<p class="mt-0">{m.winner()}</p>{/if}
+      {#if result == 2}<p class="mt-0">{m.finalist()}</p>{/if}
+      {#if result == 3}<p class="mt-0">{m.special_mention()}</p>{/if}
     </div>
     <div>
       {#each project.team as person, i}
