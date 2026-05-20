@@ -104,7 +104,7 @@ function toggleCredits() {
     <p class="mt-0">{m.projectLeader()}: <a class="credits-link" href="https://www.studio-af.ch/" target="_blank" rel="noopener noreferrer">Alberto Figuccio ↗</a></p>
     <p class="mt-0">{m.editors()}: <a class="credits-link" href="https://www.studio-af.ch/" target="_blank" rel="noopener noreferrer">Alberto Figuccio ↗</a>, <a class="credits-link" href="https://urbanites.ch/bureau/" target="_blank" rel="noopener noreferrer">Marine Girault ↗</a> et <a class="credits-link" href="https://csarch.co/" target="_blank" rel="noopener noreferrer">Konrad Scheffer ↗</a></p>
     <p class="mt-0">{m.administration()}: Anna Bleuer</p>
-    <p class="mt-0">{m.jury()} E18: Luiza Puiu, Katja Jug, ETHZ, Marion Nitsch</p>
+    <p class="mt-0">{m.photographer()}: Jury E18</p>
   </div>
 {/if}
 

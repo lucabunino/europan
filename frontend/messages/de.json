@@ -26,6 +26,10 @@
     "dataProtection": "Datenschutz",
 	"president": "Juryvorsitz",
 	"presidentFeminine": "Juryvorsitzende",
+	"winner": "Winner",
+	"finalist": "Finalist",
+	"special_mention": "Special Mention",
+	"photographer": "Fotograf",
 
     "aboutSlug": "uber-uns",
     "partnersSlug": "partner",

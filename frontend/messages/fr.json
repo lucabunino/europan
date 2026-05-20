@@ -26,6 +26,10 @@
     "dataProtection": "Protection <br>des donnees",
 	"president": "Président",
 	"presidentFeminine": "Présidente",
+	"winner": "Winner",
+	"finalist": "Finalist",
+	"special_mention": "Special Mention",
+	"photographer": "Photographe",
 
     "aboutSlug": "a-propos",
     "partnersSlug": "partenaires",
