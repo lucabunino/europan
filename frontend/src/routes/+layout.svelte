@@ -15,6 +15,7 @@ import * as m from "$lib/paraglide/messages"
 
 import Footer from '$lib/components/Footer.svelte';
 import Header from '$lib/components/Header.svelte';
+import LangSwitch from '$lib/components/LangSwitch.svelte';
 
 // Variables
 let isLoaded = $state(false);
@@ -71,6 +72,7 @@ function handleKey({key}) {if (key === 'G') {viewGrid = !viewGrid}}
 
 <ParaglideJS {i18n}>
   <Footer {data}/>
+  <LangSwitch {data}/>
 </ParaglideJS>
 
 <style>
