@@ -29,9 +29,13 @@ function getHref(lang) {
 </script>
 
 {#if $page.url.hostname !== "europan.ch" && availableLanguageTags.length > 1}
-<div class="lang-switch text-xs">
+<nav class="lang-switch text-xs" aria-label="Language switcher">
   <div class="lang-item-container">
-    <span class="lang-item lang-current">{languageTag().toUpperCase()}</span>
+    <span
+      class="lang-item lang-current"
+      aria-current="true"
+      aria-label={languageTag() === "fr" ? "Français — langue active" : "Deutsch — aktive Sprache"}
+    >{languageTag().toUpperCase()}</span>
   </div>
   {#each availableLanguageTags.filter(l => l !== languageTag()) as lang}
     <div class="lang-item-container">
@@ -40,11 +44,12 @@ function getHref(lang) {
         data-sveltekit-reload
         href={getHref(lang)}
         hreflang={lang}
-        aria-label={lang === "fr" ? "Français" : "Deutsch"}
+        lang={lang}
+        aria-label={lang === "fr" ? "Passer en Français" : "Auf Deutsch wechseln"}
       >{lang.toUpperCase()}</a>
     </div>
   {/each}
-</div>
+</nav>
 {/if}
 
 <style>
@@ -61,6 +66,7 @@ function getHref(lang) {
   -ms-flex-direction: row;
   flex-direction: row;
   gap: .2rem;
+  user-select: none;
 }
 .lang-item-container {
   overflow: hidden;
