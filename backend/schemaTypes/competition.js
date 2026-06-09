@@ -1,5 +1,4 @@
-import {EmptyIcon} from '@sanity/icons'
-import {MarkerIcon} from '@sanity/icons'
+import {EmptyIcon, MarkerIcon, DownloadIcon} from '@sanity/icons'
 import {isUniqueOtherThanLanguage} from "./_isUniqueOtherThanLanguage.js";
 
 export default {
@@ -106,7 +105,23 @@ export default {
               },
             ]
           },
-        }
+        },
+		{
+			name: 'attachmentBlock',
+			type: 'object',
+			icon: DownloadIcon,
+			title: 'Attachment',
+			fields: [
+				{
+					name: 'attachmentTitle',
+					type: 'string',
+				},
+				{
+					name: 'attachmentFile',
+					type: 'file',
+				},
+			],
+		}
       ],
       group: 'topic',
     },
@@ -142,7 +157,23 @@ export default {
               },
             ]
           },
-        }
+        },
+		{
+			name: 'attachmentBlock',
+			type: 'object',
+			icon: DownloadIcon,
+			title: 'Attachment',
+			fields: [
+				{
+					name: 'attachmentTitle',
+					type: 'string',
+				},
+				{
+					name: 'attachmentFile',
+					type: 'file',
+				},
+			],
+		}
       ],
       group: 'process',
     },

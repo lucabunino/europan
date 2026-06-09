@@ -25,6 +25,9 @@ import * as m from "$lib/paraglide/messages"
       marks: {
         link: PortableTextStyle,
       },
+	  types: {
+        attachmentBlock: PortableTextStyle,
+      }
     }}
     />
   </section>

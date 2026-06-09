@@ -10,7 +10,7 @@
   let { portableText, children }: Props = $props();
 
   let {global, value} = $derived(portableText)
-  let {style, listItem} = $derived(value);  
+  let {style, listItem} = $derived(value);
 </script>
 
 {#if style === 'normal' && !listItem}
@@ -27,6 +27,8 @@
   <li>{@render children()}</li>
 {:else if listItem == 'number'}
   <li>{@render children()}</li>
+{:else if value?._type === 'attachmentBlock'}
+  <p class="attachment"><a href={value.url} target="_blank" rel="noopener noreferrer">{value.title} ↧</a></p>
 {/if}
 
 <style>
@@ -60,5 +62,8 @@ h3 {
 h4 {
   margin-top: 1.5em;
   margin-bottom: .3em;
+}
+:global(.attachment + .attachment) {
+	margin-top: 0;
 }
 </style>

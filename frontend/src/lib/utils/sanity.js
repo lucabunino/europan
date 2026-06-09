@@ -162,6 +162,22 @@ export async function getLastCompetition(lang) {
 	return await client.fetch(`
 		*[_type == "competition" && language == $lang && !(_id in path('drafts.**'))] | order(edition desc)[0] {
 			...,
+			topicBody[] {
+                ...,
+                _type == "attachmentBlock" => {
+					...,
+					"title": attachmentTitle,
+					"url": attachmentFile.asset->url
+                }
+            },
+			processBody[] {
+                ...,
+                _type == "attachmentBlock" => {
+					...,
+                    "title": attachmentTitle,
+					"url": attachmentFile.asset->url
+                }
+            },
 			juryPresident->{...,},
 			jury[]->,
 			featuredSites[]{
@@ -201,6 +217,22 @@ export async function getCompetition(slug, lang) {
 	return await client.fetch(`
     *[_type == "competition" && language == $lang && slug.current == $slug] {
 			...,
+			topicBody[] {
+                ...,
+                _type == "attachmentBlock" => {
+					...,
+                    "title": attachmentTitle,
+					"url": attachmentFile.asset->url
+                }
+            },
+			processBody[] {
+                ...,
+                _type == "attachmentBlock" => {
+					...,
+                    "title": attachmentTitle,
+					"url": attachmentFile.asset->url
+                }
+            },
 			juryPresident->{...,},
 			jury[]->,
 			featuredSites[]->{...} | order(title asc),
