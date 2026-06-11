@@ -103,7 +103,11 @@ export async function getPage(id, lang) {
   return await client.fetch(`
     *[_id == $id && !(_id in path('drafts.**'))][0] {
       "content": ${pageField}->{
-        ...
+        ...,
+        attachments[] {
+          "title": attachmentTitle,
+          "url": attachmentFile.asset->url
+        }
       },
       "_translations": [
         ${translationField}->{
