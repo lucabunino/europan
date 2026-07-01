@@ -168,12 +168,32 @@ export async function getLastCompetition(lang) {
 				"site": site->,
 				"siteUrl": siteUrl
 			} | order(site.title asc),
+			attachments[] {
+				"title": attachmentTitle,
+				"url": attachmentFile.asset->url
+			},
 			"featuredProjects": *[_type == "project" && references(^._id)] {
 				...,
 				competition->{...},
 				team[]->{...},
 				site->{...}
 			} | order(site.title asc, result)
+		}
+	`, { lang });
+}
+
+// Menu competitions
+export async function getMenuCompetitions(lang) {
+	return await client.fetch(`
+		*[_type == "competition" && language == $lang && displayInMenu == true && !(_id in path('drafts.**'))] | order(edition desc) {
+			edition,
+			slug,
+			title,
+			"hasTopic": count(topicBody) > 0,
+			"hasProcess": count(processBody) > 0,
+			"hasSites": count(featuredSites) > 0,
+			"hasJury": defined(juryPresident) || count(jury) > 0,
+			showResults
 		}
 	`, { lang });
 }
@@ -191,6 +211,10 @@ export async function getArchive(lang) {
 					title,
 				}
 			} | order(title asc),
+			attachments[] {
+				"title": attachmentTitle,
+				"url": attachmentFile.asset->url
+			},
 			edition
     }
 	`, { lang });
@@ -209,6 +233,10 @@ export async function getCompetition(slug, lang) {
 				slug,
 				language
 			},
+			attachments[] {
+				"title": attachmentTitle,
+				"url": attachmentFile.asset->url
+			},
 			"featuredProjects": *[_type == "project" && references(^._id)] {
 				...,
 				competition->{...},
@@ -219,19 +247,19 @@ export async function getCompetition(slug, lang) {
 	`, { slug, lang });
 }
 
-// Competition
-export async function getSite(slug, lang) {
+// Site
+export async function getSite(slug, competitionSlug, lang) {
   return await client.fetch(`
     *[_type == "site" && language == $lang && slug.current == $slug && !(_id in path('drafts.**'))][0] {
 			title,
-      "referencingProjects": *[_type == "project" && references(^._id) && !(_id in path('drafts.**'))] {
+      "referencingProjects": *[_type == "project" && references(^._id) && !(_id in path('drafts.**')) && competition->slug.current == $competitionSlug] {
         ...,
         competition->{title, edition, slug},
         team[]->{...},
         site->{title, slug}
       } | order(competition.edition desc)
     }
-  `, { slug, lang });
+  `, { slug, competitionSlug, lang });
 }
 
 // SEO

@@ -12,6 +12,7 @@ export default {
     { name: 'process'},
     { name: 'jury'},
     { name: 'sites'},
+    { name: 'results'},
   ],
   fieldsets: [
 	{ name: 'juryPresident' }
@@ -55,6 +56,12 @@ export default {
         maxLength: 96,
         isUnique: isUniqueOtherThanLanguage,
       },
+      group: 'basics',
+    },
+	{
+      name: 'displayInMenu',
+      type: 'boolean',
+      description: 'Show this competition as its own top-level item in the header menu',
       group: 'basics',
     },
     // {
@@ -183,7 +190,27 @@ export default {
     {
       name: 'showResults',
       type: 'boolean',
-      group: 'sites',
+      group: 'results',
+    },
+    {
+      name: 'attachments',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            {
+              name: 'attachmentTitle',
+              type: 'string',
+            },
+            {
+              name: 'attachmentFile',
+              type: 'file',
+            },
+          ]
+        }
+      ],
+      group: 'results',
     },
     {
       name: 'juryPresident',

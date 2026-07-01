@@ -1,18 +1,20 @@
-import { getLastCompetition, getPages } from '$lib/utils/sanity';
+import { getLastCompetition, getMenuCompetitions, getPages } from '$lib/utils/sanity';
 import { getSEO } from '$lib/utils/sanity';
 import { error } from '@sveltejs/kit';
 
 export async function load({ url, depends, locals }) {
 	depends("paraglide:lang")
-	let pages = await getPages(locals.paraglide.lang);	
-	let competition = await getLastCompetition(locals.paraglide.lang);	
+	let pages = await getPages(locals.paraglide.lang);
+	let competition = await getLastCompetition(locals.paraglide.lang);
+	let menuCompetitions = await getMenuCompetitions(locals.paraglide.lang);
 	let seo = await getSEO(locals.paraglide.lang);
 	let pathname = url.pathname
-	
+
 	if (competition && seo && pathname) {
 		return {
 			pages,
 			competition,
+			menuCompetitions,
 			seo,
 			pathname
 		};

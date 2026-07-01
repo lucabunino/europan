@@ -48,25 +48,33 @@ export const i18n = createI18n(runtime, {
 			fr: "/concours/organisateur",
 			de: "/wettbewerb/auslober-in",
 		},
-		"/competitions/jury": {
-			fr: "/concours/jury",
-			de: "/wettbewerb/jury",
+		"/competitions/[slug]": {
+			fr: "/concours/[slug]",
+			de: "/wettbewerb/[slug]",
 		},
-		"/competitions/process": {
-			fr: "/concours/deroulement",
-			de: "/wettbewerb/prozess",
+		"/competitions/[slug]/jury": {
+			fr: "/concours/[slug]/jury",
+			de: "/wettbewerb/[slug]/jury",
 		},
-		"/competitions/results": {
-			fr: "/concours/resultats",
-			de: "/wettbewerb/ergebnisse",
+		"/competitions/[slug]/process": {
+			fr: "/concours/[slug]/deroulement",
+			de: "/wettbewerb/[slug]/prozess",
 		},
-		"/competitions/sites": {
-			fr: "/concours/lieux",
-			de: "/wettbewerb/orte",
+		"/competitions/[slug]/results": {
+			fr: "/concours/[slug]/resultats",
+			de: "/wettbewerb/[slug]/ergebnisse",
 		},
-		"/competitions/topic": {
-			fr: "/concours/sujet",
-			de: "/wettbewerb/thema",
+		"/competitions/[slug]/sites": {
+			fr: "/concours/[slug]/lieux",
+			de: "/wettbewerb/[slug]/orte",
+		},
+		"/competitions/[slug]/sites/[siteSlug]": {
+			fr: "/concours/[slug]/lieux/[siteSlug]",
+			de: "/wettbewerb/[slug]/orte/[siteSlug]",
+		},
+		"/competitions/[slug]/topic": {
+			fr: "/concours/[slug]/sujet",
+			de: "/wettbewerb/[slug]/thema",
 		},
 		"/news": {
 			fr: "/news",

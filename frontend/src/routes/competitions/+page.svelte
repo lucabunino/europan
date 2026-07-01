@@ -1,6 +1,5 @@
 <script>
 const { data } = $props()
-$inspect(data)
 
 import * as m from "$lib/paraglide/messages"
 </script>
@@ -37,4 +36,9 @@ import * as m from "$lib/paraglide/messages"
 	<a class="page no-hover" href="/competitions/promoter">
     	<h2 class="text-m">{m.promoter()}</h2>
 	</a>
+	{#each data.menuCompetitions || [] as comp}
+		<a class="page no-hover" href="/competitions/{comp.slug.current}">
+			<h2 class="text-m">E{comp.edition}</h2>
+		</a>
+	{/each}
 </section>

@@ -22,8 +22,43 @@ let timer2;
 let mobileMargin = $state()
 let isLoaded = $state(false);
 
+// Newest menu-featured competition stays nested inside "Competitions";
+// falls back to the site's true latest competition when none are flagged.
+let nestedCompetition = $derived.by(() => {
+  if (data.menuCompetitions?.length > 0) {
+    return data.menuCompetitions[0];
+  }
+  if (data.competition) {
+    return {
+      edition: data.competition.edition,
+      slug: data.competition.slug,
+      hasTopic: !!data.competition.topicBody,
+      hasProcess: !!data.competition.processBody,
+      hasSites: data.competition.featuredSites?.length > 0,
+      hasJury: !!data.competition.juryPresident || data.competition.jury?.length > 0,
+      showResults: !!data.competition.showResults,
+    };
+  }
+  return null;
+});
+let pillCompetitions = $derived(data.menuCompetitions?.length > 1 ? data.menuCompetitions.slice(1) : []);
+
+// Submenus are position:fixed (so ancestor scroll containers can't clip them);
+// their on-screen anchor point is measured off the top-level menu's own box.
+let menuEl = $state()
+let menuRight = $state(0)
+let menuTop = $state(0)
+function measureMenu() {
+  if (menuEl) {
+    const rect = menuEl.getBoundingClientRect()
+    menuRight = rect.right
+    menuTop = rect.top
+  }
+}
+
 // Lifecycle
 onMount(() => {
+  measureMenu()
   setTimeout(() => {
     isLoaded = true
   }, 700);
@@ -90,7 +125,7 @@ function handleMenuTouch(e) {
 }
 function handleMenuLeave(e) {
   activeMenuItemLast = e.target.getAttribute('data-item')
-  if (innerWidth > 900) {
+  if (innerWidth > 1024) {
     activeMenuItem = true 
   }
 }
@@ -102,16 +137,18 @@ function handleSubMenuLeave(e) {
 }
 </script>
 
+<svelte:window onresize={measureMenu}></svelte:window>
+
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <header
 class:on={activeMenu}
 onmouseenter={() => {
-  if (innerWidth > 900) {
+  if (innerWidth > 1024) {
     clearTimeout(timer);
   }
 }}
 onmouseleave={() => {
-  if (innerWidth > 900) {
+  if (innerWidth > 1024) {
     startCloseMenu();
   }
 }}
@@ -175,7 +212,7 @@ onmouseleave={() => {
    
   <nav class="text-l">
     <div class="menu-container" class:off={!activeMenu}>
-      <ul class="menu">
+      <ul class="menu" bind:this={menuEl}>
         <li class="menu-item-container mobile-only">
           <a class="menu-item"
           href="/"
@@ -201,7 +238,7 @@ onmouseleave={() => {
           onclick={(e) => {
             closeMenu()
             }}
-          >{m.competitions()}</a>
+          >{m.competitions()}{nestedCompetition ? `: E${nestedCompetition.edition}` : ''}</a>
 
           <button class="menu-item mobile-only black"
           data-item="1"
@@ -210,8 +247,8 @@ onmouseleave={() => {
           onclick={(e) => {
             handleMenuTouch(e)
           }}
-          >{m.competitions()}</button>
-          <div class="submenu-container">
+          >{m.competitions()}{nestedCompetition ? `: E${nestedCompetition.edition}` : ''}</button>
+          <div class="submenu-container" style="left: {menuRight}px; top: {menuTop}px">
           <ul class="submenu"
           class:on={activeSubmenu && activeMenuItem === '1' || activeSubmenu && activeMenuItemLast === '1'}
           onmouseenter={(e) => {
@@ -223,20 +260,69 @@ onmouseleave={() => {
           }}
           >
             <li class="menu-item-container"><a class="menu-item" data-item="1" class:off={activeSubmenuItem && activeSubmenuItem !== '1'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href="/competitions/what-is-europan">{m.whatIsEuropan()}</a></li>
-            {#if data.competition?.topicBody}
-            <li class="menu-item-container"><a class="menu-item" data-item="2" class:off={activeSubmenuItem && activeSubmenuItem !== '2'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href="/competitions/topic">E{data.competition.edition}: {m.topic()}</a></li>{/if}
-            {#if data.competition?.processBody}
-            <li class="menu-item-container"><a class="menu-item" data-item="3" class:off={activeSubmenuItem && activeSubmenuItem !== '3'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href="/competitions/process">E{data.competition.edition}: {m.process()}</a></li>{/if}
-            {#if data.competition?.featuredSites?.length > 0}
-            <li class="menu-item-container"><a class="menu-item" data-item="4" class:off={activeSubmenuItem && activeSubmenuItem !== '4'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href="/competitions/sites">E{data.competition.edition}: {m.sites()}</a></li>{/if}
-            {#if data.competition?.juryPresident || data.competition?.jury?.length > 0}
-            <li class="menu-item-container"><a class="menu-item" data-item="5" class:off={activeSubmenuItem && activeSubmenuItem !== '5'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href="/competitions/jury">E{data.competition.edition}: {m.jury()}</a></li>{/if}
-            {#if data.competition?.showResults}
-            <li class="menu-item-container"><a class="menu-item" data-item="6" class:off={activeSubmenuItem && activeSubmenuItem !== '6'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href="/competitions/results">{m.results()}</a></li>{/if}
-			<li class="menu-item-container"><a class="menu-item" data-item="7" class:off={activeSubmenuItem && activeSubmenuItem !== '7'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href="/competitions/promoter">{m.promoter()}</a></li>
+			<li class="menu-item-container"><a class="menu-item" data-item="2" class:off={activeSubmenuItem && activeSubmenuItem !== '2'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href="/competitions/promoter">{m.promoter()}</a></li>
+            {#if nestedCompetition?.hasTopic}
+            	<li class="menu-item-container"><a class="menu-item" data-item="3" class:off={activeSubmenuItem && activeSubmenuItem !== '3'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href="/competitions/{nestedCompetition.slug.current}/topic">E{nestedCompetition.edition}: {m.topic()}</a></li>{/if}
+            {#if nestedCompetition?.hasProcess}
+            	<li class="menu-item-container"><a class="menu-item" data-item="4" class:off={activeSubmenuItem && activeSubmenuItem !== '4'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href="/competitions/{nestedCompetition.slug.current}/process">E{nestedCompetition.edition}: {m.process()}</a></li>{/if}
+            {#if nestedCompetition?.hasSites}
+            	<li class="menu-item-container"><a class="menu-item" data-item="5" class:off={activeSubmenuItem && activeSubmenuItem !== '5'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href="/competitions/{nestedCompetition.slug.current}/sites">E{nestedCompetition.edition}: {m.sites()}</a></li>{/if}
+            {#if nestedCompetition?.hasJury}
+            	<li class="menu-item-container"><a class="menu-item" data-item="6" class:off={activeSubmenuItem && activeSubmenuItem !== '6'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href="/competitions/{nestedCompetition.slug.current}/jury">E{nestedCompetition.edition}: {m.jury()}</a></li>{/if}
+            {#if nestedCompetition?.showResults}
+            <li class="menu-item-container"><a class="menu-item" data-item="7" class:off={activeSubmenuItem && activeSubmenuItem !== '7'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href="/competitions/{nestedCompetition.slug.current}/results">E{nestedCompetition.edition}: {m.results()}</a></li>{/if}
           </ul>
         </div>
         </li>
+        {#each pillCompetitions as comp, i}
+        <li class="menu-item-container"
+        style="margin-bottom: {activeSubmenu && activeMenuItem === `comp-${i}` || activeSubmenu && activeMenuItemLast === `comp-${i}` ? mobileMargin : ''}px"
+        class:undelayed={activeSubmenu && activeMenuItem === `comp-${i}` || activeSubmenu && activeMenuItemLast === `comp-${i}` ? mobileMargin : ''}
+        >
+          <a class="menu-item desktop-only"
+          href="/competitions/{comp.slug.current}"
+          data-item="comp-{i}"
+          class:off={activeMenuItem && activeMenuItem !== `comp-${i}`}
+          onmouseenter={(e) => handleMenuEnter(e)}
+          onmouseleave={(e) => handleMenuLeave(e)}
+          onclick={(e) => {
+            closeMenu()
+            }}
+          >E{comp.edition}</a>
+
+          <button class="menu-item mobile-only black"
+          data-item="comp-{i}"
+          class:off={activeMenuItem && activeMenuItem !== `comp-${i}`}
+          onmouseenter={(e) => handleMenuEnterTouch(e)}
+          onclick={(e) => {
+            handleMenuTouch(e)
+          }}
+          >E{comp.edition}</button>
+          <div class="submenu-container" style="left: {menuRight}px; top: {menuTop}px">
+          <ul class="submenu"
+          class:on={activeSubmenu && activeMenuItem === `comp-${i}` || activeSubmenu && activeMenuItemLast === `comp-${i}`}
+          onmouseenter={(e) => {
+            clearTimeout(timer);
+            clearTimeout(timer2);
+          }}
+          onmouseleave={(e) => {
+            startCloseSubmenu();
+          }}
+          >
+            {#if comp.hasTopic}
+            	<li class="menu-item-container"><a class="menu-item" data-item="1" class:off={activeSubmenuItem && activeSubmenuItem !== '1'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href="/competitions/{comp.slug.current}/topic">E{comp.edition}: {m.topic()}</a></li>{/if}
+            {#if comp.hasProcess}
+            	<li class="menu-item-container"><a class="menu-item" data-item="2" class:off={activeSubmenuItem && activeSubmenuItem !== '2'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href="/competitions/{comp.slug.current}/process">E{comp.edition}: {m.process()}</a></li>{/if}
+            {#if comp.hasSites}
+            	<li class="menu-item-container"><a class="menu-item" data-item="3" class:off={activeSubmenuItem && activeSubmenuItem !== '3'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href="/competitions/{comp.slug.current}/sites">E{comp.edition}: {m.sites()}</a></li>{/if}
+            {#if comp.hasJury}
+            	<li class="menu-item-container"><a class="menu-item" data-item="4" class:off={activeSubmenuItem && activeSubmenuItem !== '4'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href="/competitions/{comp.slug.current}/jury">E{comp.edition}: {m.jury()}</a></li>{/if}
+            {#if comp.showResults}
+            	<li class="menu-item-container"><a class="menu-item" data-item="5" class:off={activeSubmenuItem && activeSubmenuItem !== '5'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href="/competitions/{comp.slug.current}/results">E{comp.edition}: {m.results()}</a></li>{/if}
+          </ul>
+        </div>
+        </li>
+        {/each}
         <li class="menu-item-container">
           <a class="menu-item"
           href="/archive"
@@ -268,7 +354,7 @@ onmouseleave={() => {
             handleMenuTouch(e)
           }}
           >{m.about()}</button>
-          <div class="submenu-container">
+          <div class="submenu-container" style="left: {menuRight}px; top: {menuTop}px">
             <ul class="submenu"
             class:on={activeSubmenu && activeMenuItem === '3' || activeSubmenu && activeMenuItemLast === '3'}
             onmouseenter={(e) => {
@@ -398,9 +484,7 @@ nav {
   padding-top: .7rem;
 }
 .submenu-container {
-  left: 100%;
-  top: 0;
-  position: absolute;
+  position: fixed;
 }
 .menu,
 .submenu {
@@ -411,6 +495,7 @@ nav {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  align-items: flex-start;
   gap: .7rem;
   list-style: none;
   padding: 0;
@@ -438,6 +523,7 @@ nav {
 }
 .menu-item-container {
   overflow: hidden;
+  flex-shrink: 0;
   -webkit-transition: var(--transition);
   -o-transition: var(--transition);
   transition: var(--transition);
@@ -458,17 +544,26 @@ nav {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
+  max-width: 58vw;
+  text-wrap: balance;
+  white-space: normal;
   -webkit-transition: var(--transition);
   -o-transition: var(--transition);
   transition: var(--transition);
   line-height: 1;
   padding: .1em .1em;
+  height: fit-content;
 }
 .menu-item-container:nth-child(1) .menu-item {-webkit-transition-delay: 0.00s;-o-transition-delay: 0.00s;transition-delay: 0.00s;}
 .menu-item-container:nth-child(2) .menu-item {-webkit-transition-delay: 0.03s;-o-transition-delay: 0.03s;transition-delay: 0.03s;}
 .menu-item-container:nth-child(3) .menu-item {-webkit-transition-delay: 0.06s;-o-transition-delay: 0.06s;transition-delay: 0.06s;}
 .menu-item-container:nth-child(4) .menu-item {-webkit-transition-delay: 0.09s;-o-transition-delay: 0.09s;transition-delay: 0.09s;}
 .menu-item-container:nth-child(5) .menu-item {-webkit-transition-delay: 0.12s;-o-transition-delay: 0.12s;transition-delay: 0.12s;}
+.menu-item-container:nth-child(6) .menu-item {-webkit-transition-delay: 0.15s;-o-transition-delay: 0.15s;transition-delay: 0.15s;}
+.menu-item-container:nth-child(7) .menu-item {-webkit-transition-delay: 0.18s;-o-transition-delay: 0.18s;transition-delay: 0.18s;}
+.menu-item-container:nth-child(8) .menu-item {-webkit-transition-delay: 0.21s;-o-transition-delay: 0.21s;transition-delay: 0.21s;}
+.menu-item-container:nth-child(9) .menu-item {-webkit-transition-delay: 0.24s;-o-transition-delay: 0.24s;transition-delay: 0.24s;}
+.menu-item-container:nth-child(10) .menu-item {-webkit-transition-delay: 0.27s;-o-transition-delay: 0.27s;transition-delay: 0.27s;}
 .menu-item:before {
   content: '';
   display: block;
@@ -491,7 +586,21 @@ nav {
   width: 0;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (min-width: 1025px) {
+  .menu,
+  .submenu {
+    max-height: calc(100vh - var(--gutter)*2);
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .menu::-webkit-scrollbar,
+  .submenu::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1024px) {
   nav {
     height: calc(100vh - var(--gutter)*2);
     overflow: scroll;
@@ -504,6 +613,7 @@ nav {
   }
   .menu-item {
     cursor: pointer;
+	max-width: unset;
   }
   .menu-item-container {
     width: calc(100vw - var(--gutter)*2);

@@ -89,12 +89,14 @@ a:any-link {
 }
 .text-xl {
   font-size: 13.3333rem;
+  font-size: 13rem;
   font-weight: 600;
   letter-spacing: -.05em;
   line-height: .9;
 }
 .text-l {
   font-size: 3.777rem;
+  font-size: 3.5rem;
   font-weight: 400;
   letter-spacing: -.03em;
   line-height: 1;

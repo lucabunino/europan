@@ -2,6 +2,7 @@
 const { data } = $props()
 import Project from "$lib/components/Project.svelte";
 import Person from "$lib/components/Person.svelte";
+import AttachmentButton from "$lib/components/AttachmentButton.svelte";
 
 // Stores
 import { getTranslations } from "$lib/stores/translations.svelte.js";
@@ -20,6 +21,9 @@ if (data.singleCompetition[0]?._translations) {
     {#if data.singleCompetition[0].subtitle}<h3 class="text-s page-subtitle">{data.singleCompetition[0].subtitle}</h3>{/if}
   </section>
   <section class="projects-grid">
+    {#each data.singleCompetition[0].attachments || [] as attachment}
+      <AttachmentButton attachment={attachment}/>
+    {/each}
     {#each data.singleCompetition[0].featuredProjects as project}
       <Project project={project} result={project.result}/>
     {/each}
