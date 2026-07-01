@@ -6,6 +6,7 @@ const {
 import { urlFor } from '$lib/utils/image';
 import { PortableText } from '@portabletext/svelte'
 import PortableTextStyle from '$lib/components/PortableTextStyle.svelte';
+import * as m from "$lib/paraglide/messages"
 </script>
 
 <div class="project">
@@ -17,9 +18,9 @@ import PortableTextStyle from '$lib/components/PortableTextStyle.svelte';
     <div>
       <p class="mt-0">{project.title}</p>
       <p class="mt-0">{project.site.title}</p>
-      {#if result == 1}<p class="mt-0">Lauréat</p>{/if}
-      {#if result == 2}<p class="mt-0">Finaliste</p>{/if}
-      {#if result == 3}<p class="mt-0">Mentionné</p>{/if}
+      {#if result == 1}<p class="mt-0">{m.winner()}</p>{/if}
+      {#if result == 2}<p class="mt-0">{m.finalist()}</p>{/if}
+      {#if result == 3}<p class="mt-0">{m.special_mention()}</p>{/if}
     </div>
     <div>
       {#each project.team as person, i}
@@ -45,7 +46,7 @@ import PortableTextStyle from '$lib/components/PortableTextStyle.svelte';
       {/if}
     </div>
     {#if project.europanEuropeUrl}
-      <a class="externalLink" target="_blank" rel="noopener noreferrer" href={project.europanEuropeUrl}>Voir le projet sur Europan Europe ↗</a>
+      <a class="externalLink" target="_blank" rel="noopener noreferrer" href={project.europanEuropeUrl}>{m.voir_project()} ↗</a>
     {/if}
   </div>
 </div>

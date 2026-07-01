@@ -1,6 +1,5 @@
 <script>
 let {data} = $props()
-$inspect(data)
 
 // Imports
 import { onMount } from "svelte";

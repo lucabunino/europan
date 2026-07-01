@@ -15,6 +15,7 @@ import * as m from "$lib/paraglide/messages"
 
 import Footer from '$lib/components/Footer.svelte';
 import Header from '$lib/components/Header.svelte';
+import LangSwitch from '$lib/components/LangSwitch.svelte';
 
 // Variables
 let isLoaded = $state(false);
@@ -71,6 +72,7 @@ function handleKey({key}) {if (key === 'G') {viewGrid = !viewGrid}}
 
 <ParaglideJS {i18n}>
   <Footer {data}/>
+  <LangSwitch {data}/>
 </ParaglideJS>
 
 <style>
@@ -101,39 +103,6 @@ main>div {
   }
   main>div {
     margin-top: 6rem;
-  }
-}
-@media screen and (max-width: 900px) {
-  nav {
-    height: calc(100vh - var(--gutter)*2);
-    overflow: scroll;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    overflow-y: scroll;
-  }
-  nav::-webkit-scrollbar {
-    display: none; /* For Chrome, Safari, and Edge */
-  }
-  .menu-item {
-    cursor: pointer;
-  }
-  .menu-item-container {
-    width: calc(100vw - var(--gutter)*2);
-  }
-  .submenu-container {
-    position: unset;
-  }
-  .submenu {
-    padding-left: 0;
-    padding-top: .7rem;
-  }
-  .desktop-only {
-    display: none !important;
-  }
-  .mobile-only {
-    display: -webkit-box !important;
-    display: -ms-flexbox !important;
-    display: flex !important;
   }
 }
 </style>

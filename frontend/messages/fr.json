@@ -17,7 +17,7 @@
     "contact": "Contact",
     "competitions": "Concours",
     "jury": "Jury",
-    "process": "Deroulement",
+    "process": "Déroulement du concours",
     "results": "Resultats",
     "sites": "Lieux",
     "topic": "Sujet",
@@ -26,6 +26,10 @@
     "dataProtection": "Protection <br>des donnees",
 	"president": "Président",
 	"presidentFeminine": "Présidente",
+	"winner": "Winner",
+	"finalist": "Finalist",
+	"special_mention": "Special Mention",
+	"photographer": "Photographe",
 
     "aboutSlug": "a-propos",
     "partnersSlug": "partenaires",
@@ -66,11 +70,14 @@
     "emptyFields": "Champs vides",
     
     "seeMoreNews": "Voir plus d’actualités",
+	"voir_project": "Voir le projet sur Europan Europe",
 
     "memberPartner": "Membre partenaire ou sponsor : >CHF 500.-",
     "memberCollective": "Membre collectif / personne morale-entreprise : CHF 500.-",
     "memberIndividual": "Membre individuel / personne physique : CHF 100.-",
     "memberStudent": "Membre étudiant (joindre une attestation) : CHF 50.-",
+
+	"administration": "Administration",
 
     "noTranslations": "Il n'y a pas de traduction pour ce contenu."
 	

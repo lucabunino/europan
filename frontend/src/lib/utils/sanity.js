@@ -103,7 +103,11 @@ export async function getPage(id, lang) {
   return await client.fetch(`
     *[_id == $id && !(_id in path('drafts.**'))][0] {
       "content": ${pageField}->{
-        ...
+        ...,
+        attachments[] {
+          "title": attachmentTitle,
+          "url": attachmentFile.asset->url
+        }
       },
       "_translations": [
         ${translationField}->{
@@ -162,6 +166,22 @@ export async function getLastCompetition(lang) {
 	return await client.fetch(`
 		*[_type == "competition" && language == $lang && !(_id in path('drafts.**'))] | order(edition desc)[0] {
 			...,
+			topicBody[] {
+                ...,
+                _type == "attachmentBlock" => {
+					...,
+					"title": attachmentTitle,
+					"url": attachmentFile.asset->url
+                }
+            },
+			processBody[] {
+                ...,
+                _type == "attachmentBlock" => {
+					...,
+                    "title": attachmentTitle,
+					"url": attachmentFile.asset->url
+                }
+            },
 			juryPresident->{...,},
 			jury[]->,
 			featuredSites[]{
@@ -225,6 +245,22 @@ export async function getCompetition(slug, lang) {
 	return await client.fetch(`
     *[_type == "competition" && language == $lang && slug.current == $slug] {
 			...,
+			topicBody[] {
+                ...,
+                _type == "attachmentBlock" => {
+					...,
+                    "title": attachmentTitle,
+					"url": attachmentFile.asset->url
+                }
+            },
+			processBody[] {
+                ...,
+                _type == "attachmentBlock" => {
+					...,
+                    "title": attachmentTitle,
+					"url": attachmentFile.asset->url
+                }
+            },
 			juryPresident->{...,},
 			jury[]->,
 			featuredSites[]->{...} | order(title asc),
