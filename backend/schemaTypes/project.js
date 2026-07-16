@@ -1,4 +1,4 @@
-import {ProjectsIcon} from '@sanity/icons'
+import {ProjectsIcon} from '@sanity/icons/Projects'
 import {isUniqueOtherThanLanguage} from "./_isUniqueOtherThanLanguage.js";
 
 export default {

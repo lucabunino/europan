@@ -1,4 +1,6 @@
-import {EmptyIcon, MarkerIcon, DownloadIcon} from '@sanity/icons'
+import {EmptyIcon} from '@sanity/icons/Empty'
+import {MarkerIcon} from '@sanity/icons/Marker'
+import {DownloadIcon} from '@sanity/icons/Download'
 import {isUniqueOtherThanLanguage} from "./_isUniqueOtherThanLanguage.js";
 
 export default {

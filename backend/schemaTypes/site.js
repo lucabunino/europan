@@ -1,4 +1,4 @@
-import {MarkerIcon} from '@sanity/icons'
+import {MarkerIcon} from '@sanity/icons/Marker'
 import {isUniqueOtherThanLanguage} from "./_isUniqueOtherThanLanguage.js";
 
 export default {

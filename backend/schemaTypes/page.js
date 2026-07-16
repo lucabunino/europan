@@ -1,4 +1,4 @@
-import {DocumentIcon} from '@sanity/icons'
+import {DocumentIcon} from '@sanity/icons/Document'
 import {isUniqueOtherThanLanguage} from "./_isUniqueOtherThanLanguage.js";
 import {formatDate} from "./_formatDate.js";
 
