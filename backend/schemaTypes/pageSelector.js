@@ -7,7 +7,7 @@ export default {
 		{
 			name: 'title',
 			type: 'string',
-			  hidden: true,
+			hidden: true,
 		},
 		{
 			name: 'pageFrench',
