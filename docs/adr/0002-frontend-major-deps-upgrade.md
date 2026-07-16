@@ -1,3 +1,7 @@
+---
+status: superseded by ADR-0003 (paraglide migration was done in a follow-up session, see 0003-paraglide-v2-migration.md)
+---
+
 # Upgrade frontend deps across several majors; paraglide deferred
 
 Frontend deps were behind across the board, several by multiple majors: `@inlang/paraglide-js` v1→v2, `vite` v5→v8, `@sveltejs/adapter-vercel` v5→v6, `@sanity/client`/`@sanity/image-url` majors, `swiper` v11→v14 (a critical prototype-pollution fix, previously deferred), `nodemailer` v6→v9.
