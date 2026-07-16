@@ -1,4 +1,4 @@
-import {SchemaIcon} from '@sanity/icons'
+import {SchemaIcon} from '@sanity/icons/Schema'
 
 export default {
   name: 'process',

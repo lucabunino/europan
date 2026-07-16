@@ -1,4 +1,4 @@
-import {TokenIcon} from '@sanity/icons'
+import {TokenIcon} from '@sanity/icons/Token'
 import { orderRankField } from '@sanity/orderable-document-list'
 
 export default {

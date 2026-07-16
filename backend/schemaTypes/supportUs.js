@@ -1,4 +1,4 @@
-import {HeartIcon} from '@sanity/icons'
+import {HeartIcon} from '@sanity/icons/Heart'
 
 export default {
   name: 'supportUs',

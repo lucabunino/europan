@@ -1,4 +1,4 @@
-import {BellIcon} from '@sanity/icons'
+import {BellIcon} from '@sanity/icons/Bell'
 import {isUniqueOtherThanLanguage} from "./_isUniqueOtherThanLanguage.js";
 import {formatDate} from "./_formatDate.js";
 

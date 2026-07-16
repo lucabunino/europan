@@ -1,4 +1,9 @@
-import { UsersIcon, InfoOutlineIcon, TokenIcon, EmptyIcon, InfoFilledIcon, DocumentIcon} from '@sanity/icons'
+import { UsersIcon } from '@sanity/icons/Users'
+import { InfoOutlineIcon } from '@sanity/icons/InfoOutline'
+import { TokenIcon } from '@sanity/icons/Token'
+import { EmptyIcon } from '@sanity/icons/Empty'
+import { InfoFilledIcon } from '@sanity/icons/InfoFilled'
+import { DocumentIcon } from '@sanity/icons/Document'
 import { orderableDocumentListDeskItem } from '@sanity/orderable-document-list'
 
 export const myStructure = (S, context) => {

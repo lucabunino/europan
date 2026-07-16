@@ -1,4 +1,5 @@
-import {MarkerIcon, EnvelopeIcon} from '@sanity/icons'
+import {MarkerIcon} from '@sanity/icons/Marker'
+import {EnvelopeIcon} from '@sanity/icons/Envelope'
 
 export default {
   name: 'contact',

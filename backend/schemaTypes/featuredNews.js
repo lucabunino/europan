@@ -1,4 +1,4 @@
-import {HomeIcon} from '@sanity/icons'
+import {HomeIcon} from '@sanity/icons/Home'
 
 export default {
   name: 'featuredNews',
