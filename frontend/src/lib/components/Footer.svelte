@@ -3,7 +3,7 @@ let {data} = $props()
 
 // Imports
 import { fade, slide } from "svelte/transition"
-import { page } from '$app/stores';
+import { page } from '$app/state';
 
 // Multilanguage
 import { locales, getLocale, localizeHref, deLocalizeHref } from "$lib/paraglide/runtime.js";
@@ -25,6 +25,28 @@ let alternativeHref = $derived.by(() => {
   return null;
 });
 
+// Active-page indication uses page.route.id (canonical, locale-independent
+// route pattern like "/competitions/[slug]/topic") rather than matching
+// localized pathname strings.
+let detailBasePath = $derived(
+  page.route.id === "/news/[slug]" ? "/news" :
+  page.route.id === "/archive/[slug]" ? "/archive" :
+  null
+)
+
+function getFooterLangHref(lang) {
+  if (detailBasePath && lang !== getLocale() && alternativeHref) {
+    return localizeHref(`${detailBasePath}/${alternativeHref}`, { locale: lang })
+  }
+  return localizeHref(deLocalizeHref(data.pathname), { locale: lang })
+}
+let isCompetitionsActive = $derived(page.route.id?.startsWith("/competitions") ?? false)
+let isArchiveActive = $derived(page.route.id?.startsWith("/archive") ?? false)
+let isAboutActive = $derived(page.route.id?.startsWith("/about") ?? false)
+let isNewsActive = $derived(page.route.id?.startsWith("/news") ?? false)
+let isContactActive = $derived(page.route.id === "/contact")
+let isDataProtectionActive = $derived(page.route.id === "/data-protection")
+
 // Variables
 let creditsOpen = $state(false);
 let creditsHeight = $state();
@@ -45,26 +67,16 @@ function toggleCredits() {
   <div>
     <div>
 		<ul>
-			{#if $page.url.hostname !== "europan.ch"}
+			{#if page.url.hostname !== "europan.ch"}
 			{#each locales as lang}
 				<li class="switch">
-				{#if data.pathname.includes(m.newsSlug()) || data.pathname.includes(m.archiveSlug())}
-					<a
-					data-sveltekit-reload
-					class={getLocale() === lang ? "active" : ""}
-					href={lang !== getLocale() && alternativeHref ? alternativeHref : localizeHref(deLocalizeHref(data.pathname), { locale: lang })}
-					hreflang={lang}
-					aria-current={getLocale() === lang ? "page" : undefined}
-					>→ {lang === "fr" ? "Français" : ""}{lang === "de" ? "Deutsch" : ""}</a>
-				{:else}
-					<a
-					data-sveltekit-reload
-					class={getLocale() === lang ? "active" : ""}
-					href={localizeHref(deLocalizeHref(data.pathname), { locale: lang })}
-					hreflang={lang}
-					aria-current={getLocale() === lang ? "page" : undefined}
-					>→ {lang === "fr" ? "Français" : ""}{lang === "de" ? "Deutsch" : ""}</a>
-				{/if}
+				<a
+				data-sveltekit-reload
+				class={getLocale() === lang ? "active" : ""}
+				href={getFooterLangHref(lang)}
+				hreflang={lang}
+				aria-current={getLocale() === lang ? "page" : undefined}
+				>→ {lang === "fr" ? "Français" : ""}{lang === "de" ? "Deutsch" : ""}</a>
 				</li>
 			{/each}
 			{/if}
@@ -76,17 +88,17 @@ function toggleCredits() {
         <li>Svizzera</li>
       </ul>
       <ul>
-        <li><a class:active={data.pathname == m.competitionsSlug() || data.pathname.includes(m.competitionsSlug())} href={localizeHref("/competitions")}>{m.competitions()}</a></li>
-        <li><a class:active={data.pathname == m.archiveSlug() || data.pathname.includes(m.archiveSlug())} href={localizeHref("/archive")}>{m.archive()}</a></li>
-        <li><a class:active={data.pathname == m.aboutSlug() || data.pathname.includes(m.aboutSlug())} href={localizeHref("/about")}>{m.about()}</a></li>
-        <li><a class:active={data.pathname == m.newsSlug() || data.pathname.includes(m.newsSlug())} href={localizeHref("/news")}>{m.news()}</a></li>
+        <li><a aria-current={isCompetitionsActive ? "page" : undefined} href={localizeHref("/competitions")}>{m.competitions()}</a></li>
+        <li><a aria-current={isArchiveActive ? "page" : undefined} href={localizeHref("/archive")}>{m.archive()}</a></li>
+        <li><a aria-current={isAboutActive ? "page" : undefined} href={localizeHref("/about")}>{m.about()}</a></li>
+        <li><a aria-current={isNewsActive ? "page" : undefined} href={localizeHref("/news")}>{m.news()}</a></li>
       </ul>
       <ul>
-        <li><a class:active={data.pathname == m.contactSlug()} href={localizeHref("/contact")}>{m.contact()}</a></li>
+        <li><a aria-current={isContactActive ? "page" : undefined} href={localizeHref("/contact")}>{m.contact()}</a></li>
         <!-- HERE -->
         <!-- <li><a class:active={data.pathname == '/newsletter'} href="/newsletter">Newsletter</a></li> -->
         <li> <a href="https://www.instagram.com/europan_europe/" target="_blank" rel="noopener noreferrer">Instagram ↗</a></li>
-        <li><a class:active={data.pathname == m.dataProtectionSlug()} href={localizeHref("/data-protection")}>{@html m.dataProtection()}</a></li>
+        <li><a aria-current={isDataProtectionActive ? "page" : undefined} href={localizeHref("/data-protection")}>{@html m.dataProtection()}</a></li>
       </ul>
 	   <ul>
         <li>© Copyright</li>
@@ -172,6 +184,8 @@ footer button:hover {
   padding: var(--gutter);
   background-color: var(--black);
   color: var(--white);
+  z-index: 101;
+  position: relative;
 }
 
 @media screen and (max-width: 1200px) {

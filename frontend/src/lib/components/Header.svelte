@@ -45,6 +45,10 @@ let pillCompetitions = $derived(data.menuCompetitions?.length > 1 ? data.menuCom
 
 // Submenus are position:fixed (so ancestor scroll containers can't clip them);
 // their on-screen anchor point is measured off the top-level menu's own box.
+// ResizeObserver (not $derived - getBoundingClientRect is an impure DOM read)
+// keeps this correct whenever the menu's own size changes: item count via
+// nestedCompetition/pillCompetitions, font-load reflow, crossing the 1024px
+// breakpoint - not just on mount/window-resize.
 let menuEl = $state()
 let menuRight = $state(0)
 let menuTop = $state(0)
@@ -55,10 +59,16 @@ function measureMenu() {
     menuTop = rect.top
   }
 }
+$effect(() => {
+  if (!menuEl) return;
+  measureMenu();
+  const resizeObserver = new ResizeObserver(measureMenu);
+  resizeObserver.observe(menuEl);
+  return () => resizeObserver.disconnect();
+});
 
 // Lifecycle
 onMount(() => {
-  measureMenu()
   setTimeout(() => {
     isLoaded = true
   }, 700);

@@ -218,7 +218,7 @@ a {
 a:not(.no-hover, .menu-item):hover {
   color: var(--gray);
 }
-a.active,
+a[aria-current="page"],
 button.active {
   color: var(--gray);
 }

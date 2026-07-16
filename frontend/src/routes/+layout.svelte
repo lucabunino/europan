@@ -4,7 +4,7 @@ $inspect(data)
 
 // Import
 import '../app.css'
-import { page } from '$app/stores';
+import { page } from '$app/state';
 import { onMount } from "svelte";
 
 import Footer from '$lib/components/Footer.svelte';
@@ -31,12 +31,12 @@ function handleKey({key}) {if (key === 'G') {viewGrid = !viewGrid}}
 <svelte:head>
   <title>{data.seo?.SEOTitle}</title>
   <meta name="description" content={data.seo?.SEODescription}>
-  <link rel="canonical" href={$page.url}>
+  <link rel="canonical" href={page.url}>
   <meta name="robots" content="index,follow">
   <meta name="googlebot" content="index,follow">
   <meta property="og:title" content={data.seo?.SEOTitle}>
   <meta property="og:description" content={data.seo?.SEODescription}>
-  <meta property="og:url" content={$page.url}>
+  <meta property="og:url" content={page.url}>
   <meta property="og:type" content="website">
   <meta property="og:site_name" content={data.seo?.SEOTitle}>
 </svelte:head>

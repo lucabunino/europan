@@ -4,7 +4,7 @@ let { data } = $props()
 import { locales, getLocale, localizeHref, deLocalizeHref } from "$lib/paraglide/runtime.js"
 import { getTranslations } from "$lib/stores/translations.svelte.js"
 import * as m from "$lib/paraglide/messages"
-import { page } from '$app/stores'
+import { page } from '$app/state'
 
 let translations = getTranslations()
 
@@ -19,15 +19,21 @@ let alternativeHref = $derived.by(() => {
   return null
 })
 
+let detailBasePath = $derived(
+  page.route.id === "/news/[slug]" ? "/news" :
+  page.route.id === "/archive/[slug]" ? "/archive" :
+  null
+)
+
 function getHref(lang) {
-  if (data.pathname.includes(m.newsSlug()) || data.pathname.includes(m.archiveSlug())) {
-    return lang !== getLocale() && alternativeHref ? alternativeHref : localizeHref(deLocalizeHref(data.pathname), { locale: lang })
+  if (detailBasePath && lang !== getLocale() && alternativeHref) {
+    return localizeHref(`${detailBasePath}/${alternativeHref}`, { locale: lang })
   }
   return localizeHref(deLocalizeHref(data.pathname), { locale: lang })
 }
 </script>
 
-{#if $page.url.hostname !== "europan.ch" && locales.length > 1}
+{#if page.url.hostname !== "europan.ch" && locales.length > 1}
 <nav class="lang-switch text-xs" aria-label="Language switcher">
   <div class="lang-item-container">
     <span
