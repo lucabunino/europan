@@ -6,8 +6,7 @@ import { fade, slide } from "svelte/transition"
 import { page } from '$app/stores';
 
 // Multilanguage
-import { i18n } from '$lib/i18n'
-import { availableLanguageTags, languageTag } from "$lib/paraglide/runtime.js";
+import { locales, getLocale, localizeHref, deLocalizeHref } from "$lib/paraglide/runtime.js";
 import * as m from "$lib/paraglide/messages"
 
 // Stores
@@ -17,10 +16,10 @@ let translations = getTranslations()
 let alternativeHref = $derived.by(() => {
   if (!translations.translations) return null;
 
-  if (languageTag() === "fr") {
+  if (getLocale() === "fr") {
     return translations.translations.find(t => t.language === "de")?.slug.current;
   }
-  if (languageTag() === "de") {
+  if (getLocale() === "de") {
     return translations.translations.find(t => t.language === "fr")?.slug.current;
   }
   return null;
@@ -47,23 +46,23 @@ function toggleCredits() {
     <div>
 		<ul>
 			{#if $page.url.hostname !== "europan.ch"}
-			{#each availableLanguageTags as lang}
+			{#each locales as lang}
 				<li class="switch">
 				{#if data.pathname.includes(m.newsSlug()) || data.pathname.includes(m.archiveSlug())}
 					<a
 					data-sveltekit-reload
-					class={languageTag() === lang ? "active" : ""}
-					href={lang !== languageTag() && alternativeHref ? alternativeHref : i18n.route(data.pathname)}
+					class={getLocale() === lang ? "active" : ""}
+					href={lang !== getLocale() && alternativeHref ? alternativeHref : localizeHref(deLocalizeHref(data.pathname), { locale: lang })}
 					hreflang={lang}
-					aria-current={lang === languageTag() ? "page" : undefined}
+					aria-current={getLocale() === lang ? "page" : undefined}
 					>→ {lang === "fr" ? "Français" : ""}{lang === "de" ? "Deutsch" : ""}</a>
 				{:else}
 					<a
 					data-sveltekit-reload
-					class={languageTag() === lang ? "active" : ""}
-					href={i18n.route(data.pathname)}
+					class={getLocale() === lang ? "active" : ""}
+					href={localizeHref(deLocalizeHref(data.pathname), { locale: lang })}
 					hreflang={lang}
-					aria-current={lang === languageTag() ? "page" : undefined}
+					aria-current={getLocale() === lang ? "page" : undefined}
 					>→ {lang === "fr" ? "Français" : ""}{lang === "de" ? "Deutsch" : ""}</a>
 				{/if}
 				</li>
@@ -77,17 +76,17 @@ function toggleCredits() {
         <li>Svizzera</li>
       </ul>
       <ul>
-        <li><a class:active={data.pathname == m.competitionsSlug() || data.pathname.includes(m.competitionsSlug())} href="/competitions">{m.competitions()}</a></li>
-        <li><a class:active={data.pathname == m.archiveSlug() || data.pathname.includes(m.archiveSlug())} href="/archive">{m.archive()}</a></li>
-        <li><a class:active={data.pathname == m.aboutSlug() || data.pathname.includes(m.aboutSlug())} href="/about">{m.about()}</a></li>
-        <li><a class:active={data.pathname == m.newsSlug() || data.pathname.includes(m.newsSlug())} href="/news">{m.news()}</a></li>
+        <li><a class:active={data.pathname == m.competitionsSlug() || data.pathname.includes(m.competitionsSlug())} href={localizeHref("/competitions")}>{m.competitions()}</a></li>
+        <li><a class:active={data.pathname == m.archiveSlug() || data.pathname.includes(m.archiveSlug())} href={localizeHref("/archive")}>{m.archive()}</a></li>
+        <li><a class:active={data.pathname == m.aboutSlug() || data.pathname.includes(m.aboutSlug())} href={localizeHref("/about")}>{m.about()}</a></li>
+        <li><a class:active={data.pathname == m.newsSlug() || data.pathname.includes(m.newsSlug())} href={localizeHref("/news")}>{m.news()}</a></li>
       </ul>
       <ul>
-        <li><a class:active={data.pathname == m.contactSlug()} href="/contact">{m.contact()}</a></li>
+        <li><a class:active={data.pathname == m.contactSlug()} href={localizeHref("/contact")}>{m.contact()}</a></li>
         <!-- HERE -->
         <!-- <li><a class:active={data.pathname == '/newsletter'} href="/newsletter">Newsletter</a></li> -->
         <li> <a href="https://www.instagram.com/europan_europe/" target="_blank" rel="noopener noreferrer">Instagram ↗</a></li>
-        <li><a class:active={data.pathname == m.dataProtectionSlug()} href="/data-protection">{@html m.dataProtection()}</a></li>
+        <li><a class:active={data.pathname == m.dataProtectionSlug()} href={localizeHref("/data-protection")}>{@html m.dataProtection()}</a></li>
       </ul>
 	   <ul>
         <li>© Copyright</li>

@@ -6,6 +6,7 @@ import { onMount } from "svelte";
 
 // Multilanguage
 import * as m from "$lib/paraglide/messages"
+import { localizeHref } from "$lib/paraglide/runtime.js"
 
 // Variables
 let headerType = $state(true)
@@ -152,7 +153,7 @@ onmouseleave={() => {
   }
 }}
 >
-  <a class="logo no-hover desktop-only" href="/" data-item="0"
+  <a class="logo no-hover desktop-only" href={localizeHref("/")} data-item="0"
   aria-label="logo"
   class:type={headerType}
   onmouseenter={(e) => {
@@ -214,7 +215,7 @@ onmouseleave={() => {
       <ul class="menu" bind:this={menuEl}>
         <li class="menu-item-container mobile-only">
           <a class="menu-item"
-          href="/"
+          href={localizeHref("/")}
           data-item="0"
           class:off={activeMenuItem && activeMenuItem !== '0'}
           onmouseenter={(e) => handleMenuEnter(e)}
@@ -229,7 +230,7 @@ onmouseleave={() => {
         class:undelayed={activeSubmenu && activeMenuItem === '1' || activeSubmenu && activeMenuItemLast === '1' ? mobileMargin : ''}
         >
           <a class="menu-item desktop-only"
-          href="/competitions"
+          href={localizeHref("/competitions")}
           data-item="1"
           class:off={activeMenuItem && activeMenuItem !== '1'}
           onmouseenter={(e) => handleMenuEnter(e)}
@@ -258,18 +259,18 @@ onmouseleave={() => {
             startCloseSubmenu();
           }}
           >
-            <li class="menu-item-container"><a class="menu-item" data-item="1" class:off={activeSubmenuItem && activeSubmenuItem !== '1'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href="/competitions/what-is-europan">{m.whatIsEuropan()}</a></li>
-			<li class="menu-item-container"><a class="menu-item" data-item="2" class:off={activeSubmenuItem && activeSubmenuItem !== '2'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href="/competitions/promoter">{m.promoter()}</a></li>
+            <li class="menu-item-container"><a class="menu-item" data-item="1" class:off={activeSubmenuItem && activeSubmenuItem !== '1'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href={localizeHref("/competitions/what-is-europan")}>{m.whatIsEuropan()}</a></li>
+			<li class="menu-item-container"><a class="menu-item" data-item="2" class:off={activeSubmenuItem && activeSubmenuItem !== '2'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href={localizeHref("/competitions/promoter")}>{m.promoter()}</a></li>
             {#if nestedCompetition?.hasTopic}
-            	<li class="menu-item-container"><a class="menu-item" data-item="3" class:off={activeSubmenuItem && activeSubmenuItem !== '3'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href="/competitions/{nestedCompetition.slug.current}/topic">E{nestedCompetition.edition}: {m.topic()}</a></li>{/if}
+            	<li class="menu-item-container"><a class="menu-item" data-item="3" class:off={activeSubmenuItem && activeSubmenuItem !== '3'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href={localizeHref(`/competitions/${nestedCompetition.slug.current}/topic`)}>E{nestedCompetition.edition}: {m.topic()}</a></li>{/if}
             {#if nestedCompetition?.hasProcess}
-            	<li class="menu-item-container"><a class="menu-item" data-item="4" class:off={activeSubmenuItem && activeSubmenuItem !== '4'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href="/competitions/{nestedCompetition.slug.current}/process">E{nestedCompetition.edition}: {m.process()}</a></li>{/if}
+            	<li class="menu-item-container"><a class="menu-item" data-item="4" class:off={activeSubmenuItem && activeSubmenuItem !== '4'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href={localizeHref(`/competitions/${nestedCompetition.slug.current}/process`)}>E{nestedCompetition.edition}: {m.process()}</a></li>{/if}
             {#if nestedCompetition?.hasSites}
-            	<li class="menu-item-container"><a class="menu-item" data-item="5" class:off={activeSubmenuItem && activeSubmenuItem !== '5'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href="/competitions/{nestedCompetition.slug.current}/sites">E{nestedCompetition.edition}: {m.sites()}</a></li>{/if}
+            	<li class="menu-item-container"><a class="menu-item" data-item="5" class:off={activeSubmenuItem && activeSubmenuItem !== '5'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href={localizeHref(`/competitions/${nestedCompetition.slug.current}/sites`)}>E{nestedCompetition.edition}: {m.sites()}</a></li>{/if}
             {#if nestedCompetition?.hasJury}
-            	<li class="menu-item-container"><a class="menu-item" data-item="6" class:off={activeSubmenuItem && activeSubmenuItem !== '6'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href="/competitions/{nestedCompetition.slug.current}/jury">E{nestedCompetition.edition}: {m.jury()}</a></li>{/if}
+            	<li class="menu-item-container"><a class="menu-item" data-item="6" class:off={activeSubmenuItem && activeSubmenuItem !== '6'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href={localizeHref(`/competitions/${nestedCompetition.slug.current}/jury`)}>E{nestedCompetition.edition}: {m.jury()}</a></li>{/if}
             {#if nestedCompetition?.showResults}
-            <li class="menu-item-container"><a class="menu-item" data-item="7" class:off={activeSubmenuItem && activeSubmenuItem !== '7'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href="/competitions/{nestedCompetition.slug.current}/results">E{nestedCompetition.edition}: {m.results()}</a></li>{/if}
+            <li class="menu-item-container"><a class="menu-item" data-item="7" class:off={activeSubmenuItem && activeSubmenuItem !== '7'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href={localizeHref(`/competitions/${nestedCompetition.slug.current}/results`)}>E{nestedCompetition.edition}: {m.results()}</a></li>{/if}
           </ul>
         </div>
         </li>
@@ -279,7 +280,7 @@ onmouseleave={() => {
         class:undelayed={activeSubmenu && activeMenuItem === `comp-${i}` || activeSubmenu && activeMenuItemLast === `comp-${i}` ? mobileMargin : ''}
         >
           <a class="menu-item desktop-only"
-          href="/competitions/{comp.slug.current}"
+          href={localizeHref(`/competitions/${comp.slug.current}`)}
           data-item="comp-{i}"
           class:off={activeMenuItem && activeMenuItem !== `comp-${i}`}
           onmouseenter={(e) => handleMenuEnter(e)}
@@ -309,22 +310,22 @@ onmouseleave={() => {
           }}
           >
             {#if comp.hasTopic}
-            	<li class="menu-item-container"><a class="menu-item" data-item="1" class:off={activeSubmenuItem && activeSubmenuItem !== '1'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href="/competitions/{comp.slug.current}/topic">E{comp.edition}: {m.topic()}</a></li>{/if}
+            	<li class="menu-item-container"><a class="menu-item" data-item="1" class:off={activeSubmenuItem && activeSubmenuItem !== '1'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href={localizeHref(`/competitions/${comp.slug.current}/topic`)}>E{comp.edition}: {m.topic()}</a></li>{/if}
             {#if comp.hasProcess}
-            	<li class="menu-item-container"><a class="menu-item" data-item="2" class:off={activeSubmenuItem && activeSubmenuItem !== '2'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href="/competitions/{comp.slug.current}/process">E{comp.edition}: {m.process()}</a></li>{/if}
+            	<li class="menu-item-container"><a class="menu-item" data-item="2" class:off={activeSubmenuItem && activeSubmenuItem !== '2'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href={localizeHref(`/competitions/${comp.slug.current}/process`)}>E{comp.edition}: {m.process()}</a></li>{/if}
             {#if comp.hasSites}
-            	<li class="menu-item-container"><a class="menu-item" data-item="3" class:off={activeSubmenuItem && activeSubmenuItem !== '3'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href="/competitions/{comp.slug.current}/sites">E{comp.edition}: {m.sites()}</a></li>{/if}
+            	<li class="menu-item-container"><a class="menu-item" data-item="3" class:off={activeSubmenuItem && activeSubmenuItem !== '3'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href={localizeHref(`/competitions/${comp.slug.current}/sites`)}>E{comp.edition}: {m.sites()}</a></li>{/if}
             {#if comp.hasJury}
-            	<li class="menu-item-container"><a class="menu-item" data-item="4" class:off={activeSubmenuItem && activeSubmenuItem !== '4'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href="/competitions/{comp.slug.current}/jury">E{comp.edition}: {m.jury()}</a></li>{/if}
+            	<li class="menu-item-container"><a class="menu-item" data-item="4" class:off={activeSubmenuItem && activeSubmenuItem !== '4'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href={localizeHref(`/competitions/${comp.slug.current}/jury`)}>E{comp.edition}: {m.jury()}</a></li>{/if}
             {#if comp.showResults}
-            	<li class="menu-item-container"><a class="menu-item" data-item="5" class:off={activeSubmenuItem && activeSubmenuItem !== '5'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href="/competitions/{comp.slug.current}/results">E{comp.edition}: {m.results()}</a></li>{/if}
+            	<li class="menu-item-container"><a class="menu-item" data-item="5" class:off={activeSubmenuItem && activeSubmenuItem !== '5'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href={localizeHref(`/competitions/${comp.slug.current}/results`)}>E{comp.edition}: {m.results()}</a></li>{/if}
           </ul>
         </div>
         </li>
         {/each}
         <li class="menu-item-container">
           <a class="menu-item"
-          href="/archive"
+          href={localizeHref("/archive")}
           data-item="2"
           class:off={activeMenuItem && activeMenuItem !== '2'}
           onmouseenter={(e) => handleMenuEnter(e)}
@@ -337,7 +338,7 @@ onmouseleave={() => {
         class:undelayed={activeSubmenu && activeMenuItem === '3' || activeSubmenu && activeMenuItemLast === '3' ? mobileMargin : ''}
         >
           <a class="menu-item desktop-only"
-          href="/about"
+          href={localizeHref("/about")}
           data-item="3"
           class:off={activeMenuItem && activeMenuItem !== '3'}
           onmouseenter={(e) => handleMenuEnter(e)}
@@ -364,16 +365,16 @@ onmouseleave={() => {
               startCloseSubmenu();
             }}
             >
-              <li class="menu-item-container"><a class="menu-item" data-item="1" class:off={activeSubmenuItem && activeSubmenuItem !== '1'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href="/about/europan-switzerland">{m.europanSwitzerland()}</a></li>
-              <li class="menu-item-container"><a class="menu-item" data-item="2" class:off={activeSubmenuItem && activeSubmenuItem !== '2'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href="/about/team">{m.team()}</a></li>
-              <li class="menu-item-container"><a class="menu-item" data-item="3" class:off={activeSubmenuItem && activeSubmenuItem !== '3'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href="/about/partners">{m.partners()}</a></li>
-              <li class="menu-item-container"><a class="menu-item" data-item="4" class:off={activeSubmenuItem && activeSubmenuItem !== '4'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href="/about/support-us">{m.supportUs()}</a></li>
+              <li class="menu-item-container"><a class="menu-item" data-item="1" class:off={activeSubmenuItem && activeSubmenuItem !== '1'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href={localizeHref("/about/europan-switzerland")}>{m.europanSwitzerland()}</a></li>
+              <li class="menu-item-container"><a class="menu-item" data-item="2" class:off={activeSubmenuItem && activeSubmenuItem !== '2'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href={localizeHref("/about/team")}>{m.team()}</a></li>
+              <li class="menu-item-container"><a class="menu-item" data-item="3" class:off={activeSubmenuItem && activeSubmenuItem !== '3'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href={localizeHref("/about/partners")}>{m.partners()}</a></li>
+              <li class="menu-item-container"><a class="menu-item" data-item="4" class:off={activeSubmenuItem && activeSubmenuItem !== '4'} onmouseenter={(e) => handleSubMenuEnter(e)} onmouseleave={(e) => handleSubMenuLeave(e)} onclick={(e) => {closeMenu()}} href={localizeHref("/about/support-us")}>{m.supportUs()}</a></li>
             </ul>
           </div>
         </li>
         <li class="menu-item-container">
           <a class="menu-item"
-          href="/news"
+          href={localizeHref("/news")}
           data-item="4"
           class:off={activeMenuItem && activeMenuItem !== '4'}
           onmouseenter={(e) => handleMenuEnter(e)}
@@ -383,7 +384,7 @@ onmouseleave={() => {
         </li>
         <li class="menu-item-container">
           <a class="menu-item"
-          href="/contact"
+          href={localizeHref("/contact")}
           data-item="5"
           class:off={activeMenuItem && activeMenuItem !== '5'}
           onmouseenter={(e) => handleMenuEnter(e)}

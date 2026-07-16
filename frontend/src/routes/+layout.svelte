@@ -7,12 +7,6 @@ import '../app.css'
 import { page } from '$app/stores';
 import { onMount } from "svelte";
 
-// Multilanguage
-import { ParaglideJS } from '@inlang/paraglide-sveltekit'
-import { i18n } from '$lib/i18n'
-import { availableLanguageTags, languageTag } from "$lib/paraglide/runtime.js";
-import * as m from "$lib/paraglide/messages"
-
 import Footer from '$lib/components/Footer.svelte';
 import Header from '$lib/components/Header.svelte';
 import LangSwitch from '$lib/components/LangSwitch.svelte';
@@ -58,22 +52,16 @@ function handleKey({key}) {if (key === 'G') {viewGrid = !viewGrid}}
 </div>
 {/if}
 
-<ParaglideJS {i18n}>
-  <Header {data}/>
-</ParaglideJS>
+<Header {data}/>
 
-<ParaglideJS {i18n}>
-  <main class:loaded={isLoaded}>
-    <div>
-      {@render children()}
-    </div>
-  </main>
-</ParaglideJS>
+<main class:loaded={isLoaded}>
+  <div>
+    {@render children()}
+  </div>
+</main>
 
-<ParaglideJS {i18n}>
-  <Footer {data}/>
-  <LangSwitch {data}/>
-</ParaglideJS>
+<Footer {data}/>
+<LangSwitch {data}/>
 
 <style>
 /* Main */

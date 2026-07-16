@@ -1,6 +1,7 @@
 <script>
 const { data } = $props()
 import { urlFor } from '$lib/utils/image';
+import { localizeHref } from "$lib/paraglide/runtime.js"
 </script>
 
 {#if data.competition.featuredSites}
@@ -12,7 +13,7 @@ import { urlFor } from '$lib/utils/image';
         <h2 class="text-m">{featuredSite.site.title}</h2>
       </a>
     {:else}
-      <a class="site no-hover" href="/competitions/{data.competition.slug.current}/sites/{featuredSite.site.slug.current}">
+      <a class="site no-hover" href={localizeHref(`/competitions/${data.competition.slug.current}/sites/${featuredSite.site.slug.current}`)}>
         {#if featuredSite.site.thumbnail}<img class="site-img" src={urlFor(featuredSite.site.thumbnail)} alt="Cover for {featuredSite.site.title}">{/if}
         <h2 class="text-m">{featuredSite.site.title}</h2>
       </a>

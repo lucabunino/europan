@@ -1,4 +1,5 @@
 import { getContact } from '$lib/utils/sanity';
+import { error } from '@sveltejs/kit';
 
 export async function load({ depends, locals }) {
 	depends("paraglide:lang")

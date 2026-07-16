@@ -1,6 +1,7 @@
 <script>
 const { data } = $props()
 import { formatDate } from "$lib/utils/date";
+import { localizeHref } from "$lib/paraglide/runtime.js"
 
 let innerWidth = $state()
 let innerHeight = $state()
@@ -33,7 +34,7 @@ function updateActiveNews() {
 
 <div class="content">
   {#each data.newses as news, i}
-  <a class={innerWidth < 601 && activeNews == i ? 'news no-hover active-news' : 'news no-hover'} href="/news/{news.slug.current}">
+  <a class={innerWidth < 601 && activeNews == i ? 'news no-hover active-news' : 'news no-hover'} href={localizeHref(`/news/${news.slug.current}`)}>
     <h2 class="text-xl date">{innerWidth > 600 ? formatDate(news.date) : news.date.split("-")[2]} <div class="date-small"><span>{news.date.split("-")[1]}</span><span>{news.date.split("-")[0].slice(-2)}</span></div></h2>
     <div class="info text-xs">
       <p>{news.title.replace(/(\r\n|\n|\r)/gm, " ")}</p>

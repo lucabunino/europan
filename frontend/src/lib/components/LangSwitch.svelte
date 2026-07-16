@@ -1,8 +1,7 @@
 <script>
 let { data } = $props()
 
-import { i18n } from '$lib/i18n'
-import { availableLanguageTags, languageTag } from "$lib/paraglide/runtime.js"
+import { locales, getLocale, localizeHref, deLocalizeHref } from "$lib/paraglide/runtime.js"
 import { getTranslations } from "$lib/stores/translations.svelte.js"
 import * as m from "$lib/paraglide/messages"
 import { page } from '$app/stores'
@@ -11,10 +10,10 @@ let translations = getTranslations()
 
 let alternativeHref = $derived.by(() => {
   if (!translations.translations) return null
-  if (languageTag() === "fr") {
+  if (getLocale() === "fr") {
     return translations.translations.find(t => t.language === "de")?.slug.current
   }
-  if (languageTag() === "de") {
+  if (getLocale() === "de") {
     return translations.translations.find(t => t.language === "fr")?.slug.current
   }
   return null
@@ -22,22 +21,22 @@ let alternativeHref = $derived.by(() => {
 
 function getHref(lang) {
   if (data.pathname.includes(m.newsSlug()) || data.pathname.includes(m.archiveSlug())) {
-    return lang !== languageTag() && alternativeHref ? alternativeHref : i18n.route(data.pathname)
+    return lang !== getLocale() && alternativeHref ? alternativeHref : localizeHref(deLocalizeHref(data.pathname), { locale: lang })
   }
-  return i18n.route(data.pathname)
+  return localizeHref(deLocalizeHref(data.pathname), { locale: lang })
 }
 </script>
 
-{#if $page.url.hostname !== "europan.ch" && availableLanguageTags.length > 1}
+{#if $page.url.hostname !== "europan.ch" && locales.length > 1}
 <nav class="lang-switch text-xs" aria-label="Language switcher">
   <div class="lang-item-container">
     <span
       class="lang-item lang-current"
       aria-current="true"
-      aria-label={languageTag() === "fr" ? "Français — langue active" : "Deutsch — aktive Sprache"}
-    >{languageTag().toUpperCase()}</span>
+      aria-label={getLocale() === "fr" ? "Français — langue active" : "Deutsch — aktive Sprache"}
+    >{getLocale().toUpperCase()}</span>
   </div>
-  {#each availableLanguageTags.filter(l => l !== languageTag()) as lang}
+  {#each locales.filter(l => l !== getLocale()) as lang}
     <div class="lang-item-container">
       <a
         class="lang-item lang-other no-hover"
