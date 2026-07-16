@@ -1,5 +1,6 @@
 <script>
 const { data } = $props()
+import { localizeHref } from "$lib/paraglide/runtime.js"
 let innerWidth = $state()
 let innerHeight = $state()
 let activeNews = $state(true)
@@ -31,7 +32,7 @@ function updateActiveNews() {
 
 <section class="content competitions-grid">
   {#each data.archive as competition, i}
-  <a class={innerWidth < 601 && activeNews == i ? 'competition no-hover active-news' : 'competition no-hover'} href="archive/{competition.slug.current}">
+  <a class={innerWidth < 601 && activeNews == i ? 'competition no-hover active-news' : 'competition no-hover'} href={localizeHref(`/archive/${competition.slug.current}`)}>
     <h2 class="text-xl">E{competition.edition}</h2>
     <div class="info text-xs">
       <p>{competition.title}</p>
