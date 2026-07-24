@@ -1,6 +1,7 @@
 <script>
-const { 
+const {
   news = [],
+  showSeeMoreLink = false,
 } = $props();
 
 $inspect(news)
@@ -109,6 +110,8 @@ $effect(() => {
         <p class={i > 0 ? 'mt-0' : ''}><a href={attachment.url} target="_blank" rel="noopener noreferrer">{attachment.title} ↧</a></p>
       {/each}
     {/if}
-    <p><a href={localizeHref("/news")}>{m.seeMoreNews()} →</a></p>
+    {#if showSeeMoreLink}
+      <p><a href={localizeHref("/news")}>{m.seeMoreNews()} →</a></p>
+    {/if}
   </section>
 </article>

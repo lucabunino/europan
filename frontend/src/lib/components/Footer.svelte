@@ -66,7 +66,7 @@ function toggleCredits() {
 <footer class="text-xs">
   <div>
     <div>
-		<ul>
+		<!-- <ul>
 			{#if page.url.hostname !== "europan.ch"}
 			{#each locales as lang}
 				<li class="switch">
@@ -79,8 +79,8 @@ function toggleCredits() {
 				>→ {lang === "fr" ? "Français" : ""}{lang === "de" ? "Deutsch" : ""}</a>
 				</li>
 			{/each}
-			{/if}
-      </ul>
+			{/if} 
+      </ul> -->
       <ul>
         <li>Europan</li>
         <li>Schweiz</li>
@@ -221,6 +221,11 @@ footer button:hover {
 	}
   footer ul {
     width: calc((100% - var(--gutter))/2)
+  }
+}
+@media screen and (max-width: 375px) {
+  footer ul {
+    width: 100%
   }
 }
 </style>

@@ -127,6 +127,8 @@ function getHref(lang) {
   .lang-item {
     width: 4.444rem;
     height: 4.444rem;
+	width: 4rem;
+    height: 4rem;
     font-size: 1rem;
   }
   .lang-other {

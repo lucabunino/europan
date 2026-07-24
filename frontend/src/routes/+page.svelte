@@ -5,5 +5,5 @@ import News from '$lib/components/News.svelte';
 </script>
 
 {#each data.featuredNewses[0].featuredNews as news}
-  <News news={news}/>
+  <News news={news} showSeeMoreLink={true}/>
 {/each}
