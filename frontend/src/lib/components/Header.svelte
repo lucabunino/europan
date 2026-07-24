@@ -7,6 +7,7 @@ import { onMount } from "svelte";
 // Multilanguage
 import * as m from "$lib/paraglide/messages"
 import { localizeHref } from "$lib/paraglide/runtime.js"
+import { getNestedCompetition } from "$lib/utils/competition.js"
 
 // Variables
 let headerType = $state(true)
@@ -24,23 +25,7 @@ let isLoaded = $state(false);
 
 // Newest menu-featured competition stays nested inside "Competitions";
 // falls back to the site's true latest competition when none are flagged.
-let nestedCompetition = $derived.by(() => {
-  if (data.menuCompetitions?.length > 0) {
-    return data.menuCompetitions[0];
-  }
-  if (data.competition) {
-    return {
-      edition: data.competition.edition,
-      slug: data.competition.slug,
-      hasTopic: !!data.competition.topicBody,
-      hasProcess: !!data.competition.processBody,
-      hasSites: data.competition.featuredSites?.length > 0,
-      hasJury: !!data.competition.juryPresident || data.competition.jury?.length > 0,
-      showResults: !!data.competition.showResults,
-    };
-  }
-  return null;
-});
+let nestedCompetition = $derived(getNestedCompetition(data));
 let pillCompetitions = $derived(data.menuCompetitions?.length > 1 ? data.menuCompetitions.slice(1) : []);
 
 // Submenus are position:fixed (so ancestor scroll containers can't clip them);
