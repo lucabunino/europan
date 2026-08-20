@@ -48,6 +48,7 @@ p {
 :global(ul) {
   list-style-type: none;
   padding-left: 2em;
+  margin-top: 1em;
 }
 li::before {
   display: inline-block;
