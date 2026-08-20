@@ -120,6 +120,9 @@ nav.text-l {
 .text-xs {
   font-size: .777rem;
 }
+article {
+	max-width: 1200px;
+}
 .body {
   margin: 1.2em 0;
   grid-column: 1 / span 2;
