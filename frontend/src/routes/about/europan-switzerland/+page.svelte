@@ -9,6 +9,7 @@ import PortableTextStyle from '$lib/components/PortableTextStyle.svelte'
     <h2 class="text-l page-title">{data.europanSwitzerland.title}</h2>
   </section>
   <div class="body">
+    <div class="portableText">
     <PortableText
     value={data.europanSwitzerland.body}
     components={{
@@ -23,5 +24,6 @@ import PortableTextStyle from '$lib/components/PortableTextStyle.svelte'
       },
     }}
     />
+    </div>
   </div>
 </article>

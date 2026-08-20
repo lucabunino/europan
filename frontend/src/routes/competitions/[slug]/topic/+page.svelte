@@ -12,6 +12,7 @@ import * as m from "$lib/paraglide/messages"
     <h2 class="text-l">E{data.competition.edition}: {m.topic()}</h2>
   </section>
   <section class="body">
+    <div class="portableText">
     <PortableText
     value={data.competition.topicBody}
     components={{
@@ -29,5 +30,6 @@ import * as m from "$lib/paraglide/messages"
       }
     }}
     />
+    </div>
   </section>
 </article>

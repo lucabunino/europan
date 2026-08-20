@@ -80,6 +80,7 @@ $effect(() => {
 
   <section class="body">
     {#if news.from}<h3 class="text-s">{formatDate(news.from, news.to)}</h3>{/if}
+    <div class="portableText">
     <PortableText
     value={news.body}
     components={{
@@ -94,6 +95,7 @@ $effect(() => {
       },
     }}
     />
+    </div>
   </section>
   <section>
     {#if news.links}

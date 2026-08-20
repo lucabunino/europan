@@ -74,30 +74,32 @@ $effect(() => {
   </div>
   {/if}
 
-  <section class="body">
-    {#if page.from}<h3 class="text-s">{formatDate(page.from, page.to)}</h3>{/if}
-	{#if page.body}
-		<PortableText
-		value={page.body}
-		components={{
-		block: {
-			normal: PortableTextStyle,
-			h3: PortableTextStyle,
-			h4: PortableTextStyle,
-		},
-		listItem: PortableTextStyle,
-		marks: {
-			link: PortableTextStyle,
-		},
-		}}
-		/>
-	{/if}
-  </section>
-  <section>
-    {#if page.attachments}
-      {#each page.attachments as attachment, i}
-        <p class={i > 0 ? 'mt-0' : ''}><a href={attachment.url} target="_blank" rel="noopener noreferrer">{attachment.title} ↧</a></p>
-      {/each}
+  {#if page.body}
+	<section class="body">
+		{#if page.from}<h3 class="text-s">{formatDate(page.from, page.to)}</h3>{/if}
+			<div class="portableText">
+			<PortableText
+			value={page.body}
+			components={{
+			block: {
+				normal: PortableTextStyle,
+				h3: PortableTextStyle,
+				h4: PortableTextStyle,
+			},
+			listItem: PortableTextStyle,
+			marks: {
+				link: PortableTextStyle,
+			},
+			}}
+			/>
+			</div>
+	</section>
+  {/if}
+  {#if page.attachments}
+	<section>
+		{#each page.attachments as attachment, i}
+			<p class={i > 0 ? 'mt-0' : ''}><a href={attachment.url} target="_blank" rel="noopener noreferrer">{attachment.title} ↧</a></p>
+		{/each}
+		</section>
     {/if}
-  </section>
 </article>

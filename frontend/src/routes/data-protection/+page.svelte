@@ -11,6 +11,7 @@ $inspect(data)
     <h2 class="text-l page-title">{data.dataProtection.title}</h2>
   </section>
   <div class="body">
+    <div class="portableText">
     <PortableText
     value={data.dataProtection.body}
     components={{
@@ -25,5 +26,6 @@ $inspect(data)
       },
     }}
     />
+    </div>
   </div>
 </article>

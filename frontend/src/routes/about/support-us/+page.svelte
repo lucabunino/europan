@@ -78,6 +78,7 @@ $effect(() => {
   <section class="supportUs-grid text-xs">
     <div>
       {#if data.supportUs.body}
+        <div class="portableText">
         <PortableText
         value={data.supportUs.body}
         components={{
@@ -92,6 +93,7 @@ $effect(() => {
           },
         }}
         />
+        </div>
       {/if}
     </div>
     <div>

@@ -11,6 +11,7 @@ import * as m from "$lib/paraglide/messages"
     <h2 class="text-l page-title">E{data.competition.edition}: {m.process()}</h2>
   </section>
   <div class="body">
+    <div class="portableText">
     <PortableText
     value={data.competition.processBody}
     components={{
@@ -28,5 +29,6 @@ import * as m from "$lib/paraglide/messages"
       }
     }}
     />
+    </div>
   </div>
 </article>

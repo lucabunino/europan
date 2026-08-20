@@ -29,6 +29,7 @@ import * as m from "$lib/paraglide/messages"
     </div>
     <div class="body">
       {#if project.body}
+        <div class="portableText">
         <PortableText
         value={project.body}
         components={{
@@ -43,6 +44,7 @@ import * as m from "$lib/paraglide/messages"
           },
         }}
         />
+        </div>
       {/if}
     </div>
     {#if project.europanEuropeUrl}

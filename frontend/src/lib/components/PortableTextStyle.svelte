@@ -45,7 +45,7 @@ a:hover {
 p {
   margin: 0;
 }
-:global(ul) {
+:global(.portableText ul) {
   list-style-type: none;
   padding-left: 2em;
   margin-top: 1em;
