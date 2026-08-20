@@ -54,66 +54,69 @@ $effect(() => {
 <svelte:window bind:innerWidth></svelte:window>
 
 <article class="content news">
-  <section class="page-title">
-    <h2 class="text-l">{news.title}</h2>
-    {#if news.subtitle}<h3 class="text-s page-subtitle">{news.subtitle}</h3>{/if}
-  </section>
-  {#if news.images}
-  <div class="swiper-container-container">
-    <swiper-container
-    class:loaded={swiperLoaded}
-    init={false}
-    slides-per-view={1}
-    navigation={true}
-    loop={true}
-    speed={400}
-	bind:this={swiperEl}
-    >
-    {#each news.images as image}
-      <swiper-slide>
-        <img class="news-img {image.objectFit} {image.overlay ? 'overlay' : undefined}" src={urlFor(image.image).width(1920)} alt="Image for {news.title}">
-      </swiper-slide>
-    {/each}
-    </swiper-container>
-  </div>
-  {/if}
-
-  <section class="body">
-    {#if news.from}<h3 class="text-s">{formatDate(news.from, news.to)}</h3>{/if}
-    <div class="portableText">
-    <PortableText
-    value={news.body}
-    components={{
-      block: {
-        normal: PortableTextStyle,
-        h3: PortableTextStyle,
-        h4: PortableTextStyle,
-      },
-      listItem: PortableTextStyle,
-      marks: {
-        link: PortableTextStyle,
-      },
-    }}
-    />
-    </div>
-  </section>
-  <section>
-    {#if news.links}
-      {#each news.links as link, i}
-        {#if link.blank}
-          <p class={i > 0 ? 'mt-0' : ''}><a href={link.href} target="_blank" rel="noopener noreferrer">{link.callToAction} ↗</a></p>
-        {:else}
-          <p class={i > 0 ? 'mt-0' : ''}><a href={link.href}>{link.callToAction} →</a></p>
-        {/if}
-      {/each}
-    {/if}
-    {#if news.attachments}
-      {#each news.attachments as attachment, i}
-        <p class={i > 0 ? 'mt-0' : ''}><a href={attachment.url} target="_blank" rel="noopener noreferrer">{attachment.title} ↧</a></p>
-      {/each}
-    {/if}
-    {#if showSeeMoreLink}
-      <p><a href={localizeHref("/news")}>{m.seeMoreNews()} →</a></p>
-    {/if}
-  </section>
+	<section class="page-title">
+		<h2 class="text-l">{news.title}</h2>
+		{#if news.subtitle}<h3 class="text-s page-subtitle">{news.subtitle}</h3>{/if}
+	</section>
+  	{#if news.images}
+		<div class="swiper-container-container">
+				<swiper-container
+				class:loaded={swiperLoaded}
+				init={false}
+				slides-per-view={1}
+				navigation={true}
+				loop={true}
+				speed={400}
+				bind:this={swiperEl}
+				>
+					{#each news.images as image}
+						<swiper-slide>
+							<img class="news-img {image.objectFit} {image.overlay ? 'overlay' : undefined}" src={urlFor(image.image).width(1920)} alt="Image for {news.title}">
+						</swiper-slide>
+					{/each}
+				</swiper-container>
+		</div>
+  	{/if}
+  	{#if news.body}
+		<section class="body">
+			{#if news.from}<h3 class="text-s">{formatDate(news.from, news.to)}</h3>{/if}
+			<div class="portableText">
+			<PortableText
+			value={news.body}
+			components={{
+			block: {
+				normal: PortableTextStyle,
+				h3: PortableTextStyle,
+				h4: PortableTextStyle,
+			},
+			listItem: PortableTextStyle,
+			marks: {
+				link: PortableTextStyle,
+			},
+			}}
+			/>
+			</div>
+		</section>
+	{/if}
+  	{#if news.links || news.attachments || showSeeMoreLink}
+		<section>
+			{#if news.links}
+			{#each news.links as link, i}
+				{#if link.blank}
+				<p class={i > 0 ? 'mt-0' : ''}><a href={link.href} target="_blank" rel="noopener noreferrer">{link.callToAction} ↗</a></p>
+				{:else}
+				<p class={i > 0 ? 'mt-0' : ''}><a href={link.href}>{link.callToAction} →</a></p>
+				{/if}
+			{/each}
+			{/if}
+			{#if news.attachments}
+			{#each news.attachments as attachment, i}
+				<p class={i > 0 ? 'mt-0' : ''}><a href={attachment.url} target="_blank" rel="noopener noreferrer">{attachment.title} ↧</a></p>
+			{/each}
+			{/if}
+			{#if showSeeMoreLink}
+			<p><a href={localizeHref("/news")}>{m.seeMoreNews()} →</a></p>
+			{/if}
+		</section>
+	{/if}
 </article>
