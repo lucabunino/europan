@@ -283,7 +283,7 @@ onmouseleave={() => {
           onclick={(e) => {
             closeMenu()
             }}
-          >E{comp.edition}</a>
+          >{m.competitions()}: E{comp.edition}</a>
 
           <button class="menu-item mobile-only black"
           data-item="comp-{i}"
