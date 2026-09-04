@@ -292,7 +292,7 @@ onmouseleave={() => {
           onclick={(e) => {
             handleMenuTouch(e)
           }}
-          >E{comp.edition}</button>
+          >{m.competitions()}: E{comp.edition}</button>
           <div class="submenu-container" style="left: {menuRight}px; top: {menuTop}px">
           <ul class="submenu"
           class:on={activeSubmenu && activeMenuItem === `comp-${i}` || activeSubmenu && activeMenuItemLast === `comp-${i}`}
