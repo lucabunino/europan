@@ -1,4 +1,4 @@
-import {defineConfig} from 'sanity'
+import {defineConfig, isDev} from 'sanity'
 import {structureTool} from 'sanity/structure'
 import {myStructure} from './structure'
 import {visionTool} from '@sanity/vision'
@@ -16,6 +16,8 @@ export default defineConfig({
   projectId: '7825lrn6',
   dataset: 'production',
 
+  releases: {enabled: isDev},
+
   plugins: [
     documentInternationalization({
       supportedLanguages: [
@@ -27,7 +29,7 @@ export default defineConfig({
     structureTool({
       structure: myStructure,
     }),
-    visionTool()
+    ...(isDev ? [visionTool()] : [])
   ],
 
   schema: {
