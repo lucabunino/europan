@@ -4,6 +4,10 @@ Sanity-backed SvelteKit site for the Europan architecture competition. Competiti
 
 ## Language
 
+**Membership tier**:
+One of the four ways to join Europan Suisse via the support-us form: partner/sponsor (>CHF 500), collective/company (CHF 500), individual (CHF 100), student (free, with proof of enrolment). Form labels must match the tier names in the support-us body text word for word.
+_Avoid_: Plan, package, subscription
+
 **Attachment**:
 A downloadable file of any type (not just PDF) with an editor-set title, attached to a document. Stored as an array field `{attachmentTitle, attachmentFile}` — pattern shared across `page`, `news`, and (new) `competition` documents. On competition results pages, each attachment renders as a black/gray-hover button grid item, positioned before the project results.
 _Avoid_: File, download, asset (these refer to the raw Sanity file object, not the editorial unit)

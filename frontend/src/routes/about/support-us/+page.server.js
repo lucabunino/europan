@@ -2,6 +2,7 @@ import { EMAIL } from "$env/static/private";
 import transporter from "$lib/utils/emailSetup.server.js";
 import { getSupportUs } from '$lib/utils/sanity';
 import { error } from '@sveltejs/kit';
+import { dev } from '$app/environment';
 
 export async function load({ depends, locals }) {
   depends("paraglide:lang")
@@ -70,8 +71,7 @@ export const actions = {
       
       const mail = {
         from: EMAIL,
-        // to: "bureau@europan.swiss",
-        to: "hello@lucabunino.com",
+        to: dev ? "hello@lucabunino.com" : "bureau@europan.swiss",
         subject: `Europan Suisse | New member subscription request from ${email}`,
         text: body,
         html: html,
